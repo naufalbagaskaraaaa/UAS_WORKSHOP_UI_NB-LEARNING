@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelola Transaksi — NB-Learning Admin</title>
+    <link rel="stylesheet" href="admin-style.css" />
+  </head>
+  <body>
+    <div class="admin-shell">
+      <!-- ════════════════════ SIDEBAR ════════════════════ -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__brand">
+          <div class="sidebar__brand-icon">📚</div>
+          <div class="sidebar__brand-text">
+            <span class="sidebar__brand-name">NB-Learning</span>
+            <span class="sidebar__brand-sub">Admin Panel</span>
+          </div>
+        </div>
+
+        <div class="sidebar__profile">
+          <div class="sidebar__avatar">AD</div>
+          <div class="sidebar__profile-info">
+            <div class="sidebar__profile-name">Admin Utama</div>
+            <div class="sidebar__profile-role">Super Administrator</div>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav">
+          <div class="sidebar__nav-section">
+            <div class="sidebar__nav-label">Menu Utama</div>
+
+            <a href="dashboard.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">🏠</span>
+              Dashboard
+            </a>
+
+            <a href="kelola-artikel.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">📝</span>
+              Kelola Artikel
+            </a>
+
+            <a href="kelola-produk.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">📦</span>
+              Kelola Produk
+            </a>
+
+            <a href="kelola-pengguna.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">👥</span>
+              Kelola Pengguna
+              <span class="sidebar__nav-badge">12</span>
+            </a>
+
+            <a href="kelola-transaksi.html" class="sidebar__nav-item active">
+              <span class="sidebar__nav-icon">💳</span>
+              Kelola Transaksi
+            </a>
+          </div>
+
+          <div class="sidebar__nav-section">
+            <div class="sidebar__nav-label">Pengaturan</div>
+            <a href="#" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">⚙️</span>
+              Pengaturan
+            </a>
+            <a href="#" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">🔔</span>
+              Notifikasi
+            </a>
+          </div>
+        </nav>
+
+        <div class="sidebar__footer">
+          <button class="sidebar__footer-btn">
+            <span>🚪</span>
+            Keluar
+          </button>
+        </div>
+      </aside>
+
+      <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+        onclick="closeSidebar()"
+      ></div>
+
+      <!-- ════════════════════ MAIN ════════════════════ -->
+      <div class="main-content">
+        <header class="topbar">
+          <button class="topbar__hamburger" onclick="openSidebar()">☰</button>
+          <div class="topbar__breadcrumb">
+            <span class="topbar__page-title">Kelola Transaksi</span>
+            <div class="topbar__breadcrumb-trail">
+              <span>NB-Learning</span>
+              <span>›</span>
+              <span>Kelola Transaksi</span>
+            </div>
+          </div>
+          <div class="topbar__actions">
+            <button class="topbar__icon-btn" style="position: relative">
+              🔔
+              <span class="topbar__notif-dot"></span>
+            </button>
+            <div class="topbar__user">
+              <div class="topbar__user-avatar">AD</div>
+              <span class="topbar__user-name">Admin</span>
+            </div>
+          </div>
+        </header>
+
+        <main class="page-content">
+          <div class="page-header">
+            <div class="page-header__left">
+              <h1 class="page-header__title">Riwayat Transaksi</h1>
+              <p class="page-header__desc">
+                Pantau seluruh pembayaran dan status transaksi paket belajar
+                siswa.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px">
+              <button class="btn btn--ghost btn--sm">📅 Filter Tanggal</button>
+              <button class="btn btn--ghost btn--sm">⬇️ Ekspor CSV</button>
+            </div>
+          </div>
+
+          <!-- Stats Bar -->
+          <div
+            style="
+              display: flex;
+              gap: 12px;
+              margin-bottom: 20px;
+              flex-wrap: wrap;
+            "
+          >
+            <div class="card" style="flex: 1; min-width: 140px">
+              <div
+                class="card__body"
+                style="
+                  padding: 16px 20px;
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                "
+              >
+                <div style="font-size: 22px">💰</div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      font-weight: 600;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Total Pendapatan
+                  </div>
+                  <div
+                    style="
+                      font-size: 18px;
+                      font-weight: 800;
+                      color: var(--primary);
+                    "
+                  >
+                    Rp 48,2jt
+                  </div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--success);
+                      font-weight: 600;
+                    "
+                  >
+                    ↑ bulan ini
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="flex: 1; min-width: 140px">
+              <div
+                class="card__body"
+                style="
+                  padding: 16px 20px;
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                "
+              >
+                <div style="font-size: 22px">✅</div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      font-weight: 600;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Berhasil
+                  </div>
+                  <div
+                    style="
+                      font-size: 22px;
+                      font-weight: 800;
+                      color: var(--success);
+                    "
+                  >
+                    312
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="flex: 1; min-width: 140px">
+              <div
+                class="card__body"
+                style="
+                  padding: 16px 20px;
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                "
+              >
+                <div style="font-size: 22px">⏳</div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      font-weight: 600;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Pending
+                  </div>
+                  <div
+                    style="
+                      font-size: 22px;
+                      font-weight: 800;
+                      color: var(--warning);
+                    "
+                  >
+                    28
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="flex: 1; min-width: 140px">
+              <div
+                class="card__body"
+                style="
+                  padding: 16px 20px;
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                "
+              >
+                <div style="font-size: 22px">❌</div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      font-weight: 600;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Gagal/Refund
+                  </div>
+                  <div
+                    style="
+                      font-size: 22px;
+                      font-weight: 800;
+                      color: var(--danger);
+                    "
+                  >
+                    7
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-container">
+            <div class="table-toolbar">
+              <div class="table-toolbar__left">
+                <span class="table-toolbar__title">Semua Transaksi</span>
+                <span class="table-toolbar__count">347 transaksi</span>
+                <div class="search-input-wrap">
+                  <span class="search-input-wrap__icon">🔍</span>
+                  <input
+                    type="text"
+                    class="search-input"
+                    placeholder="Cari ID invoice atau nama..."
+                  />
+                </div>
+                <select class="filter-select">
+                  <option value="">Semua Status</option>
+                  <option>Berhasil</option>
+                  <option>Pending</option>
+                  <option>Gagal</option>
+                  <option>Refund</option>
+                </select>
+                <select class="filter-select">
+                  <option value="">Semua Paket</option>
+                  <option>Paket All-in-One</option>
+                  <option>Paket TPS Intensif</option>
+                  <option>Paket TKA Saintek</option>
+                  <option>Paket TKA Soshum</option>
+                </select>
+              </div>
+            </div>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID Invoice</th>
+                  <th>Nama Siswa</th>
+                  <th>Paket Terpilih</th>
+                  <th>Metode Bayar</th>
+                  <th>Total Harga</th>
+                  <th>Tanggal</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="cell-id">#INV-20250601</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <div class="cell-user__avatar avatar-color-1">AN</div>
+                      <div>
+                        <div class="cell-user__name">Andika Nugraha</div>
+                        <div class="cell-user__email">andika.n@gmail.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="tag tag--tryout">Paket All-in-One 2025</span>
+                  </td>
+                  <td style="font-size: 12px; color: var(--text-secondary)">
+                    🏦 Transfer BCA
+                  </td>
+                  <td><span class="cell-price">Rp 349.000</span></td>
+                  <td
+                    style="
+                      font-size: 12px;
+                      color: var(--text-secondary);
+                      white-space: nowrap;
+                    "
+                  >
+                    01 Jun 2025 · 10:24
+                  </td>
+                  <td><span class="badge badge--success">Berhasil</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">🧾 Detail</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#INV-20250602</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <div class="cell-user__avatar avatar-color-2">SR</div>
+                      <div>
+                        <div class="cell-user__name">Sinta Rahayu</div>
+                        <div class="cell-user__email">sinta.r@yahoo.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tps">Paket TPS Intensif</span></td>
+                  <td style="font-size: 12px; color: var(--text-secondary)">
+                    📱 GoPay
+                  </td>
+                  <td><span class="cell-price">Rp 149.000</span></td>
+                  <td
+                    style="
+                      font-size: 12px;
+                      color: var(--text-secondary);
+                      white-space: nowrap;
+                    "
+                  >
+                    01 Jun 2025 · 11:15
+                  </td>
+                  <td><span class="badge badge--warning">Pending</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--success btn--sm">
+                        ✅ Konfirmasi
+                      </button>
+                      <button class="btn btn--ghost btn--sm">🧾</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#INV-20250603</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <div class="cell-user__avatar avatar-color-3">BW</div>
+                      <div>
+                        <div class="cell-user__name">Bayu Wicaksono</div>
+                        <div class="cell-user__email">bayuw@gmail.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tka">Paket TKA Saintek</span></td>
+                  <td style="font-size: 12px; color: var(--text-secondary)">
+                    🏦 Mandiri Virtual
+                  </td>
+                  <td><span class="cell-price">Rp 249.000</span></td>
+                  <td
+                    style="
+                      font-size: 12px;
+                      color: var(--text-secondary);
+                      white-space: nowrap;
+                    "
+                  >
+                    01 Jun 2025 · 13:02
+                  </td>
+                  <td><span class="badge badge--success">Berhasil</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">🧾 Detail</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#INV-20250604</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <div class="cell-user__avatar avatar-color-4">DP</div>
+                      <div>
+                        <div class="cell-user__name">Dewi Puspita</div>
+                        <div class="cell-user__email">
+                          dewi.puspita@gmail.com
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tki">Paket TKA Soshum</span></td>
+                  <td style="font-size: 12px; color: var(--text-secondary)">
+                    📱 OVO
+                  </td>
+                  <td><span class="cell-price">Rp 199.000</span></td>
+                  <td
+                    style="
+                      font-size: 12px;
+                      color: var(--text-secondary);
+                      white-space: nowrap;
+                    "
+                  >
+                    01 Jun 2025 · 14:30
+                  </td>
+                  <td><span class="badge badge--danger">Gagal</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button
+                        class="btn btn--warning btn--sm"
+                        style="background: var(--warning); color: #fff"
+                      >
+                        🔄 Refund
+                      </button>
+                      <button class="btn btn--ghost btn--sm">🧾</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#INV-20250605</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <div class="cell-user__avatar avatar-color-5">RA</div>
+                      <div>
+                        <div class="cell-user__name">Rizky Adriansyah</div>
+                        <div class="cell-user__email">rizky.a@outlook.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="tag tag--tryout">Paket All-in-One 2025</span>
+                  </td>
+                  <td style="font-size: 12px; color: var(--text-secondary)">
+                    💳 QRIS
+                  </td>
+                  <td><span class="cell-price">Rp 349.000</span></td>
+                  <td
+                    style="
+                      font-size: 12px;
+                      color: var(--text-secondary);
+                      white-space: nowrap;
+                    "
+                  >
+                    01 Jun 2025 · 15:45
+                  </td>
+                  <td><span class="badge badge--success">Berhasil</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">🧾 Detail</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#INV-20250606</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <div class="cell-user__avatar avatar-color-6">NF</div>
+                      <div>
+                        <div class="cell-user__name">Nur Fitriani</div>
+                        <div class="cell-user__email">nur.fitri@gmail.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tps">Paket TPS Intensif</span></td>
+                  <td style="font-size: 12px; color: var(--text-secondary)">
+                    📱 Dana
+                  </td>
+                  <td><span class="cell-price">Rp 149.000</span></td>
+                  <td
+                    style="
+                      font-size: 12px;
+                      color: var(--text-secondary);
+                      white-space: nowrap;
+                    "
+                  >
+                    01 Jun 2025 · 16:10
+                  </td>
+                  <td><span class="badge badge--warning">Pending</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--success btn--sm">
+                        ✅ Konfirmasi
+                      </button>
+                      <button class="btn btn--ghost btn--sm">🧾</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#INV-20250607</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <div class="cell-user__avatar avatar-color-1">HP</div>
+                      <div>
+                        <div class="cell-user__name">Hendra Pratama</div>
+                        <div class="cell-user__email">hendra.p@gmail.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tka">Paket TKA Saintek</span></td>
+                  <td style="font-size: 12px; color: var(--text-secondary)">
+                    🏦 Transfer BNI
+                  </td>
+                  <td><span class="cell-price">Rp 249.000</span></td>
+                  <td
+                    style="
+                      font-size: 12px;
+                      color: var(--text-secondary);
+                      white-space: nowrap;
+                    "
+                  >
+                    01 Jun 2025 · 17:22
+                  </td>
+                  <td><span class="badge badge--success">Berhasil</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">🧾 Detail</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#INV-20250608</span></td>
+                  <td>
+                    <div class="cell-user">
+                      <div class="cell-user__avatar avatar-color-2">AL</div>
+                      <div>
+                        <div class="cell-user__name">Aurelia Lestari</div>
+                        <div class="cell-user__email">aurelia.l@gmail.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tki">Paket TKA Soshum</span></td>
+                  <td style="font-size: 12px; color: var(--text-secondary)">
+                    📱 GoPay
+                  </td>
+                  <td><span class="cell-price">Rp 199.000</span></td>
+                  <td
+                    style="
+                      font-size: 12px;
+                      color: var(--text-secondary);
+                      white-space: nowrap;
+                    "
+                  >
+                    01 Jun 2025 · 18:05
+                  </td>
+                  <td><span class="badge badge--success">Berhasil</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">🧾 Detail</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="pagination">
+              <span class="pagination__info"
+                >Menampilkan 1–8 dari 347 transaksi</span
+              >
+              <div class="pagination__pages">
+                <button class="pagination__btn">‹</button>
+                <button class="pagination__btn active">1</button>
+                <button class="pagination__btn">2</button>
+                <button class="pagination__btn">3</button>
+                <span style="padding: 0 6px; color: var(--text-muted)">…</span>
+                <button class="pagination__btn">44</button>
+                <button class="pagination__btn">›</button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      function openSidebar() {
+        document.getElementById("sidebar").classList.add("open");
+        document.getElementById("sidebarOverlay").classList.add("active");
+      }
+      function closeSidebar() {
+        document.getElementById("sidebar").classList.remove("open");
+        document.getElementById("sidebarOverlay").classList.remove("active");
+      }
+    </script>
+  </body>
+</html>

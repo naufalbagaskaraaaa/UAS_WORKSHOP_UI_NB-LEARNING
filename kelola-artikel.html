@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelola Artikel — NB-Learning Admin</title>
+    <link rel="stylesheet" href="admin-style.css" />
+  </head>
+  <body>
+    <div class="admin-shell">
+      <!-- ════════════════════ SIDEBAR ════════════════════ -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__brand">
+          <div class="sidebar__brand-icon">📚</div>
+          <div class="sidebar__brand-text">
+            <span class="sidebar__brand-name">NB-Learning</span>
+            <span class="sidebar__brand-sub">Admin Panel</span>
+          </div>
+        </div>
+
+        <div class="sidebar__profile">
+          <div class="sidebar__avatar">AD</div>
+          <div class="sidebar__profile-info">
+            <div class="sidebar__profile-name">Admin Utama</div>
+            <div class="sidebar__profile-role">Super Administrator</div>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav">
+          <div class="sidebar__nav-section">
+            <div class="sidebar__nav-label">Menu Utama</div>
+
+            <a href="dashboard.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">🏠</span>
+              Dashboard
+            </a>
+
+            <a href="kelola-artikel.html" class="sidebar__nav-item active">
+              <span class="sidebar__nav-icon">📝</span>
+              Kelola Artikel
+            </a>
+
+            <a href="kelola-produk.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">📦</span>
+              Kelola Produk
+            </a>
+
+            <a href="kelola-pengguna.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">👥</span>
+              Kelola Pengguna
+              <span class="sidebar__nav-badge">12</span>
+            </a>
+
+            <a href="kelola-transaksi.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">💳</span>
+              Kelola Transaksi
+            </a>
+          </div>
+
+          <div class="sidebar__nav-section">
+            <div class="sidebar__nav-label">Pengaturan</div>
+            <a href="#" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">⚙️</span>
+              Pengaturan
+            </a>
+            <a href="#" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">🔔</span>
+              Notifikasi
+            </a>
+          </div>
+        </nav>
+
+        <div class="sidebar__footer">
+          <button class="sidebar__footer-btn">
+            <span>🚪</span>
+            Keluar
+          </button>
+        </div>
+      </aside>
+
+      <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+        onclick="closeSidebar()"
+      ></div>
+
+      <!-- ════════════════════ MAIN ════════════════════ -->
+      <div class="main-content">
+        <header class="topbar">
+          <button class="topbar__hamburger" onclick="openSidebar()">☰</button>
+          <div class="topbar__breadcrumb">
+            <span class="topbar__page-title">Kelola Artikel</span>
+            <div class="topbar__breadcrumb-trail">
+              <span>NB-Learning</span>
+              <span>›</span>
+              <span>Kelola Artikel</span>
+            </div>
+          </div>
+          <div class="topbar__actions">
+            <button class="topbar__icon-btn" style="position: relative">
+              🔔
+              <span class="topbar__notif-dot"></span>
+            </button>
+            <div class="topbar__user">
+              <div class="topbar__user-avatar">AD</div>
+              <span class="topbar__user-name">Admin</span>
+            </div>
+          </div>
+        </header>
+
+        <main class="page-content">
+          <div class="page-header">
+            <div class="page-header__left">
+              <h1 class="page-header__title">Manajemen Artikel</h1>
+              <p class="page-header__desc">
+                Kelola seluruh konten artikel dan materi belajar UTBK.
+              </p>
+            </div>
+            <button class="btn btn--primary">✏️ Tambah Artikel Baru</button>
+          </div>
+
+          <!-- Stats Bar -->
+          <div
+            style="
+              display: flex;
+              gap: 12px;
+              margin-bottom: 20px;
+              flex-wrap: wrap;
+            "
+          >
+            <div class="card" style="flex: 1; min-width: 130px">
+              <div
+                class="card__body"
+                style="
+                  padding: 16px 20px;
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                "
+              >
+                <div style="font-size: 22px">📝</div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      font-weight: 600;
+                      text-transform: uppercase;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    Total Artikel
+                  </div>
+                  <div
+                    style="
+                      font-size: 22px;
+                      font-weight: 800;
+                      color: var(--primary);
+                    "
+                  >
+                    214
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="flex: 1; min-width: 130px">
+              <div
+                class="card__body"
+                style="
+                  padding: 16px 20px;
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                "
+              >
+                <div style="font-size: 22px">✅</div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      font-weight: 600;
+                      text-transform: uppercase;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    Terbit
+                  </div>
+                  <div
+                    style="
+                      font-size: 22px;
+                      font-weight: 800;
+                      color: var(--success);
+                    "
+                  >
+                    186
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="flex: 1; min-width: 130px">
+              <div
+                class="card__body"
+                style="
+                  padding: 16px 20px;
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                "
+              >
+                <div style="font-size: 22px">⏳</div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      font-weight: 600;
+                      text-transform: uppercase;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    Draft
+                  </div>
+                  <div
+                    style="
+                      font-size: 22px;
+                      font-weight: 800;
+                      color: var(--warning);
+                    "
+                  >
+                    28
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="flex: 1; min-width: 130px">
+              <div
+                class="card__body"
+                style="
+                  padding: 16px 20px;
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                "
+              >
+                <div style="font-size: 22px">🗂️</div>
+                <div>
+                  <div
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      font-weight: 600;
+                      text-transform: uppercase;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    Kategori
+                  </div>
+                  <div
+                    style="
+                      font-size: 22px;
+                      font-weight: 800;
+                      color: var(--info);
+                    "
+                  >
+                    6
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-container">
+            <div class="table-toolbar">
+              <div class="table-toolbar__left">
+                <span class="table-toolbar__title">Daftar Artikel</span>
+                <span class="table-toolbar__count">214 artikel</span>
+                <div class="search-input-wrap">
+                  <span class="search-input-wrap__icon">🔍</span>
+                  <input
+                    type="text"
+                    class="search-input"
+                    placeholder="Cari judul artikel..."
+                  />
+                </div>
+                <select class="filter-select">
+                  <option value="">Semua Kategori</option>
+                  <option>TPS</option>
+                  <option>TKA Saintek</option>
+                  <option>TKA Soshum</option>
+                  <option>Try Out</option>
+                  <option>Materi</option>
+                </select>
+                <select class="filter-select">
+                  <option value="">Semua Status</option>
+                  <option>Terbit</option>
+                  <option>Draft</option>
+                  <option>Diarsipkan</option>
+                </select>
+              </div>
+            </div>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Judul Artikel</th>
+                  <th>Kategori</th>
+                  <th>Tanggal Rilis</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="cell-id">#ART-001</span></td>
+                  <td>
+                    <div class="cell-title">
+                      Strategi Jitu Mengerjakan Soal TPS Penalaran Umum
+                      <div class="cell-title__sub">
+                        oleh Tim NB-Learning • 8 menit baca
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tps">TPS</span></td>
+                  <td
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 12px;
+                      white-space: nowrap;
+                    "
+                  >
+                    12 Mei 2025
+                  </td>
+                  <td><span class="badge badge--success">Terbit</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm" title="Edit">
+                        ✏️ Edit
+                      </button>
+                      <button class="btn btn--danger btn--sm" title="Hapus">
+                        🗑️ Hapus
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#ART-002</span></td>
+                  <td>
+                    <div class="cell-title">
+                      Kumpulan Rumus Matematika UTBK yang Paling Sering Keluar
+                      <div class="cell-title__sub">
+                        oleh Tim NB-Learning • 12 menit baca
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tka">TKA Saintek</span></td>
+                  <td
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 12px;
+                      white-space: nowrap;
+                    "
+                  >
+                    10 Mei 2025
+                  </td>
+                  <td><span class="badge badge--success">Terbit</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                      <button class="btn btn--danger btn--sm">🗑️ Hapus</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#ART-003</span></td>
+                  <td>
+                    <div class="cell-title">
+                      Panduan Lengkap Try Out UTBK: Cara Simulasi yang Efektif
+                      <div class="cell-title__sub">
+                        oleh Tim NB-Learning • 10 menit baca
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tryout">Try Out</span></td>
+                  <td
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 12px;
+                      white-space: nowrap;
+                    "
+                  >
+                    08 Mei 2025
+                  </td>
+                  <td><span class="badge badge--success">Terbit</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                      <button class="btn btn--danger btn--sm">🗑️ Hapus</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#ART-004</span></td>
+                  <td>
+                    <div class="cell-title">
+                      Trik Cepat Soal Ekonomi TKA Soshum untuk Pemula
+                      <div class="cell-title__sub">
+                        oleh Tim NB-Learning • 6 menit baca
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tki">TKA Soshum</span></td>
+                  <td
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 12px;
+                      white-space: nowrap;
+                    "
+                  >
+                    05 Mei 2025
+                  </td>
+                  <td><span class="badge badge--warning">Draft</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                      <button class="btn btn--danger btn--sm">🗑️ Hapus</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#ART-005</span></td>
+                  <td>
+                    <div class="cell-title">
+                      Materi Biologi UTBK: Sistem Pencernaan dan Soal Latihan
+                      <div class="cell-title__sub">
+                        oleh Tim NB-Learning • 15 menit baca
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--materi">Materi</span></td>
+                  <td
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 12px;
+                      white-space: nowrap;
+                    "
+                  >
+                    01 Mei 2025
+                  </td>
+                  <td><span class="badge badge--success">Terbit</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                      <button class="btn btn--danger btn--sm">🗑️ Hapus</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#ART-006</span></td>
+                  <td>
+                    <div class="cell-title">
+                      Bedah Soal Fisika UTBK 2024: Pembahasan Lengkap
+                      <div class="cell-title__sub">
+                        oleh Tim NB-Learning • 20 menit baca
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tka">TKA Saintek</span></td>
+                  <td
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 12px;
+                      white-space: nowrap;
+                    "
+                  >
+                    28 Apr 2025
+                  </td>
+                  <td><span class="badge badge--neutral">Diarsipkan</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                      <button class="btn btn--danger btn--sm">🗑️ Hapus</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="cell-id">#ART-007</span></td>
+                  <td>
+                    <div class="cell-title">
+                      Tips Manajemen Waktu Saat UTBK agar Tidak Kehabisan Waktu
+                      <div class="cell-title__sub">
+                        oleh Tim NB-Learning • 5 menit baca
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag tag--tps">TPS</span></td>
+                  <td
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 12px;
+                      white-space: nowrap;
+                    "
+                  >
+                    25 Apr 2025
+                  </td>
+                  <td><span class="badge badge--warning">Draft</span></td>
+                  <td>
+                    <div class="cell-actions">
+                      <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                      <button class="btn btn--danger btn--sm">🗑️ Hapus</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="pagination">
+              <span class="pagination__info"
+                >Menampilkan 1–7 dari 214 artikel</span
+              >
+              <div class="pagination__pages">
+                <button class="pagination__btn">‹</button>
+                <button class="pagination__btn active">1</button>
+                <button class="pagination__btn">2</button>
+                <button class="pagination__btn">3</button>
+                <span style="padding: 0 6px; color: var(--text-muted)">…</span>
+                <button class="pagination__btn">31</button>
+                <button class="pagination__btn">›</button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      function openSidebar() {
+        document.getElementById("sidebar").classList.add("open");
+        document.getElementById("sidebarOverlay").classList.add("active");
+      }
+      function closeSidebar() {
+        document.getElementById("sidebar").classList.remove("open");
+        document.getElementById("sidebarOverlay").classList.remove("active");
+      }
+    </script>
+  </body>
+</html>

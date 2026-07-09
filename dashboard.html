@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — NB-Learning Admin</title>
+    <link rel="stylesheet" href="admin-style.css" />
+  </head>
+  <body>
+    <div class="admin-shell">
+      <!-- ════════════════════ SIDEBAR ════════════════════ -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__brand">
+          <div class="sidebar__brand-icon">📚</div>
+          <div class="sidebar__brand-text">
+            <span class="sidebar__brand-name">NB-Learning</span>
+            <span class="sidebar__brand-sub">Admin Panel</span>
+          </div>
+        </div>
+
+        <div class="sidebar__profile">
+          <div class="sidebar__avatar">AD</div>
+          <div class="sidebar__profile-info">
+            <div class="sidebar__profile-name">Admin Utama</div>
+            <div class="sidebar__profile-role">Super Administrator</div>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav">
+          <div class="sidebar__nav-section">
+            <div class="sidebar__nav-label">Menu Utama</div>
+
+            <a href="dashboard.html" class="sidebar__nav-item active">
+              <span class="sidebar__nav-icon">🏠</span>
+              Dashboard
+            </a>
+
+            <a href="kelola-artikel.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">📝</span>
+              Kelola Artikel
+            </a>
+
+            <a href="kelola-produk.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">📦</span>
+              Kelola Produk
+            </a>
+
+            <a href="kelola-pengguna.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">👥</span>
+              Kelola Pengguna
+              <span class="sidebar__nav-badge">12</span>
+            </a>
+
+            <a href="kelola-transaksi.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">💳</span>
+              Kelola Transaksi
+            </a>
+          </div>
+
+          <div class="sidebar__nav-section">
+            <div class="sidebar__nav-label">Pengaturan</div>
+            <a href="#" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">⚙️</span>
+              Pengaturan
+            </a>
+            <a href="#" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">🔔</span>
+              Notifikasi
+            </a>
+          </div>
+        </nav>
+
+        <div class="sidebar__footer">
+          <button class="sidebar__footer-btn">
+            <span>🚪</span>
+            Keluar
+          </button>
+        </div>
+      </aside>
+      <!-- ════════════════════ END SIDEBAR ════════════════════ -->
+
+      <!-- Overlay (mobile) -->
+      <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+        onclick="closeSidebar()"
+      ></div>
+
+      <!-- ════════════════════ MAIN ════════════════════ -->
+      <div class="main-content">
+        <!-- Topbar -->
+        <header class="topbar">
+          <button
+            class="topbar__hamburger"
+            id="hamburgerBtn"
+            onclick="openSidebar()"
+          >
+            ☰
+          </button>
+          <div class="topbar__breadcrumb">
+            <span class="topbar__page-title">Dashboard</span>
+            <div class="topbar__breadcrumb-trail">
+              <span>NB-Learning</span>
+              <span>›</span>
+              <span>Dashboard</span>
+            </div>
+          </div>
+          <div class="topbar__actions">
+            <button class="topbar__icon-btn">🔍</button>
+            <button class="topbar__icon-btn" style="position: relative">
+              🔔
+              <span class="topbar__notif-dot"></span>
+            </button>
+            <div class="topbar__user">
+              <div class="topbar__user-avatar">AD</div>
+              <span class="topbar__user-name">Admin</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Page Content -->
+        <main class="page-content">
+          <!-- Page Header -->
+          <div class="page-header">
+            <div class="page-header__left">
+              <h1 class="page-header__title">Selamat Datang, Admin 👋</h1>
+              <p class="page-header__desc">
+                Berikut ringkasan aktivitas platform NB-Learning hari ini.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px">
+              <button class="btn btn--ghost btn--sm">📅 Juni 2025</button>
+              <button class="btn btn--primary btn--sm">⬇️ Unduh Laporan</button>
+            </div>
+          </div>
+
+          <!-- Metric Cards -->
+          <div class="metric-grid">
+            <div class="metric-card metric-card--blue">
+              <div class="metric-card__icon-wrap">👥</div>
+              <div class="metric-card__info">
+                <div class="metric-card__label">Total Siswa</div>
+                <div class="metric-card__value">4.820</div>
+                <div class="metric-card__change metric-card__change--up">
+                  ↑ +128 bulan ini
+                </div>
+              </div>
+            </div>
+            <div class="metric-card metric-card--green">
+              <div class="metric-card__icon-wrap">📝</div>
+              <div class="metric-card__info">
+                <div class="metric-card__label">Artikel Aktif</div>
+                <div class="metric-card__value">214</div>
+                <div class="metric-card__change metric-card__change--up">
+                  ↑ +18 artikel baru
+                </div>
+              </div>
+            </div>
+            <div class="metric-card metric-card--orange">
+              <div class="metric-card__icon-wrap">📦</div>
+              <div class="metric-card__info">
+                <div class="metric-card__label">Total Paket UTBK</div>
+                <div class="metric-card__value">36</div>
+                <div class="metric-card__change metric-card__change--up">
+                  ↑ +4 paket baru
+                </div>
+              </div>
+            </div>
+            <div class="metric-card metric-card--red">
+              <div class="metric-card__icon-wrap">💳</div>
+              <div class="metric-card__info">
+                <div class="metric-card__label">Transaksi Hari Ini</div>
+                <div class="metric-card__value">Rp 2,4jt</div>
+                <div class="metric-card__change metric-card__change--down">
+                  ↓ -5% vs kemarin
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart Section -->
+          <div class="chart-section">
+            <!-- Bar Chart Placeholder -->
+            <div class="chart-placeholder">
+              <div class="chart-placeholder__header">
+                <span class="chart-placeholder__title"
+                  >📈 Grafik Pendapatan Bulanan</span
+                >
+                <span class="chart-placeholder__period">Jan – Jun 2025</span>
+              </div>
+              <div class="chart-area">
+                <div class="chart-bar-group">
+                  <div class="chart-bar" style="height: 55%"></div>
+                  <span class="chart-bar-label">Jan</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="chart-bar" style="height: 68%"></div>
+                  <span class="chart-bar-label">Feb</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="chart-bar" style="height: 80%"></div>
+                  <span class="chart-bar-label">Mar</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="chart-bar" style="height: 62%"></div>
+                  <span class="chart-bar-label">Apr</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="chart-bar" style="height: 90%"></div>
+                  <span class="chart-bar-label">Mei</span>
+                </div>
+                <div class="chart-bar-group">
+                  <div class="chart-bar" style="height: 75%"></div>
+                  <span class="chart-bar-label">Jun</span>
+                </div>
+              </div>
+              <div class="chart-legend">
+                <div class="chart-legend-item">
+                  <div
+                    class="chart-legend-dot"
+                    style="background: var(--primary)"
+                  ></div>
+                  Pendapatan
+                </div>
+              </div>
+            </div>
+
+            <!-- Stat Mini Card -->
+            <div class="stat-card">
+              <div class="stat-card__title">🎯 Status Akun Siswa</div>
+
+              <!-- SVG Donut -->
+              <div class="stat-card__donut">
+                <svg
+                  viewBox="0 0 36 36"
+                  style="width: 100%; height: 100%; transform: rotate(-90deg)"
+                >
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="14"
+                    fill="none"
+                    stroke="#E2E8F0"
+                    stroke-width="4"
+                  />
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="14"
+                    fill="none"
+                    stroke="#4F46E5"
+                    stroke-width="4"
+                    stroke-dasharray="62 38"
+                    stroke-linecap="round"
+                  />
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="14"
+                    fill="none"
+                    stroke="#10B981"
+                    stroke-width="4"
+                    stroke-dasharray="25 75"
+                    stroke-dashoffset="-62"
+                    stroke-linecap="round"
+                  />
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="14"
+                    fill="none"
+                    stroke="#F59E0B"
+                    stroke-width="4"
+                    stroke-dasharray="13 87"
+                    stroke-dashoffset="-87"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+
+              <div class="stat-card__list">
+                <div class="stat-card__list-item">
+                  <div
+                    class="stat-card__list-dot"
+                    style="background: var(--primary)"
+                  ></div>
+                  <span class="stat-card__list-label">Aktif Premium</span>
+                  <span class="stat-card__list-val">3.012</span>
+                </div>
+                <div class="stat-card__list-item">
+                  <div
+                    class="stat-card__list-dot"
+                    style="background: var(--success)"
+                  ></div>
+                  <span class="stat-card__list-label">Aktif Free</span>
+                  <span class="stat-card__list-val">1.520</span>
+                </div>
+                <div class="stat-card__list-item">
+                  <div
+                    class="stat-card__list-dot"
+                    style="background: var(--warning)"
+                  ></div>
+                  <span class="stat-card__list-label">Tidak Aktif</span>
+                  <span class="stat-card__list-val">288</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Transactions Table -->
+          <div class="recent-table-section">
+            <div class="table-container">
+              <div class="table-toolbar">
+                <div class="table-toolbar__left">
+                  <span class="table-toolbar__title">Transaksi Terbaru</span>
+                  <span class="table-toolbar__count">8 transaksi hari ini</span>
+                </div>
+                <a href="kelola-transaksi.html" class="btn btn--outline btn--sm"
+                  >Lihat Semua →</a
+                >
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>ID Invoice</th>
+                    <th>Nama Siswa</th>
+                    <th>Paket</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="cell-id">#INV-20250601</span></td>
+                    <td>
+                      <div class="cell-user">
+                        <div class="cell-user__avatar avatar-color-1">AN</div>
+                        <div>
+                          <div class="cell-user__name">Andika Nugraha</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="tag tag--tryout">Paket TryOut Pro</span>
+                    </td>
+                    <td><span class="cell-price">Rp 199.000</span></td>
+                    <td><span class="badge badge--success">Berhasil</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="cell-id">#INV-20250602</span></td>
+                    <td>
+                      <div class="cell-user">
+                        <div class="cell-user__avatar avatar-color-2">SR</div>
+                        <div>
+                          <div class="cell-user__name">Sinta Rahayu</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="tag tag--tps">Paket TPS Intensif</span>
+                    </td>
+                    <td><span class="cell-price">Rp 149.000</span></td>
+                    <td><span class="badge badge--warning">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="cell-id">#INV-20250603</span></td>
+                    <td>
+                      <div class="cell-user">
+                        <div class="cell-user__avatar avatar-color-3">BW</div>
+                        <div>
+                          <div class="cell-user__name">Bayu Wicaksono</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><span class="tag tag--tka">Paket TKA Saintek</span></td>
+                    <td><span class="cell-price">Rp 249.000</span></td>
+                    <td><span class="badge badge--success">Berhasil</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+      <!-- ════════════════════ END MAIN ════════════════════ -->
+    </div>
+
+    <script>
+      function openSidebar() {
+        document.getElementById("sidebar").classList.add("open");
+        document.getElementById("sidebarOverlay").classList.add("active");
+      }
+      function closeSidebar() {
+        document.getElementById("sidebar").classList.remove("open");
+        document.getElementById("sidebarOverlay").classList.remove("active");
+      }
+    </script>
+  </body>
+</html>

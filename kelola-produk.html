@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelola Produk — NB-Learning Admin</title>
+    <link rel="stylesheet" href="admin-style.css" />
+    <style>
+      /* Product Grid */
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .product-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px 22px;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .product-card:hover {
+        box-shadow: var(--shadow-card-hover);
+        transform: translateY(-2px);
+      }
+
+      .product-card__badge {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+      }
+
+      .product-card__icon {
+        width: 46px;
+        height: 46px;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        margin-bottom: 14px;
+      }
+
+      .product-card__id {
+        font-size: 10px;
+        font-family: "SF Mono", monospace;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .product-card__name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 6px;
+        line-height: 1.3;
+      }
+
+      .product-card__price {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--primary);
+        letter-spacing: -0.5px;
+        margin-bottom: 12px;
+      }
+
+      .product-card__meta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 16px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .product-card__meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .product-card__meta-label {
+        font-size: 10px;
+        color: var(--text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+
+      .product-card__meta-val {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .product-card__actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .product-card__actions .btn {
+        flex: 1;
+        justify-content: center;
+      }
+
+      @media (max-width: 768px) {
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-shell">
+      <!-- ════════════════════ SIDEBAR ════════════════════ -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__brand">
+          <div class="sidebar__brand-icon">📚</div>
+          <div class="sidebar__brand-text">
+            <span class="sidebar__brand-name">NB-Learning</span>
+            <span class="sidebar__brand-sub">Admin Panel</span>
+          </div>
+        </div>
+
+        <div class="sidebar__profile">
+          <div class="sidebar__avatar">AD</div>
+          <div class="sidebar__profile-info">
+            <div class="sidebar__profile-name">Admin Utama</div>
+            <div class="sidebar__profile-role">Super Administrator</div>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav">
+          <div class="sidebar__nav-section">
+            <div class="sidebar__nav-label">Menu Utama</div>
+
+            <a href="dashboard.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">🏠</span>
+              Dashboard
+            </a>
+
+            <a href="kelola-artikel.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">📝</span>
+              Kelola Artikel
+            </a>
+
+            <a href="kelola-produk.html" class="sidebar__nav-item active">
+              <span class="sidebar__nav-icon">📦</span>
+              Kelola Produk
+            </a>
+
+            <a href="kelola-pengguna.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">👥</span>
+              Kelola Pengguna
+              <span class="sidebar__nav-badge">12</span>
+            </a>
+
+            <a href="kelola-transaksi.html" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">💳</span>
+              Kelola Transaksi
+            </a>
+          </div>
+
+          <div class="sidebar__nav-section">
+            <div class="sidebar__nav-label">Pengaturan</div>
+            <a href="#" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">⚙️</span>
+              Pengaturan
+            </a>
+            <a href="#" class="sidebar__nav-item">
+              <span class="sidebar__nav-icon">🔔</span>
+              Notifikasi
+            </a>
+          </div>
+        </nav>
+
+        <div class="sidebar__footer">
+          <button class="sidebar__footer-btn">
+            <span>🚪</span>
+            Keluar
+          </button>
+        </div>
+      </aside>
+
+      <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+        onclick="closeSidebar()"
+      ></div>
+
+      <!-- ════════════════════ MAIN ════════════════════ -->
+      <div class="main-content">
+        <header class="topbar">
+          <button class="topbar__hamburger" onclick="openSidebar()">☰</button>
+          <div class="topbar__breadcrumb">
+            <span class="topbar__page-title">Kelola Produk</span>
+            <div class="topbar__breadcrumb-trail">
+              <span>NB-Learning</span>
+              <span>›</span>
+              <span>Kelola Produk</span>
+            </div>
+          </div>
+          <div class="topbar__actions">
+            <button class="topbar__icon-btn" style="position: relative">
+              🔔
+              <span class="topbar__notif-dot"></span>
+            </button>
+            <div class="topbar__user">
+              <div class="topbar__user-avatar">AD</div>
+              <span class="topbar__user-name">Admin</span>
+            </div>
+          </div>
+        </header>
+
+        <main class="page-content">
+          <div class="page-header">
+            <div class="page-header__left">
+              <h1 class="page-header__title">Manajemen Paket Soal</h1>
+              <p class="page-header__desc">
+                Kelola paket Try Out & soal latihan UTBK yang tersedia untuk
+                siswa.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px">
+              <button class="btn btn--ghost btn--sm">📊 Tampilan Tabel</button>
+              <button class="btn btn--primary">📦 Tambah Paket Baru</button>
+            </div>
+          </div>
+
+          <!-- View Toggle Tabs -->
+          <div
+            style="
+              display: flex;
+              gap: 8px;
+              margin-bottom: 20px;
+              background: var(--bg-card);
+              padding: 6px;
+              border-radius: var(--radius-md);
+              border: 1px solid var(--border);
+              width: fit-content;
+            "
+          >
+            <button
+              class="btn btn--primary btn--sm"
+              id="btnGrid"
+              onclick="switchView('grid')"
+            >
+              ⊞ Grid
+            </button>
+            <button
+              class="btn btn--ghost btn--sm"
+              id="btnTable"
+              onclick="switchView('table')"
+            >
+              ☰ Tabel
+            </button>
+          </div>
+
+          <!-- ── GRID VIEW ── -->
+          <div id="gridView">
+            <div class="product-grid">
+              <!-- Card 1 -->
+              <div class="product-card">
+                <span class="product-card__badge"
+                  ><span class="badge badge--success">Aktif</span></span
+                >
+                <div
+                  class="product-card__icon"
+                  style="background: var(--primary-light)"
+                >
+                  🏆
+                </div>
+                <div class="product-card__id">#PKT-001</div>
+                <div class="product-card__name">Paket UTBK All-in-One 2025</div>
+                <div class="product-card__price">Rp 349.000</div>
+                <div class="product-card__meta">
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Jumlah Soal</span>
+                    <span class="product-card__meta-val">1.200</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Try Out</span>
+                    <span class="product-card__meta-val">10x</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Akses</span>
+                    <span class="product-card__meta-val">834</span>
+                  </div>
+                </div>
+                <div class="product-card__actions">
+                  <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                  <button class="btn btn--outline btn--sm">👁 Detail</button>
+                  <button class="btn btn--danger btn--sm">🗑️</button>
+                </div>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="product-card">
+                <span class="product-card__badge"
+                  ><span class="badge badge--success">Aktif</span></span
+                >
+                <div class="product-card__icon" style="background: #ede9fe">
+                  🧠
+                </div>
+                <div class="product-card__id">#PKT-002</div>
+                <div class="product-card__name">
+                  Paket TPS Intensif — Penalaran & Literasi
+                </div>
+                <div class="product-card__price">Rp 149.000</div>
+                <div class="product-card__meta">
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Jumlah Soal</span>
+                    <span class="product-card__meta-val">450</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Try Out</span>
+                    <span class="product-card__meta-val">5x</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Akses</span>
+                    <span class="product-card__meta-val">521</span>
+                  </div>
+                </div>
+                <div class="product-card__actions">
+                  <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                  <button class="btn btn--outline btn--sm">👁 Detail</button>
+                  <button class="btn btn--danger btn--sm">🗑️</button>
+                </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="product-card">
+                <span class="product-card__badge"
+                  ><span class="badge badge--success">Aktif</span></span
+                >
+                <div class="product-card__icon" style="background: #fef3c7">
+                  🔬
+                </div>
+                <div class="product-card__id">#PKT-003</div>
+                <div class="product-card__name">
+                  Paket TKA Saintek — Matematika & IPA
+                </div>
+                <div class="product-card__price">Rp 249.000</div>
+                <div class="product-card__meta">
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Jumlah Soal</span>
+                    <span class="product-card__meta-val">600</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Try Out</span>
+                    <span class="product-card__meta-val">6x</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Akses</span>
+                    <span class="product-card__meta-val">378</span>
+                  </div>
+                </div>
+                <div class="product-card__actions">
+                  <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                  <button class="btn btn--outline btn--sm">👁 Detail</button>
+                  <button class="btn btn--danger btn--sm">🗑️</button>
+                </div>
+              </div>
+
+              <!-- Card 4 -->
+              <div class="product-card">
+                <span class="product-card__badge"
+                  ><span class="badge badge--success">Aktif</span></span
+                >
+                <div class="product-card__icon" style="background: #d1fae5">
+                  📖
+                </div>
+                <div class="product-card__id">#PKT-004</div>
+                <div class="product-card__name">
+                  Paket TKA Soshum — IPS & Sejarah
+                </div>
+                <div class="product-card__price">Rp 199.000</div>
+                <div class="product-card__meta">
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Jumlah Soal</span>
+                    <span class="product-card__meta-val">500</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Try Out</span>
+                    <span class="product-card__meta-val">5x</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Akses</span>
+                    <span class="product-card__meta-val">290</span>
+                  </div>
+                </div>
+                <div class="product-card__actions">
+                  <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                  <button class="btn btn--outline btn--sm">👁 Detail</button>
+                  <button class="btn btn--danger btn--sm">🗑️</button>
+                </div>
+              </div>
+
+              <!-- Card 5 -->
+              <div class="product-card">
+                <span class="product-card__badge"
+                  ><span class="badge badge--warning">Draft</span></span
+                >
+                <div class="product-card__icon" style="background: #dbeafe">
+                  ⚡
+                </div>
+                <div class="product-card__id">#PKT-005</div>
+                <div class="product-card__name">
+                  Paket Kilat 3 Hari Menjelang UTBK
+                </div>
+                <div class="product-card__price">Rp 89.000</div>
+                <div class="product-card__meta">
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Jumlah Soal</span>
+                    <span class="product-card__meta-val">180</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Try Out</span>
+                    <span class="product-card__meta-val">2x</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Akses</span>
+                    <span class="product-card__meta-val">—</span>
+                  </div>
+                </div>
+                <div class="product-card__actions">
+                  <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                  <button class="btn btn--success btn--sm">🚀 Terbitkan</button>
+                  <button class="btn btn--danger btn--sm">🗑️</button>
+                </div>
+              </div>
+
+              <!-- Card 6 -->
+              <div class="product-card">
+                <span class="product-card__badge"
+                  ><span class="badge badge--danger">Nonaktif</span></span
+                >
+                <div class="product-card__icon" style="background: #fee2e2">
+                  📝
+                </div>
+                <div class="product-card__id">#PKT-006</div>
+                <div class="product-card__name">
+                  Paket Try Out UTBK 2024 (Arsip)
+                </div>
+                <div class="product-card__price">Rp 0</div>
+                <div class="product-card__meta">
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Jumlah Soal</span>
+                    <span class="product-card__meta-val">800</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Try Out</span>
+                    <span class="product-card__meta-val">8x</span>
+                  </div>
+                  <div class="product-card__meta-item">
+                    <span class="product-card__meta-label">Akses</span>
+                    <span class="product-card__meta-val">1.2k</span>
+                  </div>
+                </div>
+                <div class="product-card__actions">
+                  <button class="btn btn--ghost btn--sm">✏️ Edit</button>
+                  <button class="btn btn--outline btn--sm">♻️ Aktifkan</button>
+                  <button class="btn btn--danger btn--sm">🗑️</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── TABLE VIEW (hidden by default) ── -->
+          <div id="tableView" style="display: none">
+            <div class="table-container">
+              <div class="table-toolbar">
+                <div class="table-toolbar__left">
+                  <span class="table-toolbar__title">Daftar Paket UTBK</span>
+                  <span class="table-toolbar__count">6 paket</span>
+                  <div class="search-input-wrap">
+                    <span class="search-input-wrap__icon">🔍</span>
+                    <input
+                      type="text"
+                      class="search-input"
+                      placeholder="Cari nama paket..."
+                    />
+                  </div>
+                </div>
+              </div>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>ID Paket</th>
+                    <th>Nama Paket</th>
+                    <th>Harga</th>
+                    <th>Jumlah Soal</th>
+                    <th>Jumlah Akses</th>
+                    <th>Status Akses</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="cell-id">#PKT-001</span></td>
+                    <td>
+                      <div class="cell-title">Paket UTBK All-in-One 2025</div>
+                    </td>
+                    <td><span class="cell-price">Rp 349.000</span></td>
+                    <td style="font-weight: 600">1.200 soal</td>
+                    <td style="font-weight: 600; color: var(--success)">834</td>
+                    <td><span class="badge badge--success">Aktif</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <button class="btn btn--ghost btn--sm">✏️</button>
+                        <button class="btn btn--danger btn--sm">🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="cell-id">#PKT-002</span></td>
+                    <td><div class="cell-title">Paket TPS Intensif</div></td>
+                    <td><span class="cell-price">Rp 149.000</span></td>
+                    <td style="font-weight: 600">450 soal</td>
+                    <td style="font-weight: 600; color: var(--success)">521</td>
+                    <td><span class="badge badge--success">Aktif</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <button class="btn btn--ghost btn--sm">✏️</button>
+                        <button class="btn btn--danger btn--sm">🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="cell-id">#PKT-005</span></td>
+                    <td><div class="cell-title">Paket Kilat 3 Hari</div></td>
+                    <td><span class="cell-price">Rp 89.000</span></td>
+                    <td style="font-weight: 600">180 soal</td>
+                    <td style="color: var(--text-muted)">—</td>
+                    <td><span class="badge badge--warning">Draft</span></td>
+                    <td>
+                      <div class="cell-actions">
+                        <button class="btn btn--ghost btn--sm">✏️</button>
+                        <button class="btn btn--danger btn--sm">🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      function openSidebar() {
+        document.getElementById("sidebar").classList.add("open");
+        document.getElementById("sidebarOverlay").classList.add("active");
+      }
+      function closeSidebar() {
+        document.getElementById("sidebar").classList.remove("open");
+        document.getElementById("sidebarOverlay").classList.remove("active");
+      }
+      function switchView(view) {
+        if (view === "grid") {
+          document.getElementById("gridView").style.display = "block";
+          document.getElementById("tableView").style.display = "none";
+          document.getElementById("btnGrid").className =
+            "btn btn--primary btn--sm";
+          document.getElementById("btnTable").className =
+            "btn btn--ghost btn--sm";
+        } else {
+          document.getElementById("gridView").style.display = "none";
+          document.getElementById("tableView").style.display = "block";
+          document.getElementById("btnGrid").className =
+            "btn btn--ghost btn--sm";
+          document.getElementById("btnTable").className =
+            "btn btn--primary btn--sm";
+        }
+      }
+    </script>
+  </body>
+</html>
