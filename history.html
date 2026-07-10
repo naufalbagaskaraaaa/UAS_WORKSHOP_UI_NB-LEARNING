@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="admin-style.css" />
     <style>
       /* ===== Tambahan khusus untuk halaman history ===== */
-      /* Navbar & Footer style diambil dari admin-style.css */
 
       .page-header {
         padding: 32px 0 24px;
@@ -23,14 +22,13 @@
         margin-top: 4px;
       }
 
-      /* Container utama */
       .container {
         max-width: 1180px;
         margin: 0 auto;
         padding: 0 24px;
       }
 
-      /* ===== Table (diadaptasi dari admin-style.css) ===== */
+      /* ===== Table ===== */
       .table-container {
         background: var(--bg-card);
         border-radius: var(--radius-lg);
@@ -95,7 +93,7 @@
         background: var(--border-light);
       }
 
-      /* Badge status */
+      /* ===== Badge (dari admin-style.css) ===== */
       .badge {
         display: inline-flex;
         align-items: center;
@@ -123,7 +121,7 @@
         color: #1e40af;
       }
 
-      /* Tombol */
+      /* ===== Tombol ===== */
       .btn {
         display: inline-flex;
         align-items: center;
@@ -158,7 +156,7 @@
         font-size: 11.5px;
       }
 
-      /* Pagination */
+      /* ===== Pagination ===== */
       .pagination {
         display: flex;
         justify-content: flex-end;
@@ -186,7 +184,161 @@
         border-color: var(--primary);
       }
 
-      /* ===== Responsive ===== */
+      /* ===== Navbar (pakai class, konsisten dengan artikel.html) ===== */
+      .navbar {
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 0 24px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+      }
+      .navbar__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+      .navbar__logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 20px;
+        color: var(--primary);
+        text-decoration: none;
+      }
+      .navbar__logo-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        background: var(--primary);
+        color: #fff;
+        border-radius: var(--radius-sm);
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .navbar__menu {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        list-style: none;
+      }
+      .navbar__menu a {
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-weight: 500;
+        font-size: 14px;
+        transition: var(--transition);
+        position: relative;
+      }
+      .navbar__menu a:hover {
+        color: var(--primary);
+      }
+      .navbar__menu a.active {
+        color: var(--primary);
+      }
+      .navbar__menu a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 999px;
+      }
+      .navbar__actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .navbar__cart {
+        position: relative;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 20px;
+        transition: var(--transition);
+      }
+      .navbar__cart:hover {
+        color: var(--primary);
+      }
+      .navbar__cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -10px;
+        background: var(--danger);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .navbar__avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: var(--transition);
+      }
+      .navbar__avatar:hover {
+        border-color: var(--primary);
+      }
+
+      /* ===== Footer ===== */
+      .footer {
+        margin-top: auto;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border);
+        padding: 32px 0 20px;
+      }
+      .footer__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+      .footer__links {
+        display: flex;
+        gap: 24px;
+        list-style: none;
+      }
+      .footer__links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 13px;
+        transition: var(--transition);
+      }
+      .footer__links a:hover {
+        color: var(--primary);
+      }
+      .footer__copy {
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+
+      /* ===== RESPONSIVE: Ubah tabel jadi card list di HP ===== */
       @media (max-width: 600px) {
         .table-toolbar {
           flex-direction: column;
@@ -198,196 +350,115 @@
         .search-input:focus {
           width: 100%;
         }
-        .data-table th,
+
+        /* Sembunyikan header tabel */
+        .data-table thead {
+          display: none;
+        }
+
+        /* Setiap baris jadi card */
+        .data-table tbody tr {
+          display: block;
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 16px;
+          margin-bottom: 12px;
+          box-shadow: var(--shadow-sm);
+        }
+
+        .data-table tbody tr:hover td {
+          background: transparent;
+        }
+
         .data-table td {
-          padding: 10px 12px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 8px 0;
+          border-bottom: 1px solid var(--border-light);
+          font-size: 13px;
+          gap: 12px;
+          background: transparent !important;
+        }
+
+        .data-table td:last-child {
+          border-bottom: none;
+        }
+
+        /* Label kolom muncul sebagai pseudo-element */
+        .data-table td::before {
+          content: attr(data-label);
+          font-weight: 600;
+          color: var(--text-secondary);
           font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
+          flex-shrink: 0;
+        }
+
+        /* Kolom Aksi - tombol Detail tetap di kanan */
+        .data-table td:last-child {
+          justify-content: flex-end;
+        }
+        .data-table td:last-child::before {
+          content: "";
+          display: none;
+        }
+
+        /* Badge dan tombol tetap proporsional */
+        .data-table td .badge {
+          font-size: 10px;
+          padding: 2px 10px;
+        }
+        .data-table td .btn--sm {
+          padding: 3px 10px;
+          font-size: 11px;
+        }
+
+        .pagination {
+          justify-content: center;
+          padding: 12px 16px;
+        }
+        .pagination button {
+          padding: 4px 10px;
+          font-size: 12px;
+        }
+      }
+
+      /* ===== Tablet kecil ===== */
+      @media (max-width: 860px) {
+        .navbar__menu {
+          gap: 16px;
+        }
+        .navbar__menu a {
+          font-size: 13px;
         }
       }
     </style>
   </head>
   <body>
-    <!-- ===== NAVBAR (sama persis dengan artikel.html & katalog.html) ===== -->
-    <nav
-      style="
-        background: var(--bg-card);
-        border-bottom: 1px solid var(--border);
-        box-shadow: var(--shadow-sm);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        padding: 0 24px;
-        height: 64px;
-        display: flex;
-        align-items: center;
-      "
-    >
-      <div
-        style="
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          max-width: 1180px;
-          margin: 0 auto;
-        "
-      >
-        <!-- Logo -->
-        <a
-          href="#"
-          style="
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 20px;
-            color: var(--primary);
-            text-decoration: none;
-          "
-        >
-          <span
-            style="
-              display: inline-flex;
-              align-items: center;
-              justify-content: center;
-              width: 34px;
-              height: 34px;
-              background: var(--primary);
-              color: #fff;
-              border-radius: var(--radius-sm);
-              font-size: 16px;
-              font-weight: 700;
-            "
-            >NB</span
-          >
+    <!-- ===== NAVBAR (pakai class, konsisten) ===== -->
+    <nav class="navbar">
+      <div class="navbar__inner">
+        <a href="#" class="navbar__logo">
+          <span class="navbar__logo-icon">NB</span>
           NB-Learning
         </a>
-        <!-- Menu -->
-        <ul
-          style="
-            display: flex;
-            align-items: center;
-            gap: 28px;
-            list-style: none;
-          "
-        >
-          <li>
-            <a
-              href="#"
-              style="
-                text-decoration: none;
-                color: var(--text-secondary);
-                font-weight: 500;
-                font-size: 14px;
-                transition: var(--transition);
-              "
-              >Beranda</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              style="
-                text-decoration: none;
-                color: var(--text-secondary);
-                font-weight: 500;
-                font-size: 14px;
-                transition: var(--transition);
-              "
-              >Try Out</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              style="
-                text-decoration: none;
-                color: var(--text-secondary);
-                font-weight: 500;
-                font-size: 14px;
-                transition: var(--transition);
-              "
-              >Forum</a
-            >
-          </li>
-          <li>
-            <a
-              href="artikel.html"
-              style="
-                text-decoration: none;
-                color: var(--text-secondary);
-                font-weight: 500;
-                font-size: 14px;
-                transition: var(--transition);
-              "
-              >Artikel</a
-            >
-          </li>
-          <li>
-            <a
-              href="katalog.html"
-              style="
-                text-decoration: none;
-                color: var(--text-secondary);
-                font-weight: 500;
-                font-size: 14px;
-                transition: var(--transition);
-              "
-              >Toko Premium</a
-            >
-          </li>
+        <ul class="navbar__menu">
+          <li><a href="#">Beranda</a></li>
+          <li><a href="#">Try Out</a></li>
+          <li><a href="#">Forum</a></li>
+          <li><a href="artikel.html">Artikel</a></li>
+          <li><a href="katalog.html">Toko Premium</a></li>
+          <li><a href="history.html" class="active">Riwayat</a></li>
         </ul>
-        <!-- Actions -->
-        <div style="display: flex; align-items: center; gap: 16px">
-          <a
-            href="keranjang.html"
-            style="
-              position: relative;
-              color: var(--text-secondary);
-              text-decoration: none;
-              font-size: 20px;
-              transition: var(--transition);
-            "
-          >
+        <div class="navbar__actions">
+          <a href="keranjang.html" class="navbar__cart">
             🛒
-            <span
-              style="
-                position: absolute;
-                top: -8px;
-                right: -10px;
-                background: var(--danger);
-                color: #fff;
-                font-size: 10px;
-                font-weight: 700;
-                width: 18px;
-                height: 18px;
-                border-radius: 999px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
-              >3</span
-            >
+            <span class="navbar__cart-badge">3</span>
           </a>
-          <div
-            style="
-              width: 34px;
-              height: 34px;
-              border-radius: 50%;
-              background: var(--primary-light);
-              color: var(--primary);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-weight: 700;
-              font-size: 13px;
-              cursor: pointer;
-              border: 2px solid transparent;
-              transition: var(--transition);
-            "
-          >
-            NB
-          </div>
+          <div class="navbar__avatar">NB</div>
         </div>
       </div>
     </nav>
@@ -432,44 +503,64 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong>#INV-001</strong></td>
-              <td>10 Juli 2026</td>
-              <td>Paket Kelas Intensif TPS</td>
-              <td>Rp149.000</td>
-              <td><span class="badge badge--success">Selesai</span></td>
-              <td><button class="btn btn--outline btn--sm">Detail</button></td>
+              <td data-label="ID Transaksi"><strong>#INV-001</strong></td>
+              <td data-label="Tanggal">10 Juli 2026</td>
+              <td data-label="Produk">Paket Kelas Intensif TPS</td>
+              <td data-label="Total">Rp149.000</td>
+              <td data-label="Status">
+                <span class="badge badge--success">Selesai</span>
+              </td>
+              <td data-label="Aksi">
+                <button class="btn btn--outline btn--sm">Detail</button>
+              </td>
             </tr>
             <tr>
-              <td><strong>#INV-002</strong></td>
-              <td>8 Juli 2026</td>
-              <td>E-book Rangkuman Rumus Saintek</td>
-              <td>Rp39.000</td>
-              <td><span class="badge badge--warning">Menunggu</span></td>
-              <td><button class="btn btn--outline btn--sm">Detail</button></td>
+              <td data-label="ID Transaksi"><strong>#INV-002</strong></td>
+              <td data-label="Tanggal">8 Juli 2026</td>
+              <td data-label="Produk">E-book Rangkuman Rumus Saintek</td>
+              <td data-label="Total">Rp39.000</td>
+              <td data-label="Status">
+                <span class="badge badge--warning">Menunggu</span>
+              </td>
+              <td data-label="Aksi">
+                <button class="btn btn--outline btn--sm">Detail</button>
+              </td>
             </tr>
             <tr>
-              <td><strong>#INV-003</strong></td>
-              <td>5 Juli 2026</td>
-              <td>Sesi Konsultasi 1-on-1</td>
-              <td>Rp75.000</td>
-              <td><span class="badge badge--danger">Gagal</span></td>
-              <td><button class="btn btn--outline btn--sm">Detail</button></td>
+              <td data-label="ID Transaksi"><strong>#INV-003</strong></td>
+              <td data-label="Tanggal">5 Juli 2026</td>
+              <td data-label="Produk">Sesi Konsultasi 1-on-1</td>
+              <td data-label="Total">Rp75.000</td>
+              <td data-label="Status">
+                <span class="badge badge--danger">Gagal</span>
+              </td>
+              <td data-label="Aksi">
+                <button class="btn btn--outline btn--sm">Detail</button>
+              </td>
             </tr>
             <tr>
-              <td><strong>#INV-004</strong></td>
-              <td>1 Juli 2026</td>
-              <td>Bundling Paket TPS + E-book</td>
-              <td>Rp169.000</td>
-              <td><span class="badge badge--info">Diproses</span></td>
-              <td><button class="btn btn--outline btn--sm">Detail</button></td>
+              <td data-label="ID Transaksi"><strong>#INV-004</strong></td>
+              <td data-label="Tanggal">1 Juli 2026</td>
+              <td data-label="Produk">Bundling Paket TPS + E-book</td>
+              <td data-label="Total">Rp169.000</td>
+              <td data-label="Status">
+                <span class="badge badge--info">Diproses</span>
+              </td>
+              <td data-label="Aksi">
+                <button class="btn btn--outline btn--sm">Detail</button>
+              </td>
             </tr>
             <tr>
-              <td><strong>#INV-005</strong></td>
-              <td>28 Juni 2026</td>
-              <td>Paket Kelas Intensif Soshum</td>
-              <td>Rp149.000</td>
-              <td><span class="badge badge--success">Selesai</span></td>
-              <td><button class="btn btn--outline btn--sm">Detail</button></td>
+              <td data-label="ID Transaksi"><strong>#INV-005</strong></td>
+              <td data-label="Tanggal">28 Juni 2026</td>
+              <td data-label="Produk">Paket Kelas Intensif Soshum</td>
+              <td data-label="Total">Rp149.000</td>
+              <td data-label="Status">
+                <span class="badge badge--success">Selesai</span>
+              </td>
+              <td data-label="Aksi">
+                <button class="btn btn--outline btn--sm">Detail</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -485,66 +576,15 @@
       </div>
     </main>
 
-    <!-- ===== FOOTER (sama persis dengan artikel.html & katalog.html) ===== -->
-    <footer
-      style="
-        margin-top: auto;
-        background: var(--bg-card);
-        border-top: 1px solid var(--border);
-        padding: 32px 0 20px;
-      "
-    >
-      <div
-        style="
-          max-width: 1180px;
-          margin: 0 auto;
-          padding: 0 24px;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          align-items: center;
-          gap: 16px;
-        "
-      >
-        <ul style="display: flex; gap: 24px; list-style: none">
-          <li>
-            <a
-              href="#"
-              style="
-                text-decoration: none;
-                color: var(--text-muted);
-                font-size: 13px;
-                transition: var(--transition);
-              "
-              >Pusat Bantuan</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              style="
-                text-decoration: none;
-                color: var(--text-muted);
-                font-size: 13px;
-                transition: var(--transition);
-              "
-              >Hubungi Kami</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              style="
-                text-decoration: none;
-                color: var(--text-muted);
-                font-size: 13px;
-                transition: var(--transition);
-              "
-              >Syarat & Ketentuan</a
-            >
-          </li>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <ul class="footer__links">
+          <li><a href="#">Pusat Bantuan</a></li>
+          <li><a href="#">Hubungi Kami</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
         </ul>
-        <span style="color: var(--text-muted); font-size: 13px"
+        <span class="footer__copy"
           >&copy; 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO).</span
         >
       </div>
