@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout — NB-Learning</title>
+    <!-- Menggunakan design system dari admin-style.css -->
+    <link rel="stylesheet" href="admin-style.css" />
+    <style>
+      /* ===== Variabel tambahan (mengikuti admin-style.css) ===== */
+      :root {
+        --radius-md: 10px;
+      }
+
+      /* ===== Reset tambahan ===== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg-page);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* ===== Page Header ===== */
+      .page-header {
+        padding: 32px 0 24px;
+      }
+      .page-header h1 {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.4px;
+      }
+      .page-header p {
+        color: var(--text-secondary);
+        font-size: 15px;
+        margin-top: 4px;
+      }
+
+      /* ===== Checkout Grid (2 kolom) ===== */
+      .checkout-grid {
+        display: grid;
+        grid-template-columns: 2fr 1.2fr;
+        gap: 32px;
+        padding-bottom: 40px;
+      }
+
+      /* ===== Card (sama persis dengan admin-style) ===== */
+      .card {
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        padding: 24px;
+      }
+      .card:hover {
+        box-shadow: var(--shadow-md);
+      }
+      .card__title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+      .card__sub {
+        color: var(--text-secondary);
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      /* ===== Form ===== */
+      .form-group {
+        margin-bottom: 18px;
+      }
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-bottom: 4px;
+      }
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        background: #fff;
+        transition: var(--transition);
+      }
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--primary-light);
+      }
+
+      /* ===== Payment Methods (radio card) ===== */
+      .payment-methods {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 8px;
+      }
+      .payment-methods__item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: var(--transition);
+        background: #fff;
+      }
+      .payment-methods__item:hover {
+        border-color: var(--primary);
+        background: var(--primary-light);
+      }
+      .payment-methods__item input[type="radio"] {
+        accent-color: var(--primary);
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        flex-shrink: 0;
+        cursor: pointer;
+      }
+      .payment-methods__item label {
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        flex: 1;
+      }
+      .payment-methods__item .method-icon {
+        font-size: 20px;
+        margin-right: 4px;
+      }
+
+      /* ===== Order Summary ===== */
+      .order-summary__item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-light);
+        font-size: 14px;
+      }
+      .order-summary__item:last-of-type {
+        border-bottom: none;
+      }
+      .order-summary__item--subtotal {
+        color: var(--text-secondary);
+        font-size: 13px;
+      }
+      .order-summary__item--total {
+        font-weight: 700;
+        font-size: 18px;
+        padding-top: 16px;
+        border-top: 2px solid var(--border);
+        margin-top: 8px;
+      }
+      .order-summary__item--total .order-summary__price {
+        color: var(--primary);
+      }
+
+      .order-summary__promo {
+        display: flex;
+        gap: 8px;
+        margin: 12px 0 8px;
+      }
+      .order-summary__promo input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-family: "Inter", sans-serif;
+        font-size: 13px;
+      }
+      .order-summary__promo input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--primary-light);
+      }
+
+      /* ===== Tombol ===== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 24px;
+        border: none;
+        border-radius: var(--radius-sm);
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        gap: 8px;
+      }
+      .btn--primary {
+        background: var(--primary);
+        color: #fff;
+      }
+      .btn--primary:hover {
+        background: var(--primary-dark);
+      }
+      .btn--outline {
+        background: transparent;
+        color: var(--primary);
+        border: 1.5px solid var(--primary);
+      }
+      .btn--outline:hover {
+        background: var(--primary-light);
+      }
+      .btn--block {
+        width: 100%;
+        justify-content: center;
+      }
+      .btn--sm {
+        padding: 6px 14px;
+        font-size: 12px;
+      }
+
+      /* ===== Responsive ===== */
+      @media (max-width: 860px) {
+        .checkout-grid {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+        .page-header h1 {
+          font-size: 20px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .navbar__menu {
+          display: none;
+        }
+        .navbar__actions .navbar__cart span {
+          display: none;
+        }
+        .payment-methods__item {
+          padding: 10px 12px;
+        }
+      }
+
+      /* ===== Navbar & Footer (diambil dari artikel.html / katalog.html) ===== */
+      /* Karena admin-style.css tidak mendefinisikan navbar, kita buat di sini */
+      .navbar {
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 0 24px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+      }
+      .navbar__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+      .navbar__logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 20px;
+        color: var(--primary);
+        text-decoration: none;
+      }
+      .navbar__logo-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        background: var(--primary);
+        color: #fff;
+        border-radius: var(--radius-sm);
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .navbar__menu {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        list-style: none;
+      }
+      .navbar__menu a {
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-weight: 500;
+        font-size: 14px;
+        transition: var(--transition);
+      }
+      .navbar__menu a:hover {
+        color: var(--primary);
+      }
+      .navbar__menu a.active {
+        color: var(--primary);
+      }
+      .navbar__actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .navbar__cart {
+        position: relative;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 20px;
+        transition: var(--transition);
+      }
+      .navbar__cart:hover {
+        color: var(--primary);
+      }
+      .navbar__cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -10px;
+        background: var(--danger);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .navbar__avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: var(--transition);
+      }
+      .navbar__avatar:hover {
+        border-color: var(--primary);
+      }
+
+      /* Footer */
+      .footer {
+        margin-top: auto;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border);
+        padding: 32px 0 20px;
+      }
+      .footer__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+      .footer__links {
+        display: flex;
+        gap: 24px;
+        list-style: none;
+      }
+      .footer__links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 13px;
+        transition: var(--transition);
+      }
+      .footer__links a:hover {
+        color: var(--primary);
+      }
+      .footer__copy {
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar">
+      <div class="navbar__inner">
+        <a href="#" class="navbar__logo">
+          <span class="navbar__logo-icon">NB</span>
+          NB-Learning
+        </a>
+        <ul class="navbar__menu">
+          <li><a href="#">Beranda</a></li>
+          <li><a href="#">Try Out</a></li>
+          <li><a href="#">Forum</a></li>
+          <li><a href="artikel.html">Artikel</a></li>
+          <li><a href="katalog.html">Toko Premium</a></li>
+        </ul>
+        <div class="navbar__actions">
+          <a href="keranjang.html" class="navbar__cart">
+            🛒
+            <span class="navbar__cart-badge">3</span>
+          </a>
+          <div class="navbar__avatar">NB</div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ========== PAGE HEADER ========== -->
+    <header class="page-header">
+      <div class="container">
+        <h1>Checkout</h1>
+        <p>Lengkapi data diri dan pilih metode pembayaran</p>
+      </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="container">
+      <div class="checkout-grid">
+        <!-- Kolom Kiri: Form & Payment -->
+        <div class="card">
+          <h2 class="card__title">Data Penagihan</h2>
+          <form>
+            <div class="form-group">
+              <label for="nama">Nama Lengkap</label>
+              <input type="text" id="nama" placeholder="Naufal Bagaskara" />
+            </div>
+            <div class="form-group">
+              <label for="email">Alamat Email</label>
+              <input type="email" id="email" placeholder="naufal@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="telepon">Nomor Telepon</label>
+              <input type="tel" id="telepon" placeholder="0812-3456-7890" />
+            </div>
+
+            <hr
+              style="
+                margin: 24px 0;
+                border: 0;
+                border-top: 1px solid var(--border-light);
+              "
+            />
+
+            <h2 class="card__title" style="font-size: 16px">
+              Metode Pembayaran
+            </h2>
+            <div class="payment-methods">
+              <!-- Transfer Bank -->
+              <label class="payment-methods__item">
+                <input type="radio" name="payment" value="bca" checked />
+                <span class="method-icon">🏦</span>
+                <label>Transfer Bank BCA</label>
+              </label>
+              <label class="payment-methods__item">
+                <input type="radio" name="payment" value="mandiri" />
+                <span class="method-icon">🏦</span>
+                <label>Transfer Bank Mandiri</label>
+              </label>
+              <label class="payment-methods__item">
+                <input type="radio" name="payment" value="bni" />
+                <span class="method-icon">🏦</span>
+                <label>Transfer Bank BNI</label>
+              </label>
+              <!-- E-Wallet -->
+              <label class="payment-methods__item">
+                <input type="radio" name="payment" value="gopay" />
+                <span class="method-icon">📱</span>
+                <label>GoPay</label>
+              </label>
+              <label class="payment-methods__item">
+                <input type="radio" name="payment" value="ovo" />
+                <span class="method-icon">📱</span>
+                <label>OVO</label>
+              </label>
+            </div>
+          </form>
+        </div>
+
+        <!-- Kolom Kanan: Ringkasan Pesanan -->
+        <div class="card">
+          <h2 class="card__title">Ringkasan Pesanan</h2>
+
+          <div class="order-summary">
+            <div class="order-summary__item">
+              <span>Paket Kelas Intensif TPS</span>
+              <span class="order-summary__price">Rp149.000</span>
+            </div>
+            <div class="order-summary__item">
+              <span>E-book Rangkuman Rumus Saintek</span>
+              <span class="order-summary__price">Rp39.000</span>
+            </div>
+            <div class="order-summary__item">
+              <span>Sesi Konsultasi 1-on-1</span>
+              <span class="order-summary__price">Rp75.000</span>
+            </div>
+
+            <div class="order-summary__item order-summary__item--subtotal">
+              <span>Subtotal</span>
+              <span>Rp263.000</span>
+            </div>
+
+            <!-- Kode Promo -->
+            <div class="order-summary__promo">
+              <input type="text" placeholder="Masukkan kode promo" />
+              <button class="btn btn--outline btn--sm">Terapkan</button>
+            </div>
+
+            <div class="order-summary__item order-summary__item--total">
+              <span>Total</span>
+              <span class="order-summary__price">Rp263.000</span>
+            </div>
+          </div>
+
+          <button class="btn btn--primary btn--block" style="margin-top: 20px">
+            Bayar Sekarang
+          </button>
+          <p
+            style="
+              font-size: 12px;
+              color: var(--text-muted);
+              text-align: center;
+              margin-top: 12px;
+            "
+          >
+            🔒 Transaksi aman dan terenkripsi
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <ul class="footer__links">
+          <li><a href="#">Pusat Bantuan</a></li>
+          <li><a href="#">Hubungi Kami</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+        </ul>
+        <span class="footer__copy"
+          >&copy; 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO).</span
+        >
+      </div>
+    </footer>
+  </body>
+</html>
