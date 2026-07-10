@@ -3,188 +3,329 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Keranjang Belanja — NB-Learning</title>
+    <title>Keranjang — NB-Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="admin-style.css" />
     <link rel="stylesheet" href="siswa-styles.css" />
+
+    <style>
+      .container {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .page-header {
+        padding: 32px 0 24px;
+      }
+      .page-header__title {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.4px;
+        color: var(--text-primary);
+      }
+
+      .cart-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 32px;
+        padding-bottom: 40px;
+      }
+
+      .cart-item {
+        display: flex;
+        gap: 16px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border-light);
+      }
+      .cart-item:last-child {
+        border-bottom: none;
+      }
+
+      .cart-item__image {
+        width: 80px;
+        height: 80px;
+        border-radius: var(--radius-sm);
+        background: var(--primary-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        flex-shrink: 0;
+      }
+
+      .cart-item__info {
+        flex: 1;
+      }
+      .cart-item__title {
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--text-primary);
+      }
+      .cart-item__meta {
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+      .cart-item__price {
+        font-weight: 700;
+        font-size: 15px;
+        color: var(--primary);
+      }
+      .cart-item__remove {
+        color: var(--text-muted);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        transition: var(--transition);
+      }
+      .cart-item__remove:hover {
+        color: var(--danger);
+      }
+
+      .cart-item__quantity {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .cart-item__quantity button {
+        width: 28px;
+        height: 28px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border);
+        background: var(--bg-card);
+        cursor: pointer;
+        transition: var(--transition);
+        font-size: 14px;
+      }
+      .cart-item__quantity button:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .cart-item__quantity span {
+        font-weight: 600;
+        font-size: 14px;
+        min-width: 24px;
+        text-align: center;
+      }
+
+      .card {
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        padding: 24px;
+      }
+      .card__title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+      .summary-item.total {
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--text-primary);
+        border-top: 2px solid var(--border);
+        padding-top: 16px;
+        margin-top: 8px;
+      }
+      .summary-item.total .summary-price {
+        color: var(--primary);
+      }
+
+      .btn--block {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: 16px;
+      }
+
+      .empty-cart {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+      }
+      .empty-cart .icon {
+        font-size: 64px;
+        margin-bottom: 16px;
+      }
+      .empty-cart h3 {
+        font-size: 18px;
+        color: var(--text-secondary);
+        margin-bottom: 4px;
+      }
+
+      @media (max-width: 860px) {
+        .cart-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 480px) {
+        .cart-item {
+          flex-wrap: wrap;
+        }
+        .cart-item__image {
+          width: 60px;
+          height: 60px;
+          font-size: 24px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- NAVBAR -->
-    <header class="navbar">
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
       <div class="navbar__inner">
         <a href="index.html" class="navbar__logo">
-          <span class="navbar__logo-mark">NB</span>
+          <span class="navbar__logo-icon">NB</span>
           NB-Learning
         </a>
-
-        <nav class="navbar__menu">
-          <a href="index.html" class="navbar__link">Beranda</a>
-          <a href="try-out.html" class="navbar__link">Try Out</a>
-          <a href="forum.html" class="navbar__link">Forum</a>
-          <a href="artikel.html" class="navbar__link">Artikel</a>
-          <a href="katalog.html" class="navbar__link">Toko Premium</a>
-        </nav>
-
+        <ul class="navbar__menu">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="cbt.html">Try Out</a></li>
+          <li><a href="forum.html">Forum</a></li>
+          <li><a href="artikel.html">Artikel</a></li>
+          <li><a href="katalog.html">Toko Premium</a></li>
+        </ul>
         <div class="navbar__actions">
-          <button
-            class="navbar__icon-btn"
-            aria-label="Keranjang belanja"
-            onclick="window.location.href = 'keranjang.html'"
-          >
+          <a href="keranjang.html" class="navbar__cart">
             🛒
-            <span class="navbar__badge">2</span>
-          </button>
-          <button class="navbar__icon-btn" aria-label="Notifikasi">🔔</button>
-          <div class="navbar__avatar" title="Naufal Bagaskara">NB</div>
-          <button class="navbar__toggle" aria-label="Buka menu">☰</button>
+            <span class="navbar__cart-badge">3</span>
+          </a>
+          <div class="navbar__avatar">NB</div>
         </div>
+      </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <header class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">🛒 Keranjang Belanja</h1>
       </div>
     </header>
 
+    <!-- ===== MAIN CONTENT ===== -->
     <main class="container">
-      <!-- PAGE HEADER -->
-      <section class="page-header">
-        <p class="page-header__breadcrumb">
-          <a href="index.html">Beranda</a> / Keranjang Belanja
-        </p>
-        <h1 class="page-header__title">Keranjang Belanja</h1>
-        <p class="page-header__subtitle">
-          Periksa kembali produk yang ingin kamu beli sebelum lanjut ke
-          pembayaran.
-        </p>
-      </section>
+      <div class="cart-grid">
+        <!-- Kiri: Daftar Item -->
+        <div class="card">
+          <h2 class="card__title">Item dalam Keranjang (3)</h2>
 
-      <!-- CART LAYOUT -->
-      <section class="cart-layout">
-        <!-- DAFTAR ITEM -->
-        <div class="card" style="padding: 22px">
+          <!-- Item 1 -->
           <div class="cart-item">
-            <div class="cart-item__thumb cart-item__thumb--kelas">📚</div>
+            <div class="cart-item__image">📚</div>
             <div class="cart-item__info">
-              <a href="detail-produk.html" class="cart-item__title"
-                >Paket Kelas Intensif TPS 4 Minggu</a
-              >
-              <span class="cart-item__unit-price">Rp149.000 / item</span>
-              <button class="cart-item__remove">Hapus</button>
-            </div>
-            <div class="cart-item__actions">
-              <div class="qty-selector">
-                <button class="qty-selector__btn" aria-label="Kurangi jumlah">
-                  −
-                </button>
-                <span class="qty-selector__value">1</span>
-                <button class="qty-selector__btn" aria-label="Tambah jumlah">
-                  +
-                </button>
+              <div class="cart-item__title">
+                Paket Kelas Intensif TPS 4 Minggu
               </div>
-              <span class="cart-item__subtotal">Rp149.000</span>
+              <div class="cart-item__meta">Paket Kelas • 20 sesi video</div>
+              <div class="cart-item__price">Rp149.000</div>
+              <div class="cart-item__quantity">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+              </div>
             </div>
+            <button class="cart-item__remove">✕</button>
           </div>
 
+          <!-- Item 2 -->
           <div class="cart-item">
-            <div class="cart-item__thumb cart-item__thumb--ebook">📘</div>
+            <div class="cart-item__image">📖</div>
             <div class="cart-item__info">
-              <a href="detail-produk.html" class="cart-item__title"
-                >E-book Rangkuman Rumus Saintek</a
-              >
-              <span class="cart-item__unit-price">Rp39.000 / item</span>
-              <button class="cart-item__remove">Hapus</button>
-            </div>
-            <div class="cart-item__actions">
-              <div class="qty-selector">
-                <button class="qty-selector__btn" aria-label="Kurangi jumlah">
-                  −
-                </button>
-                <span class="qty-selector__value">1</span>
-                <button class="qty-selector__btn" aria-label="Tambah jumlah">
-                  +
-                </button>
+              <div class="cart-item__title">E-book Rangkuman Rumus Saintek</div>
+              <div class="cart-item__meta">E-book • 120 halaman PDF</div>
+              <div class="cart-item__price">Rp39.000</div>
+              <div class="cart-item__quantity">
+                <button>-</button>
+                <span>2</span>
+                <button>+</button>
               </div>
-              <span class="cart-item__subtotal">Rp39.000</span>
             </div>
+            <button class="cart-item__remove">✕</button>
           </div>
 
-          <div style="padding-top: 18px">
-            <a href="katalog.html" class="btn btn--ghost btn--sm"
-              >← Lanjut Belanja</a
-            >
+          <!-- Item 3 -->
+          <div class="cart-item">
+            <div class="cart-item__image">💬</div>
+            <div class="cart-item__info">
+              <div class="cart-item__title">Sesi Konsultasi 1-on-1</div>
+              <div class="cart-item__meta">Konsultasi • 60 menit</div>
+              <div class="cart-item__price">Rp75.000</div>
+              <div class="cart-item__quantity">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+              </div>
+            </div>
+            <button class="cart-item__remove">✕</button>
           </div>
         </div>
 
-        <!-- RINGKASAN PESANAN -->
-        <aside class="card summary-card">
-          <p class="summary-card__title">Ringkasan Pesanan</p>
-
-          <div class="summary-row">
-            <span>Subtotal (2 produk)</span>
-            <span>Rp188.000</span>
+        <!-- Kanan: Ringkasan -->
+        <div class="card">
+          <h2 class="card__title">Ringkasan Belanja</h2>
+          <div class="summary-item">
+            <span>Subtotal (3 item)</span>
+            <span>Rp263.000</span>
           </div>
-          <div class="summary-row">
-            <span>Diskon</span>
-            <span>−Rp0</span>
+          <div class="summary-item">
+            <span>Ongkos Kirim</span>
+            <span>Gratis</span>
           </div>
-
-          <div class="voucher-row">
-            <input
-              type="text"
-              class="voucher-input"
-              placeholder="Masukkan kode voucher"
-            />
-            <button class="btn btn--outline btn--sm">Pakai</button>
+          <div class="summary-item total">
+            <span>Total</span>
+            <span class="summary-price">Rp263.000</span>
           </div>
-
-          <div class="summary-row summary-row--total">
-            <span>Total Bayar</span>
-            <span>Rp188.000</span>
-          </div>
-
-          <button
-            class="btn btn--primary btn--block"
-            style="margin-top: 18px"
-            onclick="window.location.href = 'checkout.html'"
+          <a href="checkout.html" class="btn btn--primary btn--block"
+            >Lanjutkan ke Checkout</a
           >
-            Checkout
-          </button>
-          <p
-            class="stock-note"
-            style="justify-content: center; margin-top: 12px"
+          <a
+            href="katalog.html"
+            style="
+              display: block;
+              text-align: center;
+              margin-top: 12px;
+              font-size: 13px;
+              color: var(--text-secondary);
+              text-decoration: none;
+              transition: var(--transition);
+            "
           >
-            🔒 Produk digital — tidak memerlukan alamat pengiriman
-          </p>
-        </aside>
-      </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="footer__inner">
-        <div>
-          <div class="footer__brand">
-            <span class="navbar__logo-mark">NB</span>
-            NB-Learning
-          </div>
-          <p class="footer__desc">
-            Platform pembelajaran dan simulasi ujian UTBK/SNBT gratis untuk
-            pemberdayaan pendidikan inklusif Kabupaten Nganjuk.
-          </p>
-        </div>
-
-        <div>
-          <p class="footer__col-title">Navigasi</p>
-          <a href="index.html" class="footer__link">Beranda</a>
-          <a href="try-out.html" class="footer__link">Try Out</a>
-          <a href="artikel.html" class="footer__link">Artikel</a>
-          <a href="katalog.html" class="footer__link">Toko Premium</a>
-        </div>
-
-        <div>
-          <p class="footer__col-title">Bantuan</p>
-          <a href="#" class="footer__link">Pusat Bantuan</a>
-          <a href="#" class="footer__link">Hubungi Kami</a>
-          <a href="#" class="footer__link">Syarat & Ketentuan</a>
+            ← Lanjutkan Belanja
+          </a>
         </div>
       </div>
-      <div class="footer__bottom">
-        © 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO). Seluruh hak
-        cipta dilindungi.
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <ul class="footer__links">
+          <li><a href="#">Pusat Bantuan</a></li>
+          <li><a href="#">Hubungi Kami</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+        </ul>
+        <span class="footer__copy"
+          >&copy; 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO).</span
+        >
       </div>
     </footer>
   </body>

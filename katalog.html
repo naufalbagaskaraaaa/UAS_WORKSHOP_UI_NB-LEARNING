@@ -4,250 +4,421 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toko Premium — NB-Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="admin-style.css" />
     <link rel="stylesheet" href="siswa-styles.css" />
+
+    <style>
+      .container {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .page-header {
+        padding: 32px 0 24px;
+      }
+      .page-header__title {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.4px;
+        color: var(--text-primary);
+      }
+      .page-header__sub {
+        color: var(--text-secondary);
+        font-size: 15px;
+        margin-top: 4px;
+      }
+
+      .filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .filter-chip {
+        padding: 6px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        background: var(--bg-card);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .filter-chip:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .filter-chip.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      .search-input {
+        padding: 8px 14px 8px 36px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        font-family: "Inter", sans-serif;
+        font-size: 13px;
+        background: #fff
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>')
+          no-repeat 12px center;
+        background-size: 16px;
+        width: 240px;
+        transition: var(--transition);
+      }
+      .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--primary-light);
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+        padding-bottom: 40px;
+      }
+
+      .product-card {
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-card-hover);
+      }
+
+      .product-card__image {
+        height: 140px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-light),
+          var(--primary)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        color: #fff;
+      }
+
+      .product-card__body {
+        padding: 20px 24px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .product-card__badge {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 999px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        background: var(--primary-light);
+        color: var(--primary);
+        margin-bottom: 8px;
+        align-self: flex-start;
+      }
+      .product-card__badge--ebook {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+      .product-card__badge--konsultasi {
+        background: #fce7f3;
+        color: #be185d;
+      }
+      .product-card__badge--bundling {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .product-card__title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 6px;
+      }
+      .product-card__desc {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-bottom: 12px;
+        flex: 1;
+      }
+      .product-card__price {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 12px;
+      }
+      .product-card__price .original {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-muted);
+        text-decoration: line-through;
+        margin-left: 8px;
+      }
+
+      .product-card__actions {
+        display: flex;
+        gap: 8px;
+      }
+      .product-card__actions .btn {
+        flex: 1;
+        justify-content: center;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        padding: 16px 0 40px;
+      }
+      .pagination button {
+        padding: 6px 12px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: #fff;
+        color: var(--text-secondary);
+        font-size: 13px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      .pagination button:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .pagination button.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      @media (max-width: 600px) {
+        .search-input {
+          width: 100%;
+        }
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- NAVBAR -->
-    <header class="navbar">
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
       <div class="navbar__inner">
         <a href="index.html" class="navbar__logo">
-          <span class="navbar__logo-mark">NB</span>
+          <span class="navbar__logo-icon">NB</span>
           NB-Learning
         </a>
-
-        <nav class="navbar__menu">
-          <a href="index.html" class="navbar__link">Beranda</a>
-          <a href="try-out.html" class="navbar__link">Try Out</a>
-          <a href="forum.html" class="navbar__link">Forum</a>
-          <a href="artikel.html" class="navbar__link">Artikel</a>
-          <a href="katalog.html" class="navbar__link active">Toko Premium</a>
-        </nav>
-
+        <ul class="navbar__menu">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="cbt.html">Try Out</a></li>
+          <li><a href="forum.html">Forum</a></li>
+          <li><a href="artikel.html">Artikel</a></li>
+          <li><a href="katalog.html" class="active">Toko Premium</a></li>
+        </ul>
         <div class="navbar__actions">
-          <button
-            class="navbar__icon-btn"
-            aria-label="Keranjang belanja"
-            onclick="window.location.href = 'keranjang.html'"
-          >
+          <a href="keranjang.html" class="navbar__cart">
             🛒
-            <span class="navbar__badge">2</span>
-          </button>
-          <button class="navbar__icon-btn" aria-label="Notifikasi">🔔</button>
-          <div class="navbar__avatar" title="Naufal Bagaskara">NB</div>
-          <button class="navbar__toggle" aria-label="Buka menu">☰</button>
+            <span class="navbar__cart-badge">3</span>
+          </a>
+          <div class="navbar__avatar">NB</div>
         </div>
       </div>
-    </header>
+    </nav>
 
-    <main class="container">
-      <!-- PAGE HEADER -->
-      <section class="page-header">
-        <p class="page-header__breadcrumb">
-          <a href="index.html">Beranda</a> / Toko Premium
-        </p>
+    <!-- ===== PAGE HEADER ===== -->
+    <header class="page-header">
+      <div class="container">
         <h1 class="page-header__title">Toko Premium</h1>
-        <p class="page-header__subtitle">
+        <p class="page-header__sub">
           Tingkatkan persiapan UTBK/SNBT kamu dengan paket kelas intensif,
           e-book rangkuman, dan sesi konsultasi bersama mentor.
         </p>
-      </section>
+      </div>
+    </header>
 
-      <!-- FILTER BAR -->
-      <section class="filter-bar">
-        <div class="search-input-wrap">
-          <span class="search-input-wrap__icon">🔍</span>
-          <input
-            type="text"
-            class="search-input"
-            placeholder="Cari nama produk..."
-          />
-        </div>
+    <!-- ===== FILTER & SEARCH ===== -->
+    <div class="container">
+      <div
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px;
+          margin-bottom: 16px;
+          align-items: center;
+        "
+      >
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Cari nama produk..."
+        />
+      </div>
+      <div class="filter-bar">
+        <button class="filter-chip active">Semua</button>
+        <button class="filter-chip">Paket Kelas</button>
+        <button class="filter-chip">E-book</button>
+        <button class="filter-chip">Konsultasi</button>
+        <button class="filter-chip">Bundling Hemat</button>
+      </div>
+    </div>
 
-        <div class="filter-bar__tags">
-          <button class="filter-chip active">Semua</button>
-          <button class="filter-chip">Paket Kelas</button>
-          <button class="filter-chip">E-book</button>
-          <button class="filter-chip">Konsultasi</button>
-          <button class="filter-chip">Bundling Hemat</button>
-        </div>
-      </section>
-
-      <!-- PRODUCT GRID -->
-      <section class="product-grid">
-        <a href="detail-produk.html" class="product-card">
-          <div class="product-card__thumb product-card__thumb--kelas">📚</div>
+    <!-- ===== PRODUCT GRID ===== -->
+    <div class="container">
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-card__image">📚</div>
           <div class="product-card__body">
-            <span class="tag tag--kelas product-card__category"
-              >Paket Kelas</span
-            >
+            <span class="product-card__badge">Paket Kelas</span>
             <h3 class="product-card__title">
               Paket Kelas Intensif TPS 4 Minggu
             </h3>
             <p class="product-card__desc">
               20 sesi video + latihan soal terarah
             </p>
-            <div class="product-card__footer">
-              <div class="product-card__price-wrap">
-                <span class="product-card__price-old">Rp199.000</span>
-                <span class="product-card__price">Rp149.000</span>
-              </div>
-              <button class="btn btn--primary btn--sm">+ Keranjang</button>
+            <div class="product-card__price">
+              Rp149.000 <span class="original">Rp199.000</span>
+            </div>
+            <div class="product-card__actions">
+              <a href="detail-produk.html" class="btn btn--primary">Detail</a>
+              <button class="btn btn--outline">+ Keranjang</button>
             </div>
           </div>
-        </a>
+        </div>
 
-        <a href="detail-produk.html" class="product-card">
-          <div class="product-card__thumb product-card__thumb--ebook">📘</div>
+        <div class="product-card">
+          <div class="product-card__image">📖</div>
           <div class="product-card__body">
-            <span class="tag tag--ebook product-card__category">E-book</span>
+            <span class="product-card__badge product-card__badge--ebook"
+              >E-book</span
+            >
             <h3 class="product-card__title">E-book Rangkuman Rumus Saintek</h3>
             <p class="product-card__desc">
               120 halaman, format PDF, siap cetak
             </p>
-            <div class="product-card__footer">
-              <div class="product-card__price-wrap">
-                <span class="product-card__price">Rp39.000</span>
-              </div>
-              <button class="btn btn--primary btn--sm">+ Keranjang</button>
+            <div class="product-card__price">Rp39.000</div>
+            <div class="product-card__actions">
+              <a href="detail-produk.html" class="btn btn--primary">Detail</a>
+              <button class="btn btn--outline">+ Keranjang</button>
             </div>
           </div>
-        </a>
-
-        <a href="detail-produk.html" class="product-card">
-          <div class="product-card__thumb product-card__thumb--konsultasi">
-            🎧
-          </div>
-          <div class="product-card__body">
-            <span class="tag tag--konsultasi product-card__category"
-              >Konsultasi</span
-            >
-            <h3 class="product-card__title">
-              Sesi Konsultasi 1-on-1 Bersama Mentor
-            </h3>
-            <p class="product-card__desc">60 menit via video call terjadwal</p>
-            <div class="product-card__footer">
-              <div class="product-card__price-wrap">
-                <span class="product-card__price">Rp75.000</span>
-              </div>
-              <button class="btn btn--primary btn--sm">+ Keranjang</button>
-            </div>
-          </div>
-        </a>
-
-        <a href="detail-produk.html" class="product-card">
-          <div class="product-card__thumb product-card__thumb--bundling">
-            🎁
-            <span class="badge badge--danger product-card__stock-flag"
-              >Hemat</span
-            >
-          </div>
-          <div class="product-card__body">
-            <span class="tag tag--bundling product-card__category"
-              >Bundling Hemat</span
-            >
-            <h3 class="product-card__title">
-              Bundling Paket Kelas TPS + E-book Rumus
-            </h3>
-            <p class="product-card__desc">Gabungan 2 produk, lebih hemat 30%</p>
-            <div class="product-card__footer">
-              <div class="product-card__price-wrap">
-                <span class="product-card__price-old">Rp238.000</span>
-                <span class="product-card__price">Rp169.000</span>
-              </div>
-              <button class="btn btn--primary btn--sm">+ Keranjang</button>
-            </div>
-          </div>
-        </a>
-
-        <a href="detail-produk.html" class="product-card">
-          <div class="product-card__thumb product-card__thumb--kelas">📚</div>
-          <div class="product-card__body">
-            <span class="tag tag--kelas product-card__category"
-              >Paket Kelas</span
-            >
-            <h3 class="product-card__title">
-              Paket Kelas Intensif Soshum 4 Minggu
-            </h3>
-            <p class="product-card__desc">
-              20 sesi video + latihan soal terarah
-            </p>
-            <div class="product-card__footer">
-              <div class="product-card__price-wrap">
-                <span class="product-card__price">Rp149.000</span>
-              </div>
-              <button class="btn btn--primary btn--sm">+ Keranjang</button>
-            </div>
-          </div>
-        </a>
+        </div>
 
         <div class="product-card">
-          <div class="product-card__thumb product-card__thumb--ebook">
-            📗
-            <span class="badge badge--neutral product-card__stock-flag"
-              >Stok Habis</span
-            >
-          </div>
+          <div class="product-card__image">💬</div>
           <div class="product-card__body">
-            <span class="tag tag--ebook product-card__category">E-book</span>
-            <h3 class="product-card__title">
-              E-book Bank Soal TKA 5 Tahun Terakhir
-            </h3>
+            <span class="product-card__badge product-card__badge--konsultasi"
+              >Konsultasi</span
+            >
+            <h3 class="product-card__title">Sesi Konsultasi 1-on-1</h3>
             <p class="product-card__desc">
-              200+ soal beserta pembahasan lengkap
+              Konsultasi pribadi dengan mentor ahli selama 60 menit
             </p>
-            <div class="product-card__footer">
-              <div class="product-card__price-wrap">
-                <span class="product-card__price">Rp49.000</span>
-              </div>
-              <button class="btn btn--disabled btn--sm" disabled>
-                Stok Habis
-              </button>
+            <div class="product-card__price">Rp75.000</div>
+            <div class="product-card__actions">
+              <a href="detail-produk.html" class="btn btn--primary">Detail</a>
+              <button class="btn btn--outline">+ Keranjang</button>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- PAGINATION -->
-      <nav class="pagination" aria-label="Navigasi halaman produk">
-        <button class="pagination__btn" disabled>‹</button>
-        <button class="pagination__btn active">1</button>
-        <button class="pagination__btn">2</button>
-        <button class="pagination__btn">›</button>
-      </nav>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="footer__inner">
-        <div>
-          <div class="footer__brand">
-            <span class="navbar__logo-mark">NB</span>
-            NB-Learning
+        <div class="product-card">
+          <div class="product-card__image">📦</div>
+          <div class="product-card__body">
+            <span class="product-card__badge product-card__badge--bundling"
+              >Bundling Hemat</span
+            >
+            <h3 class="product-card__title">Bundling TPS + E-book Saintek</h3>
+            <p class="product-card__desc">
+              Paket TPS + E-book Saintek dengan harga spesial
+            </p>
+            <div class="product-card__price">
+              Rp169.000 <span class="original">Rp188.000</span>
+            </div>
+            <div class="product-card__actions">
+              <a href="detail-produk.html" class="btn btn--primary">Detail</a>
+              <button class="btn btn--outline">+ Keranjang</button>
+            </div>
           </div>
-          <p class="footer__desc">
-            Platform pembelajaran dan simulasi ujian UTBK/SNBT gratis untuk
-            pemberdayaan pendidikan inklusif Kabupaten Nganjuk.
-          </p>
         </div>
 
-        <div>
-          <p class="footer__col-title">Navigasi</p>
-          <a href="index.html" class="footer__link">Beranda</a>
-          <a href="try-out.html" class="footer__link">Try Out</a>
-          <a href="artikel.html" class="footer__link">Artikel</a>
-          <a href="katalog.html" class="footer__link">Toko Premium</a>
+        <div class="product-card">
+          <div class="product-card__image">📚</div>
+          <div class="product-card__body">
+            <span class="product-card__badge">Paket Kelas</span>
+            <h3 class="product-card__title">Paket Kelas Intensif Soshum</h3>
+            <p class="product-card__desc">
+              Materi ekonomi, sosiologi, dan sejarah untuk UTBK
+            </p>
+            <div class="product-card__price">
+              Rp149.000 <span class="original">Rp199.000</span>
+            </div>
+            <div class="product-card__actions">
+              <a href="detail-produk.html" class="btn btn--primary">Detail</a>
+              <button class="btn btn--outline">+ Keranjang</button>
+            </div>
+          </div>
         </div>
 
-        <div>
-          <p class="footer__col-title">Bantuan</p>
-          <a href="#" class="footer__link">Pusat Bantuan</a>
-          <a href="#" class="footer__link">Hubungi Kami</a>
-          <a href="#" class="footer__link">Syarat & Ketentuan</a>
+        <div class="product-card">
+          <div class="product-card__image">📖</div>
+          <div class="product-card__body">
+            <span class="product-card__badge product-card__badge--ebook"
+              >E-book</span
+            >
+            <h3 class="product-card__title">E-book 100 Soal TPS Terbaru</h3>
+            <p class="product-card__desc">
+              Soal dan pembahasan untuk latihan mandiri
+            </p>
+            <div class="product-card__price">Rp45.000</div>
+            <div class="product-card__actions">
+              <a href="detail-produk.html" class="btn btn--primary">Detail</a>
+              <button class="btn btn--outline">+ Keranjang</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="footer__bottom">
-        © 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO). Seluruh hak
-        cipta dilindungi.
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button>&laquo;</button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>&raquo;</button>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <ul class="footer__links">
+          <li><a href="#">Pusat Bantuan</a></li>
+          <li><a href="#">Hubungi Kami</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+        </ul>
+        <span class="footer__copy"
+          >&copy; 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO).</span
+        >
       </div>
     </footer>
   </body>

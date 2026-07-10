@@ -11,139 +11,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="admin-style.css" />
+    <link rel="stylesheet" href="siswa-styles.css" />
 
     <style>
-      /* ===== Tambahan untuk forum.html ===== */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
-        background: var(--bg-page);
-        color: var(--text-primary);
-        line-height: 1.6;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
       .container {
         max-width: 1180px;
         margin: 0 auto;
         padding: 0 24px;
       }
 
-      /* ===== Navbar (sama dengan halaman siswa) ===== */
-      .navbar {
-        background: var(--bg-card);
-        border-bottom: 1px solid var(--border);
-        box-shadow: var(--shadow-sm);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        padding: 0 24px;
-        height: 70px;
-        display: flex;
-        align-items: center;
-      }
-
-      .navbar__inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        max-width: 1180px;
-        margin: 0 auto;
-      }
-
-      .navbar__logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 800;
-        font-size: 20px;
-        color: var(--primary);
-        text-decoration: none;
-      }
-
-      .navbar__logo-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        background: var(--primary);
-        color: #fff;
-        border-radius: var(--radius-sm);
-        font-size: 18px;
-        font-weight: 700;
-      }
-
-      .navbar__menu {
-        display: flex;
-        align-items: center;
-        gap: 32px;
-        list-style: none;
-      }
-
-      .navbar__menu a {
-        text-decoration: none;
-        color: var(--text-secondary);
-        font-weight: 500;
-        font-size: 14px;
-        transition: var(--transition);
-        position: relative;
-      }
-
-      .navbar__menu a:hover {
-        color: var(--primary);
-      }
-
-      .navbar__menu a.active {
-        color: var(--primary);
-      }
-
-      .navbar__menu a.active::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: var(--primary);
-        border-radius: 999px;
-      }
-
-      .navbar__actions {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .navbar__avatar {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: var(--primary-light);
-        color: var(--primary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 14px;
-        cursor: pointer;
-        transition: var(--transition);
-        border: 2px solid transparent;
-      }
-
-      .navbar__avatar:hover {
-        border-color: var(--primary);
-      }
-
-      /* ===== Page Header ===== */
       .page-header {
         padding: 32px 0 24px;
       }
@@ -159,7 +35,6 @@
         margin-top: 4px;
       }
 
-      /* ===== Forum Grid ===== */
       .forum-grid {
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -167,13 +42,11 @@
         padding-bottom: 40px;
       }
 
-      /* ===== Card (umum) ===== */
       .card {
         background: var(--bg-card);
         border-radius: var(--radius-lg);
         border: 1px solid var(--border);
         box-shadow: var(--shadow-sm);
-        transition: var(--transition);
         padding: 24px;
       }
       .card:hover {
@@ -184,13 +57,7 @@
         font-weight: 700;
         margin-bottom: 16px;
       }
-      .card__sub {
-        color: var(--text-secondary);
-        font-size: 14px;
-        margin-bottom: 20px;
-      }
 
-      /* ===== Form Buat Pertanyaan ===== */
       .form-group {
         margin-bottom: 18px;
       }
@@ -251,7 +118,6 @@
         display: none;
       }
 
-      /* ===== Feed Pertanyaan ===== */
       .feed {
         margin-top: 24px;
         display: flex;
@@ -265,7 +131,6 @@
         border: 1px solid var(--border);
         padding: 20px 24px;
         transition: var(--transition);
-        cursor: pointer;
       }
       .question-card:hover {
         box-shadow: var(--shadow-md);
@@ -277,6 +142,7 @@
         align-items: center;
         gap: 12px;
         margin-bottom: 8px;
+        flex-wrap: wrap;
       }
       .question-card__avatar {
         width: 36px;
@@ -308,10 +174,6 @@
         background: #fef3c7;
         color: #d97706;
       }
-      .question-card__badge--siswa {
-        background: var(--primary-light);
-        color: var(--primary);
-      }
       .question-card__time {
         margin-left: auto;
         font-size: 11px;
@@ -339,13 +201,7 @@
         font-size: 13px;
         color: var(--text-muted);
       }
-      .question-card__footer span {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
 
-      /* ===== Widget ===== */
       .widget {
         margin-bottom: 24px;
       }
@@ -436,64 +292,16 @@
         background: var(--text-muted);
       }
 
-      /* ===== Footer ===== */
-      .footer {
-        margin-top: auto;
-        background: var(--bg-card);
-        border-top: 1px solid var(--border);
-        padding: 32px 0 20px;
-      }
-      .footer__inner {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-      }
-      .footer__links {
-        display: flex;
-        gap: 24px;
-        list-style: none;
-      }
-      .footer__links a {
-        text-decoration: none;
-        color: var(--text-muted);
-        font-size: 13px;
-        transition: var(--transition);
-      }
-      .footer__links a:hover {
-        color: var(--primary);
-      }
-      .footer__copy {
-        color: var(--text-muted);
-        font-size: 13px;
-      }
-
-      /* ===== Responsive ===== */
       @media (max-width: 860px) {
         .forum-grid {
           grid-template-columns: 1fr;
-          gap: 24px;
-        }
-        .navbar__menu {
-          display: none;
-        }
-        .page-header__title {
-          font-size: 20px;
-        }
-        .question-card__header {
-          flex-wrap: wrap;
         }
         .question-card__time {
           margin-left: 0;
           width: 100%;
         }
       }
-
       @media (max-width: 480px) {
-        .container {
-          padding: 0 16px;
-        }
         .form-actions {
           flex-direction: column;
           align-items: stretch;
@@ -523,36 +331,9 @@
           <li><a href="katalog.html">Toko Premium</a></li>
         </ul>
         <div class="navbar__actions">
-          <a
-            href="keranjang.html"
-            class="navbar__cart"
-            style="
-              position: relative;
-              color: var(--text-secondary);
-              text-decoration: none;
-              font-size: 20px;
-              transition: var(--transition);
-            "
-          >
+          <a href="keranjang.html" class="navbar__cart">
             🛒
-            <span
-              style="
-                position: absolute;
-                top: -8px;
-                right: -10px;
-                background: var(--danger);
-                color: #fff;
-                font-size: 10px;
-                font-weight: 700;
-                width: 18px;
-                height: 18px;
-                border-radius: 999px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
-              >3</span
-            >
+            <span class="navbar__cart-badge">3</span>
           </a>
           <div class="navbar__avatar">NB</div>
         </div>
@@ -572,9 +353,9 @@
     <!-- ===== MAIN CONTENT ===== -->
     <main class="container">
       <div class="forum-grid">
-        <!-- ===== KOLOM KIRI (70%) ===== -->
+        <!-- KOLOM KIRI (70%) -->
         <div>
-          <!-- Card: Buat Pertanyaan -->
+          <!-- Form Buat Pertanyaan -->
           <div class="card">
             <h2 class="card__title">💬 Buat Pertanyaan Baru</h2>
             <form>
@@ -605,16 +386,13 @@
             </form>
           </div>
 
-          <!-- Feed Pertanyaan -->
+          <!-- Feed -->
           <div class="feed">
-            <!-- Pertanyaan 1 -->
             <div class="question-card">
               <div class="question-card__header">
                 <div class="question-card__avatar avatar-color-1">AN</div>
                 <span class="question-card__author">Andika Nugraha</span>
-                <span class="question-card__badge question-card__badge--siswa"
-                  >Siswa</span
-                >
+                <span class="question-card__badge">Siswa</span>
                 <span class="question-card__time">2 jam lalu</span>
               </div>
               <div class="question-card__title">
@@ -630,14 +408,11 @@
               </div>
             </div>
 
-            <!-- Pertanyaan 2 -->
             <div class="question-card">
               <div class="question-card__header">
                 <div class="question-card__avatar avatar-color-4">DP</div>
                 <span class="question-card__author">Dewi Puspita</span>
-                <span class="question-card__badge question-card__badge--siswa"
-                  >Siswa</span
-                >
+                <span class="question-card__badge">Siswa</span>
                 <span class="question-card__time">5 jam lalu</span>
               </div>
               <div class="question-card__title">
@@ -653,7 +428,6 @@
               </div>
             </div>
 
-            <!-- Pertanyaan 3 -->
             <div class="question-card">
               <div class="question-card__header">
                 <div class="question-card__avatar avatar-color-2">SR</div>
@@ -668,7 +442,7 @@
               </div>
               <div class="question-card__body">
                 Menurut pengalaman saya sebagai mentor, siswa sering kesulitan
-                membagi waktu di TKA Soshum. Saya akan membagikan tips...
+                membagi waktu di TKA Soshum.
               </div>
               <div class="question-card__footer">
                 <span>💬 24 komentar</span>
@@ -676,14 +450,11 @@
               </div>
             </div>
 
-            <!-- Pertanyaan 4 -->
             <div class="question-card">
               <div class="question-card__header">
                 <div class="question-card__avatar avatar-color-5">RA</div>
                 <span class="question-card__author">Rizky Adriansyah</span>
-                <span class="question-card__badge question-card__badge--siswa"
-                  >Siswa</span
-                >
+                <span class="question-card__badge">Siswa</span>
                 <span class="question-card__time">2 hari lalu</span>
               </div>
               <div class="question-card__title">
@@ -701,9 +472,9 @@
           </div>
         </div>
 
-        <!-- ===== KOLOM KANAN (30%) ===== -->
+        <!-- KOLOM KANAN (30%) -->
         <div>
-          <!-- Widget Topik Populer -->
+          <!-- Topik Populer -->
           <div class="widget card">
             <h3 class="widget__title">🔥 Topik Populer</h3>
             <div class="topic-list">
@@ -730,7 +501,7 @@
             </div>
           </div>
 
-          <!-- Widget Mentor Aktif -->
+          <!-- Mentor Aktif -->
           <div class="widget card">
             <h3 class="widget__title">👨‍🏫 Mentor Aktif</h3>
             <div class="mentor-list">

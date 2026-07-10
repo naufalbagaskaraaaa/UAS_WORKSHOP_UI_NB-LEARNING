@@ -3,686 +3,357 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Try Out UTBK — NB-Learning</title>
+    <title>Try Out CBT — NB-Learning</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="admin-style.css" />
+    <link rel="stylesheet" href="siswa-styles.css" />
 
     <style>
-      /* ===== Reset / Base ===== */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
-        background: var(--bg-page);
-        color: var(--text-primary);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* ===== Topbar ===== */
-      .cbt-topbar {
-        background: var(--bg-card);
-        border-bottom: 1px solid var(--border);
-        box-shadow: var(--shadow-sm);
-        padding: 0 24px;
-        height: 64px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
-
-      .cbt-topbar__logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 800;
-        font-size: 18px;
-        color: var(--primary);
-        text-decoration: none;
-      }
-
-      .cbt-topbar__logo-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        background: var(--primary);
-        color: #fff;
-        border-radius: var(--radius-sm);
-        font-size: 16px;
-        font-weight: 700;
-      }
-
-      .cbt-topbar__timer {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 700;
-        font-size: 18px;
-        color: var(--danger);
-        background: var(--danger-light);
-        padding: 6px 18px;
-        border-radius: 999px;
-        letter-spacing: 0.5px;
-      }
-
-      .cbt-topbar__timer-icon {
-        font-size: 20px;
-      }
-
-      .cbt-topbar__user {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .cbt-topbar__avatar {
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--primary), var(--primary-mid));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 13px;
-        font-weight: 700;
-        color: #fff;
-      }
-
-      .cbt-topbar__name {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--text-primary);
-      }
-
-      /* ===== Container Utama ===== */
-      .cbt-container {
-        max-width: 1280px;
+      .container {
+        max-width: 1180px;
         margin: 0 auto;
-        padding: 24px;
-        flex: 1;
-        width: 100%;
+        padding: 0 24px;
       }
 
-      .cbt-grid {
+      .page-header {
+        padding: 32px 0 16px;
+      }
+      .page-header__title {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.4px;
+        color: var(--text-primary);
+      }
+      .page-header__sub {
+        color: var(--text-secondary);
+        font-size: 15px;
+        margin-top: 4px;
+      }
+
+      .exam-layout {
         display: grid;
-        grid-template-columns: 70% 30%;
-        gap: 24px;
-        align-items: start;
+        grid-template-columns: 2fr 1fr;
+        gap: 32px;
+        padding-bottom: 40px;
       }
 
-      /* ===== Kolom Kiri — Area Soal ===== */
-      .cbt-question {
+      /* ===== Left Column ===== */
+      .question-area {
         background: var(--bg-card);
         border-radius: var(--radius-lg);
         border: 1px solid var(--border);
         box-shadow: var(--shadow-sm);
-        padding: 32px 28px;
+        padding: 24px;
       }
 
-      .cbt-question__number {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--text-secondary);
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .cbt-question__number .badge {
-        background: var(--primary-light);
-        color: var(--primary);
-        padding: 2px 12px;
-        border-radius: 999px;
-        font-size: 11px;
+      .question-area__number {
+        font-size: 14px;
         font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 8px;
       }
 
-      .cbt-question__text {
-        font-size: 17px;
-        font-weight: 500;
-        line-height: 1.7;
-        margin-bottom: 28px;
+      .question-area__text {
+        font-size: 16px;
+        line-height: 1.8;
         color: var(--text-primary);
+        margin-bottom: 24px;
       }
 
-      .cbt-question__options {
+      .options {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        margin-bottom: 32px;
+        gap: 10px;
+        margin-bottom: 24px;
       }
 
-      .cbt-option {
+      .options label {
         display: flex;
         align-items: center;
-        gap: 14px;
-        padding: 14px 18px;
+        gap: 12px;
+        padding: 10px 16px;
         border: 1.5px solid var(--border);
         border-radius: var(--radius-sm);
         cursor: pointer;
         transition: var(--transition);
-        background: #fff;
+        font-size: 14px;
+        color: var(--text-primary);
       }
 
-      .cbt-option:hover {
+      .options label:hover {
         border-color: var(--primary);
         background: var(--primary-light);
       }
 
-      .cbt-option input[type="radio"] {
+      .options input[type="radio"] {
         accent-color: var(--primary);
         width: 18px;
         height: 18px;
         flex-shrink: 0;
-        margin: 0;
-      }
-
-      .cbt-option label {
-        font-size: 15px;
-        font-weight: 500;
-        color: var(--text-primary);
         cursor: pointer;
-        flex: 1;
       }
 
-      .cbt-option--selected {
-        border-color: var(--primary);
-        background: var(--primary-light);
-      }
-
-      .cbt-option--selected label {
-        color: var(--primary);
-      }
-
-      /* ===== Tombol Navigasi Soal ===== */
-      .cbt-question__nav {
+      .question-nav-buttons {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
         gap: 12px;
         flex-wrap: wrap;
-        padding-top: 20px;
-        border-top: 1px solid var(--border-light);
       }
-
-      .cbt-question__nav-group {
-        display: flex;
-        gap: 8px;
+      .question-nav-buttons .btn {
+        flex: 1;
+        justify-content: center;
+        min-width: 100px;
       }
-
-      .btn--prev {
-        background: var(--bg-page);
-        color: var(--text-secondary);
-        border: 1.5px solid var(--border);
-      }
-
-      .btn--prev:hover {
-        background: var(--border-light);
-        color: var(--text-primary);
-      }
-
-      .btn--ragu {
+      .btn--warning {
         background: var(--warning);
         color: #fff;
-        border: none;
+        border-color: var(--warning);
       }
-
-      .btn--ragu:hover {
+      .btn--warning:hover {
         background: #d97706;
+        border-color: #d97706;
       }
 
-      .btn--next {
-        background: var(--primary);
-        color: #fff;
-        border: none;
-      }
-
-      .btn--next:hover {
-        background: var(--primary-dark);
-      }
-
-      /* ===== Kolom Kanan — Navigasi Soal ===== */
-      .cbt-nav {
+      /* ===== Right Column ===== */
+      .exam-nav {
         background: var(--bg-card);
         border-radius: var(--radius-lg);
         border: 1px solid var(--border);
         box-shadow: var(--shadow-sm);
-        padding: 24px 20px;
-        position: sticky;
-        top: 88px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
       }
 
-      .cbt-nav__title {
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 16px;
+      .exam-nav__info {
         text-align: center;
+        margin-bottom: 16px;
+      }
+      .exam-nav__info .timer {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--danger);
+      }
+      .exam-nav__info .label {
+        font-size: 12px;
+        color: var(--text-muted);
       }
 
-      .cbt-nav__grid {
+      .question-grid {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 8px;
-        margin-bottom: 20px;
+        margin: 16px 0 24px;
       }
 
-      .cbt-nav__item {
-        aspect-ratio: 1/1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: var(--radius-sm);
-        font-size: 13px;
-        font-weight: 700;
+      .question-grid__btn {
+        padding: 8px 0;
         border: 1.5px solid var(--border);
+        border-radius: var(--radius-sm);
         background: #fff;
+        font-weight: 600;
+        font-size: 14px;
         color: var(--text-secondary);
         cursor: pointer;
         transition: var(--transition);
+        text-align: center;
       }
-
-      .cbt-nav__item:hover {
+      .question-grid__btn:hover {
         border-color: var(--primary);
-        transform: scale(1.05);
+        color: var(--primary);
       }
-
-      .cbt-nav__item--answered {
+      .question-grid__btn.active {
+        border-color: var(--primary);
+        background: var(--primary);
+        color: #fff;
+      }
+      .question-grid__btn.answered {
         background: var(--success-light);
         border-color: var(--success);
-        color: var(--success);
+        color: #059669;
       }
-
-      .cbt-nav__item--ragu {
+      .question-grid__btn.answered.active {
+        background: var(--success);
+        color: #fff;
+      }
+      .question-grid__btn.flagged {
         background: var(--warning-light);
         border-color: var(--warning);
         color: #d97706;
       }
-
-      .cbt-nav__item--active {
-        border-color: var(--primary);
-        background: var(--primary-light);
-        color: var(--primary);
-        box-shadow: 0 0 0 2px var(--primary-light);
+      .question-grid__btn.flagged.active {
+        background: var(--warning);
+        color: #fff;
       }
 
-      .cbt-nav__legend {
+      .exam-nav__legend {
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
-        gap: 12px;
-        margin-bottom: 20px;
+        gap: 16px;
         font-size: 11px;
-        font-weight: 500;
         color: var(--text-secondary);
+        margin-bottom: 16px;
       }
-
-      .cbt-nav__legend-item {
+      .exam-nav__legend span {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 4px;
       }
-
-      .cbt-nav__legend-dot {
-        width: 14px;
-        height: 14px;
+      .exam-nav__legend .dot {
+        width: 12px;
+        height: 12px;
         border-radius: 4px;
-        border: 1px solid var(--border);
+        display: inline-block;
+      }
+      .dot--answered {
+        background: var(--success);
+      }
+      .dot--flagged {
+        background: var(--warning);
+      }
+      .dot--unanswered {
+        background: var(--border);
       }
 
-      .cbt-nav__legend-dot--answered {
-        background: var(--success-light);
-        border-color: var(--success);
-      }
-
-      .cbt-nav__legend-dot--ragu {
-        background: var(--warning-light);
-        border-color: var(--warning);
-      }
-
-      .cbt-nav__legend-dot--unanswered {
-        background: #fff;
-        border-color: var(--border);
-      }
-
-      .btn--submit {
+      .btn--danger-block {
         width: 100%;
         justify-content: center;
-        padding: 14px;
+        padding: 12px;
         font-size: 15px;
         font-weight: 700;
-        border-radius: var(--radius-sm);
-        background: var(--danger);
-        color: #fff;
-        border: none;
-        transition: var(--transition);
+        margin-top: auto;
       }
 
-      .btn--submit:hover {
-        background: #dc2626;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 16px rgba(239, 68, 68, 0.35);
-      }
-
-      /* ===== Responsive ===== */
-      @media (max-width: 1024px) {
-        .cbt-grid {
+      @media (max-width: 860px) {
+        .exam-layout {
           grid-template-columns: 1fr;
-          gap: 20px;
         }
-        .cbt-nav {
-          position: static;
-        }
-        .cbt-nav__grid {
-          grid-template-columns: repeat(10, 1fr);
+        .question-grid {
+          grid-template-columns: repeat(8, 1fr);
         }
       }
-
-      @media (max-width: 768px) {
-        .cbt-topbar {
-          padding: 0 16px;
-          height: 56px;
-          flex-wrap: wrap;
-        }
-        .cbt-topbar__timer {
-          font-size: 14px;
-          padding: 4px 14px;
-        }
-        .cbt-topbar__name {
-          display: none;
-        }
-        .cbt-container {
-          padding: 16px;
-        }
-        .cbt-question {
-          padding: 20px 16px;
-        }
-        .cbt-question__text {
-          font-size: 15px;
-        }
-        .cbt-option {
-          padding: 12px 14px;
-        }
-        .cbt-option label {
-          font-size: 14px;
-        }
-        .cbt-question__nav {
-          flex-direction: column;
-          align-items: stretch;
-        }
-        .cbt-question__nav-group {
-          justify-content: center;
-        }
-        .cbt-nav__grid {
+      @media (max-width: 480px) {
+        .question-grid {
           grid-template-columns: repeat(5, 1fr);
         }
-      }
-
-      @media (max-width: 480px) {
-        .cbt-topbar__logo {
-          font-size: 14px;
-        }
-        .cbt-topbar__logo-icon {
-          width: 28px;
-          height: 28px;
-          font-size: 13px;
-        }
-        .cbt-topbar__timer {
-          font-size: 12px;
-          padding: 3px 10px;
-        }
-        .cbt-question {
-          padding: 16px 12px;
-        }
-        .cbt-question__text {
-          font-size: 14px;
-        }
-        .cbt-option {
-          padding: 10px 12px;
-          gap: 10px;
-        }
-        .cbt-option label {
-          font-size: 13px;
-        }
-        .btn--prev,
-        .btn--ragu,
-        .btn--next {
-          font-size: 12px;
-          padding: 8px 14px;
-        }
-        .cbt-nav__grid {
-          gap: 6px;
-        }
-        .cbt-nav__item {
-          font-size: 11px;
+        .question-nav-buttons .btn {
+          flex: 1 1 100%;
         }
       }
     </style>
   </head>
   <body>
-    <!-- ===== TOPBAR ===== -->
-    <header class="cbt-topbar">
-      <a href="#" class="cbt-topbar__logo">
-        <span class="cbt-topbar__logo-icon">NB</span>
-        NB-Learning
-      </a>
-
-      <div class="cbt-topbar__timer">
-        <span class="cbt-topbar__timer-icon">⏱️</span>
-        <span id="timerDisplay">01:45:30</span>
+    <!-- ===== TOPBAR (Navbar khusus try out) ===== -->
+    <nav class="navbar" style="border-bottom: 2px solid var(--danger)">
+      <div class="navbar__inner">
+        <a href="index.html" class="navbar__logo">
+          <span class="navbar__logo-icon">NB</span>
+          NB-Learning
+        </a>
+        <div style="font-size: 18px; font-weight: 700; color: var(--danger)">
+          ⏱️ <span id="timerDisplay">59:59</span>
+        </div>
+        <div class="navbar__actions">
+          <div class="navbar__avatar">NB</div>
+        </div>
       </div>
+    </nav>
 
-      <div class="cbt-topbar__user">
-        <div class="cbt-topbar__avatar">NA</div>
-        <span class="cbt-topbar__name">Naufal Bagaskara</span>
+    <!-- ===== PAGE HEADER ===== -->
+    <header class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">📝 Try Out UTBK — TPS</h1>
+        <p class="page-header__sub">Soal 1 dari 20 · Penalaran Umum</p>
       </div>
     </header>
 
-    <!-- ===== KONTEN UTAMA ===== -->
-    <main class="cbt-container">
-      <div class="cbt-grid">
-        <!-- Kolom Kiri — Area Soal -->
-        <section class="cbt-question">
-          <div class="cbt-question__number">
-            Soal <span class="badge">1 dari 20</span>
-            <span
-              style="
-                margin-left: auto;
-                font-size: 12px;
-                font-weight: 400;
-                color: var(--text-muted);
-              "
-              >TPS Pengetahuan Kuantitatif</span
-            >
+    <!-- ===== EXAM LAYOUT ===== -->
+    <main class="container">
+      <div class="exam-layout">
+        <!-- Kiri: Soal -->
+        <div class="question-area">
+          <div class="question-area__number">Soal 1</div>
+          <div class="question-area__text">
+            Sebuah perusahaan memiliki 100 karyawan. 60% di antaranya adalah
+            laki-laki. Jika 30% dari karyawan laki-laki memiliki gelar S2,
+            berapa jumlah karyawan laki-laki yang memiliki gelar S2?
           </div>
 
-          <div class="cbt-question__text">
-            Jika <strong>f(x) = 2x² + 3x - 5</strong>, maka nilai dari
-            <strong>f(3)</strong> adalah …?
+          <div class="options">
+            <label> <input type="radio" name="q1" value="A" /> A. 12 </label>
+            <label> <input type="radio" name="q1" value="B" /> B. 18 </label>
+            <label> <input type="radio" name="q1" value="C" /> C. 24 </label>
+            <label> <input type="radio" name="q1" value="D" /> D. 30 </label>
+            <label> <input type="radio" name="q1" value="E" /> E. 36 </label>
           </div>
 
-          <div class="cbt-question__options">
-            <label class="cbt-option">
-              <input type="radio" name="answer" value="A" />
-              <label for="A">A. 18</label>
-            </label>
-            <label class="cbt-option">
-              <input type="radio" name="answer" value="B" />
-              <label for="B">B. 22</label>
-            </label>
-            <label class="cbt-option">
-              <input type="radio" name="answer" value="C" />
-              <label for="C">C. 24</label>
-            </label>
-            <label class="cbt-option">
-              <input type="radio" name="answer" value="D" />
-              <label for="D">D. 28</label>
-            </label>
-            <label class="cbt-option">
-              <input type="radio" name="answer" value="E" />
-              <label for="E">E. 30</label>
-            </label>
+          <div class="question-nav-buttons">
+            <button class="btn btn--ghost">⬅ Sebelumnya</button>
+            <button class="btn btn--warning">🤔 Ragu-ragu</button>
+            <button class="btn btn--primary">Selanjutnya ➡</button>
+          </div>
+        </div>
+
+        <!-- Kanan: Navigasi -->
+        <div class="exam-nav">
+          <div class="exam-nav__info">
+            <div class="timer">59:59</div>
+            <div class="label">Waktu Tersisa</div>
           </div>
 
-          <div class="cbt-question__nav">
-            <div class="cbt-question__nav-group">
-              <button class="btn btn--prev btn--sm">⬅ Sebelumnya</button>
-              <button class="btn btn--ragu btn--sm">🤔 Ragu-ragu</button>
-            </div>
-            <button class="btn btn--next btn--sm">Selanjutnya ➡</button>
-          </div>
-        </section>
-
-        <!-- Kolom Kanan — Navigasi Soal -->
-        <aside class="cbt-nav">
-          <div class="cbt-nav__title">Navigasi Soal</div>
-
-          <div class="cbt-nav__grid" id="questionGrid">
-            <!-- Akan di-generate oleh JS, atau bisa static sbb: -->
-            <div class="cbt-nav__item cbt-nav__item--answered">1</div>
-            <div class="cbt-nav__item cbt-nav__item--active">2</div>
-            <div class="cbt-nav__item">3</div>
-            <div class="cbt-nav__item cbt-nav__item--ragu">4</div>
-            <div class="cbt-nav__item">5</div>
-            <div class="cbt-nav__item cbt-nav__item--answered">6</div>
-            <div class="cbt-nav__item">7</div>
-            <div class="cbt-nav__item">8</div>
-            <div class="cbt-nav__item cbt-nav__item--answered">9</div>
-            <div class="cbt-nav__item">10</div>
-            <div class="cbt-nav__item">11</div>
-            <div class="cbt-nav__item cbt-nav__item--answered">12</div>
-            <div class="cbt-nav__item">13</div>
-            <div class="cbt-nav__item cbt-nav__item--ragu">14</div>
-            <div class="cbt-nav__item">15</div>
-            <div class="cbt-nav__item cbt-nav__item--answered">16</div>
-            <div class="cbt-nav__item">17</div>
-            <div class="cbt-nav__item">18</div>
-            <div class="cbt-nav__item cbt-nav__item--answered">19</div>
-            <div class="cbt-nav__item">20</div>
+          <div class="exam-nav__legend">
+            <span><span class="dot dot--answered"></span> Dijawab</span>
+            <span><span class="dot dot--flagged"></span> Ragu</span>
+            <span><span class="dot dot--unanswered"></span> Belum</span>
           </div>
 
-          <div class="cbt-nav__legend">
-            <span class="cbt-nav__legend-item">
-              <span
-                class="cbt-nav__legend-dot cbt-nav__legend-dot--answered"
-              ></span>
-              Dijawab
-            </span>
-            <span class="cbt-nav__legend-item">
-              <span
-                class="cbt-nav__legend-dot cbt-nav__legend-dot--ragu"
-              ></span>
-              Ragu
-            </span>
-            <span class="cbt-nav__legend-item">
-              <span
-                class="cbt-nav__legend-dot cbt-nav__legend-dot--unanswered"
-              ></span>
-              Belum
-            </span>
+          <div class="question-grid">
+            <button class="question-grid__btn active">1</button>
+            <button class="question-grid__btn answered">2</button>
+            <button class="question-grid__btn flagged">3</button>
+            <button class="question-grid__btn">4</button>
+            <button class="question-grid__btn">5</button>
+            <button class="question-grid__btn answered">6</button>
+            <button class="question-grid__btn">7</button>
+            <button class="question-grid__btn">8</button>
+            <button class="question-grid__btn">9</button>
+            <button class="question-grid__btn answered">10</button>
+            <button class="question-grid__btn">11</button>
+            <button class="question-grid__btn">12</button>
+            <button class="question-grid__btn">13</button>
+            <button class="question-grid__btn">14</button>
+            <button class="question-grid__btn answered">15</button>
+            <button class="question-grid__btn">16</button>
+            <button class="question-grid__btn">17</button>
+            <button class="question-grid__btn">18</button>
+            <button class="question-grid__btn">19</button>
+            <button class="question-grid__btn">20</button>
           </div>
 
-          <button class="btn--submit">📤 Kumpulkan Ujian</button>
-        </aside>
+          <button class="btn btn--danger btn--danger-block">
+            📤 Kumpulkan Ujian
+          </button>
+        </div>
       </div>
     </main>
 
-    <!-- ===== SCRIPT (opsional untuk timer dan interaksi) ===== -->
-    <script>
-      (function () {
-        // Timer countdown (contoh: 1 jam 45 menit 30 detik)
-        let totalSeconds = 6330; // 1:45:30
-        const timerDisplay = document.getElementById("timerDisplay");
-
-        function updateTimer() {
-          if (totalSeconds <= 0) {
-            timerDisplay.textContent = "00:00:00";
-            return;
-          }
-          const hours = String(Math.floor(totalSeconds / 3600)).padStart(
-            2,
-            "0",
-          );
-          const minutes = String(
-            Math.floor((totalSeconds % 3600) / 60),
-          ).padStart(2, "0");
-          const seconds = String(totalSeconds % 60).padStart(2, "0");
-          timerDisplay.textContent = `${hours}:${minutes}:${seconds}`;
-          totalSeconds--;
-        }
-
-        updateTimer();
-        setInterval(updateTimer, 1000);
-
-        // Interaksi: klik opsi beri highlight
-        document.querySelectorAll(".cbt-option").forEach((opt) => {
-          opt.addEventListener("click", function () {
-            // Hapus highlight dari semua opsi dalam grup
-            const parent = this.closest(".cbt-question__options");
-            parent
-              .querySelectorAll(".cbt-option")
-              .forEach((o) => o.classList.remove("cbt-option--selected"));
-            this.classList.add("cbt-option--selected");
-            // centang radio
-            const radio = this.querySelector('input[type="radio"]');
-            if (radio) radio.checked = true;
-          });
-        });
-
-        // Klik navigasi soal (contoh sederhana: ubah active)
-        document.querySelectorAll(".cbt-nav__item").forEach((item) => {
-          item.addEventListener("click", function () {
-            document
-              .querySelectorAll(".cbt-nav__item")
-              .forEach((i) => i.classList.remove("cbt-nav__item--active"));
-            this.classList.add("cbt-nav__item--active");
-          });
-        });
-
-        // Tombol Kumpulkan Ujian (alert konfirmasi)
-        document
-          .querySelector(".btn--submit")
-          .addEventListener("click", function (e) {
-            e.preventDefault();
-            if (
-              confirm(
-                "Yakin ingin mengumpulkan ujian? Jawaban yang sudah diisi akan dikirim.",
-              )
-            ) {
-              alert("Ujian berhasil dikumpulkan! 🎉");
-              // redirect ke halaman hasil atau dashboard
-              // window.location.href = 'hasil-ujian.html';
-            }
-          });
-
-        // Tombol Ragu-ragu (toggle)
-        document
-          .querySelector(".btn--ragu")
-          .addEventListener("click", function () {
-            const currentQuestion = document.querySelector(
-              ".cbt-nav__item--active",
-            );
-            if (currentQuestion) {
-              currentQuestion.classList.toggle("cbt-nav__item--ragu");
-            }
-          });
-      })();
-    </script>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" style="margin-top: 0">
+      <div class="container footer__inner">
+        <ul class="footer__links">
+          <li><a href="#">Pusat Bantuan</a></li>
+          <li><a href="#">Hubungi Kami</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+        </ul>
+        <span class="footer__copy"
+          >&copy; 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO).</span
+        >
+      </div>
+    </footer>
   </body>
 </html>
