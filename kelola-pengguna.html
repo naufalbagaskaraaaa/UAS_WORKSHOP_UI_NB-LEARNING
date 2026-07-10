@@ -5,6 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kelola Pengguna — NB-Learning Admin</title>
     <link rel="stylesheet" href="admin-style.css" />
+
+    <style>
+      /* ===== Tambahan untuk kelola-pengguna.html ===== */
+
+      /* Stat cards (mengganti inline style) */
+      .stat-card-mini {
+        flex: 1;
+        min-width: 130px;
+      }
+      .stat-card-mini .card__body {
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .stat-card-mini .stat-icon {
+        font-size: 22px;
+      }
+      .stat-card-mini .stat-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+      .stat-card-mini .stat-value {
+        font-size: 22px;
+        font-weight: 800;
+      }
+      .stat-value--primary {
+        color: var(--primary);
+      }
+      .stat-value--success {
+        color: var(--success);
+      }
+      .stat-value--info {
+        color: var(--info);
+      }
+      .stat-value--danger {
+        color: var(--danger);
+      }
+
+      /* Stats bar wrapper */
+      .stats-bar {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      /* Tabel cell tanggal & sekolah */
+      .cell-meta {
+        font-size: 12px;
+        color: var(--text-secondary);
+        white-space: nowrap;
+      }
+
+      /* Tombol aksi grup */
+      .action-group {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        flex-wrap: nowrap;
+      }
+
+      /* Header tombol aksi */
+      .page-header__actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .stats-bar {
+          flex-direction: column;
+        }
+        .stat-card-mini {
+          min-width: unset;
+        }
+        .page-header {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .page-header__actions {
+          width: 100%;
+        }
+        .page-header__actions .btn {
+          flex: 1;
+          justify-content: center;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="admin-shell">
@@ -117,154 +210,47 @@
                 NB-Learning.
               </p>
             </div>
-            <div style="display: flex; gap: 8px">
+            <div class="page-header__actions">
               <button class="btn btn--ghost btn--sm">⬇️ Ekspor CSV</button>
               <button class="btn btn--primary">👤 Tambah Pengguna</button>
             </div>
           </div>
 
           <!-- Stats Bar -->
-          <div
-            style="
-              display: flex;
-              gap: 12px;
-              margin-bottom: 20px;
-              flex-wrap: wrap;
-            "
-          >
-            <div class="card" style="flex: 1; min-width: 130px">
-              <div
-                class="card__body"
-                style="
-                  padding: 16px 20px;
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                "
-              >
-                <div style="font-size: 22px">👥</div>
+          <div class="stats-bar">
+            <div class="card stat-card-mini">
+              <div class="card__body">
+                <span class="stat-icon">👥</span>
                 <div>
-                  <div
-                    style="
-                      font-size: 11px;
-                      color: var(--text-muted);
-                      font-weight: 600;
-                      text-transform: uppercase;
-                    "
-                  >
-                    Total
-                  </div>
-                  <div
-                    style="
-                      font-size: 22px;
-                      font-weight: 800;
-                      color: var(--primary);
-                    "
-                  >
-                    4.820
-                  </div>
+                  <div class="stat-label">Total</div>
+                  <div class="stat-value stat-value--primary">4.820</div>
                 </div>
               </div>
             </div>
-            <div class="card" style="flex: 1; min-width: 130px">
-              <div
-                class="card__body"
-                style="
-                  padding: 16px 20px;
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                "
-              >
-                <div style="font-size: 22px">💎</div>
+            <div class="card stat-card-mini">
+              <div class="card__body">
+                <span class="stat-icon">💎</span>
                 <div>
-                  <div
-                    style="
-                      font-size: 11px;
-                      color: var(--text-muted);
-                      font-weight: 600;
-                      text-transform: uppercase;
-                    "
-                  >
-                    Premium
-                  </div>
-                  <div
-                    style="
-                      font-size: 22px;
-                      font-weight: 800;
-                      color: var(--success);
-                    "
-                  >
-                    3.012
-                  </div>
+                  <div class="stat-label">Premium</div>
+                  <div class="stat-value stat-value--success">3.012</div>
                 </div>
               </div>
             </div>
-            <div class="card" style="flex: 1; min-width: 130px">
-              <div
-                class="card__body"
-                style="
-                  padding: 16px 20px;
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                "
-              >
-                <div style="font-size: 22px">🆓</div>
+            <div class="card stat-card-mini">
+              <div class="card__body">
+                <span class="stat-icon">🆓</span>
                 <div>
-                  <div
-                    style="
-                      font-size: 11px;
-                      color: var(--text-muted);
-                      font-weight: 600;
-                      text-transform: uppercase;
-                    "
-                  >
-                    Free
-                  </div>
-                  <div
-                    style="
-                      font-size: 22px;
-                      font-weight: 800;
-                      color: var(--info);
-                    "
-                  >
-                    1.520
-                  </div>
+                  <div class="stat-label">Free</div>
+                  <div class="stat-value stat-value--info">1.520</div>
                 </div>
               </div>
             </div>
-            <div class="card" style="flex: 1; min-width: 130px">
-              <div
-                class="card__body"
-                style="
-                  padding: 16px 20px;
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                "
-              >
-                <div style="font-size: 22px">🚫</div>
+            <div class="card stat-card-mini">
+              <div class="card__body">
+                <span class="stat-icon">🚫</span>
                 <div>
-                  <div
-                    style="
-                      font-size: 11px;
-                      color: var(--text-muted);
-                      font-weight: 600;
-                      text-transform: uppercase;
-                    "
-                  >
-                    Diblokir
-                  </div>
-                  <div
-                    style="
-                      font-size: 22px;
-                      font-weight: 800;
-                      color: var(--danger);
-                    "
-                  >
-                    12
-                  </div>
+                  <div class="stat-label">Diblokir</div>
+                  <div class="stat-value stat-value--danger">12</div>
                 </div>
               </div>
             </div>
@@ -284,13 +270,19 @@
                     placeholder="Cari nama atau email..."
                   />
                 </div>
-                <select class="filter-select">
+                <select
+                  class="filter-select"
+                  aria-label="Filter berdasarkan status akun"
+                >
                   <option value="">Semua Status</option>
                   <option>Aktif Premium</option>
                   <option>Aktif Free</option>
                   <option>Diblokir</option>
                 </select>
-                <select class="filter-select">
+                <select
+                  class="filter-select"
+                  aria-label="Filter berdasarkan asal sekolah"
+                >
                   <option value="">Semua Asal Sekolah</option>
                   <option>SMAN 1 Surabaya</option>
                   <option>SMAN 5 Jakarta</option>
@@ -322,28 +314,15 @@
                       </div>
                     </div>
                   </td>
-                  <td style="font-size: 12px; color: var(--text-secondary)">
-                    SMAN 1 Surabaya
-                  </td>
-                  <td
-                    style="
-                      font-size: 12px;
-                      color: var(--text-secondary);
-                      white-space: nowrap;
-                    "
-                  >
-                    10 Jan 2025
-                  </td>
+                  <td class="cell-meta">SMAN 1 Surabaya</td>
+                  <td class="cell-meta">10 Jan 2025</td>
                   <td>
                     <span class="badge badge--success">Aktif Premium</span>
                   </td>
                   <td>
                     <div class="cell-actions">
                       <button class="btn btn--ghost btn--sm">✏️ Edit</button>
-                      <button
-                        class="btn btn--warning btn--sm"
-                        style="background: var(--warning); color: #fff"
-                      >
+                      <button class="btn btn--warning btn--sm">
                         🔇 Blokir
                       </button>
                     </div>
@@ -360,28 +339,15 @@
                       </div>
                     </div>
                   </td>
-                  <td style="font-size: 12px; color: var(--text-secondary)">
-                    SMAN 3 Bandung
-                  </td>
-                  <td
-                    style="
-                      font-size: 12px;
-                      color: var(--text-secondary);
-                      white-space: nowrap;
-                    "
-                  >
-                    15 Jan 2025
-                  </td>
+                  <td class="cell-meta">SMAN 3 Bandung</td>
+                  <td class="cell-meta">15 Jan 2025</td>
                   <td>
                     <span class="badge badge--success">Aktif Premium</span>
                   </td>
                   <td>
                     <div class="cell-actions">
                       <button class="btn btn--ghost btn--sm">✏️ Edit</button>
-                      <button
-                        class="btn btn--warning btn--sm"
-                        style="background: var(--warning); color: #fff"
-                      >
+                      <button class="btn btn--warning btn--sm">
                         🔇 Blokir
                       </button>
                     </div>
@@ -398,26 +364,13 @@
                       </div>
                     </div>
                   </td>
-                  <td style="font-size: 12px; color: var(--text-secondary)">
-                    SMKN 2 Surabaya
-                  </td>
-                  <td
-                    style="
-                      font-size: 12px;
-                      color: var(--text-secondary);
-                      white-space: nowrap;
-                    "
-                  >
-                    20 Jan 2025
-                  </td>
+                  <td class="cell-meta">SMKN 2 Surabaya</td>
+                  <td class="cell-meta">20 Jan 2025</td>
                   <td><span class="badge badge--info">Aktif Free</span></td>
                   <td>
                     <div class="cell-actions">
                       <button class="btn btn--ghost btn--sm">✏️ Edit</button>
-                      <button
-                        class="btn btn--warning btn--sm"
-                        style="background: var(--warning); color: #fff"
-                      >
+                      <button class="btn btn--warning btn--sm">
                         🔇 Blokir
                       </button>
                     </div>
@@ -436,18 +389,8 @@
                       </div>
                     </div>
                   </td>
-                  <td style="font-size: 12px; color: var(--text-secondary)">
-                    SMAN 5 Jakarta
-                  </td>
-                  <td
-                    style="
-                      font-size: 12px;
-                      color: var(--text-secondary);
-                      white-space: nowrap;
-                    "
-                  >
-                    02 Feb 2025
-                  </td>
+                  <td class="cell-meta">SMAN 5 Jakarta</td>
+                  <td class="cell-meta">02 Feb 2025</td>
                   <td><span class="badge badge--danger">Diblokir</span></td>
                   <td>
                     <div class="cell-actions">
@@ -469,28 +412,15 @@
                       </div>
                     </div>
                   </td>
-                  <td style="font-size: 12px; color: var(--text-secondary)">
-                    SMAN 1 Malang
-                  </td>
-                  <td
-                    style="
-                      font-size: 12px;
-                      color: var(--text-secondary);
-                      white-space: nowrap;
-                    "
-                  >
-                    10 Feb 2025
-                  </td>
+                  <td class="cell-meta">SMAN 1 Malang</td>
+                  <td class="cell-meta">10 Feb 2025</td>
                   <td>
                     <span class="badge badge--success">Aktif Premium</span>
                   </td>
                   <td>
                     <div class="cell-actions">
                       <button class="btn btn--ghost btn--sm">✏️ Edit</button>
-                      <button
-                        class="btn btn--warning btn--sm"
-                        style="background: var(--warning); color: #fff"
-                      >
+                      <button class="btn btn--warning btn--sm">
                         🔇 Blokir
                       </button>
                     </div>
@@ -507,26 +437,13 @@
                       </div>
                     </div>
                   </td>
-                  <td style="font-size: 12px; color: var(--text-secondary)">
-                    SMAN 2 Yogyakarta
-                  </td>
-                  <td
-                    style="
-                      font-size: 12px;
-                      color: var(--text-secondary);
-                      white-space: nowrap;
-                    "
-                  >
-                    14 Feb 2025
-                  </td>
+                  <td class="cell-meta">SMAN 2 Yogyakarta</td>
+                  <td class="cell-meta">14 Feb 2025</td>
                   <td><span class="badge badge--info">Aktif Free</span></td>
                   <td>
                     <div class="cell-actions">
                       <button class="btn btn--ghost btn--sm">✏️ Edit</button>
-                      <button
-                        class="btn btn--warning btn--sm"
-                        style="background: var(--warning); color: #fff"
-                      >
+                      <button class="btn btn--warning btn--sm">
                         🔇 Blokir
                       </button>
                     </div>
@@ -543,28 +460,15 @@
                       </div>
                     </div>
                   </td>
-                  <td style="font-size: 12px; color: var(--text-secondary)">
-                    SMAN 7 Surabaya
-                  </td>
-                  <td
-                    style="
-                      font-size: 12px;
-                      color: var(--text-secondary);
-                      white-space: nowrap;
-                    "
-                  >
-                    20 Feb 2025
-                  </td>
+                  <td class="cell-meta">SMAN 7 Surabaya</td>
+                  <td class="cell-meta">20 Feb 2025</td>
                   <td>
                     <span class="badge badge--success">Aktif Premium</span>
                   </td>
                   <td>
                     <div class="cell-actions">
                       <button class="btn btn--ghost btn--sm">✏️ Edit</button>
-                      <button
-                        class="btn btn--warning btn--sm"
-                        style="background: var(--warning); color: #fff"
-                      >
+                      <button class="btn btn--warning btn--sm">
                         🔇 Blokir
                       </button>
                     </div>
@@ -581,18 +485,8 @@
                       </div>
                     </div>
                   </td>
-                  <td style="font-size: 12px; color: var(--text-secondary)">
-                    SMAN 3 Semarang
-                  </td>
-                  <td
-                    style="
-                      font-size: 12px;
-                      color: var(--text-secondary);
-                      white-space: nowrap;
-                    "
-                  >
-                    28 Feb 2025
-                  </td>
+                  <td class="cell-meta">SMAN 3 Semarang</td>
+                  <td class="cell-meta">28 Feb 2025</td>
                   <td><span class="badge badge--danger">Diblokir</span></td>
                   <td>
                     <div class="cell-actions">

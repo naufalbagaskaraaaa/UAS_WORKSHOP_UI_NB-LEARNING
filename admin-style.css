@@ -28,15 +28,17 @@
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
-  --shadow-card-hover: 0 8px 30px rgba(79, 70, 229, 0.15); /* Sidebar */
+  --shadow-card-hover: 0 8px 30px rgba(79, 70, 229, 0.15);
   --sidebar-width: 260px;
-  --topbar-height: 64px; /* Radius */
+  --topbar-height: 64px;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
-  --radius-xl: 20px; /* Transition */
+  --radius-xl: 20px;
   --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-} /* ── Reset & Base ── */
+}
+
+/* ── Reset & Base ── */
 *,
 *::before,
 *::after {
@@ -76,25 +78,33 @@ button {
   font-family: inherit;
   border: none;
   background: none;
-} /* ============================================================ LAYOUT: Shell
-— Sidebar + Main ============================================================ */
+}
+
+/* ============================================================
+   LAYOUT: Shell — Sidebar + Main
+   ============================================================ */
 .admin-shell {
   display: flex;
   min-height: 100vh;
-} /* ── Sidebar Overlay
-(mobile) ── */
+}
+
+/* ── Sidebar Overlay (mobile) ── */
 .sidebar-overlay {
   display: none;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
   z-index: 99;
+  -webkit-backdrop-filter: blur(2px); /* tambahan untuk Safari */
   backdrop-filter: blur(2px);
 }
 .sidebar-overlay.active {
   display: block;
-} /*
-============================================================ SIDEBAR
+}
+
+/*
+============================================================
+SIDEBAR
 ============================================================ */
 .sidebar {
   width: var(--sidebar-width);
@@ -109,8 +119,7 @@ button {
   transition: var(--transition);
   overflow-y: auto;
   overflow-x: hidden;
-} /*
-Scrollbar Sidebar */
+}
 .sidebar::-webkit-scrollbar {
   width: 4px;
 }
@@ -120,7 +129,9 @@ Scrollbar Sidebar */
 .sidebar::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 4px;
-} /* Brand / Logo */
+}
+
+/* Brand / Logo */
 .sidebar__brand {
   display: flex;
   align-items: center;
@@ -157,7 +168,9 @@ Scrollbar Sidebar */
   color: var(--text-sidebar);
   text-transform: uppercase;
   letter-spacing: 0.8px;
-} /* Admin Profile Mini */
+}
+
+/* Admin Profile Mini */
 .sidebar__profile {
   display: flex;
   align-items: center;
@@ -193,8 +206,9 @@ Scrollbar Sidebar */
 .sidebar__profile-role {
   font-size: 10px;
   color: var(--text-sidebar);
-} /* Nav
-*/
+}
+
+/* Nav */
 .sidebar__nav {
   flex: 1;
   padding: 12px 0;
@@ -263,7 +277,9 @@ Scrollbar Sidebar */
   padding: 2px 6px;
   border-radius: 20px;
   line-height: 1.4;
-} /* Sidebar Footer */
+}
+
+/* Sidebar Footer */
 .sidebar__footer {
   padding: 16px 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -283,8 +299,11 @@ Scrollbar Sidebar */
 .sidebar__footer-btn:hover {
   background: rgba(239, 68, 68, 0.12);
   color: #fca5a5;
-} /*
-============================================================ MAIN CONTENT AREA
+}
+
+/*
+============================================================
+MAIN CONTENT AREA
 ============================================================ */
 .main-content {
   margin-left: var(--sidebar-width);
@@ -293,7 +312,9 @@ Scrollbar Sidebar */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-} /* ── Topbar ── */
+}
+
+/* ── Topbar ── */
 .topbar {
   height: var(--topbar-height);
   background: var(--bg-card);
@@ -399,19 +420,21 @@ Scrollbar Sidebar */
   font-size: 13px;
   font-weight: 600;
   color: var(--text-primary);
-} /* ── Page Content Wrapper ── */
+}
+
+/* ── Page Content Wrapper ── */
 .page-content {
   padding: 28px;
   flex: 1;
-} /* Page Header */
+}
+
+/* Page Header */
 .page-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 24px;
   gap: 16px;
-}
-.page-header__left {
 }
 .page-header__title {
   font-size: 22px;
@@ -423,8 +446,11 @@ Scrollbar Sidebar */
   font-size: 13px;
   color: var(--text-secondary);
   margin-top: 3px;
-} /*
-============================================================ COMPONENTS: Cards
+}
+
+/*
+============================================================
+COMPONENTS: Cards
 ============================================================ */
 .card {
   background: var(--bg-card);
@@ -450,7 +476,9 @@ Scrollbar Sidebar */
   font-size: 14px;
   font-weight: 700;
   color: var(--text-primary);
-} /* ── Metric / Stat Cards ── */
+}
+
+/* ── Metric / Stat Cards ── */
 .metric-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -523,8 +551,6 @@ Scrollbar Sidebar */
 .metric-card--red .metric-card__icon-wrap {
   background: var(--danger-light);
 }
-.metric-card__info {
-}
 .metric-card__label {
   font-size: 11.5px;
   font-weight: 600;
@@ -565,8 +591,9 @@ Scrollbar Sidebar */
 }
 .metric-card__change--down {
   color: var(--danger);
-} /*
-── Chart Placeholder ── */
+}
+
+/* ── Chart Placeholder ── */
 .chart-section {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -653,8 +680,9 @@ Scrollbar Sidebar */
   width: 8px;
   height: 8px;
   border-radius: 50%;
-} /* Donut /
-Mini Stat Card */
+}
+
+/* Donut / Mini Stat Card */
 .stat-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
@@ -700,12 +728,16 @@ Mini Stat Card */
 .stat-card__list-val {
   font-weight: 700;
   color: var(--text-primary);
-} /* ── Recent Activity Table on Dashboard ──
-*/
+}
+
+/* ── Recent Activity Table on Dashboard ── */
 .recent-table-section {
   margin-bottom: 28px;
-} /*
-============================================================ COMPONENTS: Buttons
+}
+
+/*
+============================================================
+COMPONENTS: Buttons
 ============================================================ */
 .btn {
   display: inline-flex;
@@ -777,8 +809,11 @@ Mini Stat Card */
 .btn--ghost:hover {
   background: var(--bg-page);
   color: var(--text-primary);
-} /*
-============================================================ COMPONENTS: Tables
+}
+
+/*
+============================================================
+COMPONENTS: Tables
 ============================================================ */
 .table-container {
   background: var(--bg-card);
@@ -906,13 +941,17 @@ Mini Stat Card */
 }
 .data-table tbody tr:hover {
   background: var(--bg-page);
-} /* Cell: ID */
+}
+
+/* Cell: ID */
 .cell-id {
   font-family: "SF Mono", "Courier New", monospace;
   font-size: 11px;
   color: var(--text-muted);
   font-weight: 600;
-} /* Cell: Article/Product Title */
+}
+
+/* Cell: Article/Product Title */
 .cell-title {
   font-weight: 600;
   color: var(--text-primary);
@@ -923,7 +962,9 @@ Mini Stat Card */
   color: var(--text-muted);
   font-weight: 400;
   margin-top: 2px;
-} /* Cell: User Info */
+}
+
+/* Cell: User Info */
 .cell-user {
   display: flex;
   align-items: center;
@@ -949,8 +990,9 @@ Mini Stat Card */
   font-size: 11px;
   color: var(--text-muted);
   margin-top: 1px;
-} /* Avatars
-gradient by index */
+}
+
+/* Avatars gradient by index */
 .avatar-color-1 {
   background: linear-gradient(135deg, #4f46e5, #818cf8);
 }
@@ -968,21 +1010,28 @@ gradient by index */
 }
 .avatar-color-6 {
   background: linear-gradient(135deg, #06b6d4, #67e8f9);
-} /* Cell: Price */
+}
+
+/* Cell: Price */
 .cell-price {
   font-weight: 700;
   color: var(--text-primary);
   white-space: nowrap;
-} /* Cell: Actions */
+}
+
+/* Cell: Actions */
 .cell-actions {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   flex-wrap: nowrap;
-} /*
-============================================================ COMPONENTS: Badges
-/ Status Pills ============================================================ */
+}
+
+/*
+============================================================
+COMPONENTS: Badges / Status Pills
+============================================================ */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -1019,8 +1068,9 @@ gradient by index */
 .badge--neutral {
   background: var(--bg-page);
   color: var(--text-secondary);
-} /* ── Kategori Tag
-── */
+}
+
+/* ── Kategori Tag ── */
 .tag {
   display: inline-block;
   padding: 3px 9px;
@@ -1049,9 +1099,12 @@ gradient by index */
 .tag--materi {
   background: #fce7f3;
   color: #db2777;
-} /*
-============================================================ COMPONENTS:
-Pagination ============================================================ */
+}
+
+/*
+============================================================
+COMPONENTS: Pagination
+============================================================ */
 .pagination {
   display: flex;
   align-items: center;
@@ -1095,9 +1148,12 @@ Pagination ============================================================ */
   background: var(--primary);
   border-color: var(--primary);
   color: #fff;
-} /*
-============================================================ COMPONENTS: Empty
-State ============================================================ */
+}
+
+/*
+============================================================
+COMPONENTS: Empty State
+============================================================ */
 .empty-state {
   text-align: center;
   padding: 48px 24px;
@@ -1115,10 +1171,13 @@ State ============================================================ */
 }
 .empty-state__desc {
   font-size: 13px;
-} /* ============================================================
+}
+
+/* ============================================================
 RESPONSIVE: Media Queries
-============================================================ */ /* ── Tablet (≤
-1024px) ── */
+============================================================ */
+
+/* ── Tablet (≤ 1024px) ── */
 @media (max-width: 1024px) {
   .metric-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1132,10 +1191,10 @@ RESPONSIVE: Media Queries
   .search-input:focus {
     width: 200px;
   }
-} /* ── Mobile (≤ 768px)
-── */
+}
+
+/* ── Mobile (≤ 768px) ── */
 @media (max-width: 768px) {
-  /* Sidebar goes off-canvas */
   .sidebar {
     left: calc(-1 * var(--sidebar-width));
     box-shadow: none;
@@ -1143,32 +1202,29 @@ RESPONSIVE: Media Queries
   .sidebar.open {
     left: 0;
     box-shadow: var(--shadow-lg);
-  } /* Main takes full width */
+  }
   .main-content {
     margin-left: 0;
-  } /* Show hamburger */
+  }
   .topbar__hamburger {
     display: flex;
-  } /*
-Topbar adjustments */
+  }
   .topbar {
     padding: 0 16px;
   }
   .topbar__user-name {
     display: none;
-  } /* Page content padding */
+  }
   .page-content {
     padding: 20px 16px;
-  } /*
-Metric grid single column */
+  }
   .metric-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
   .metric-card__value {
     font-size: 22px;
-  } /* Page header
-stacks */
+  }
   .page-header {
     flex-direction: column;
     align-items: stretch;
@@ -1176,14 +1232,13 @@ stacks */
   .page-header .btn {
     width: 100%;
     justify-content: center;
-  } /* Table: horizontal
-scroll */
+  }
   .table-container {
     overflow-x: auto;
   }
   .data-table {
     min-width: 680px;
-  } /* Toolbar wraps */
+  }
   .table-toolbar {
     padding: 12px 16px;
   }
@@ -1201,13 +1256,15 @@ scroll */
   }
   .chart-section {
     grid-template-columns: 1fr;
-  } /* Pagination */
+  }
   .pagination {
     padding: 12px 16px;
     flex-direction: column;
     align-items: flex-start;
   }
-} /* ── Small Mobile (≤ 480px) ── */
+}
+
+/* ── Small Mobile (≤ 480px) ── */
 @media (max-width: 480px) {
   .metric-grid {
     grid-template-columns: 1fr;
@@ -1218,8 +1275,11 @@ scroll */
   .page-header__title {
     font-size: 18px;
   }
-} /*
-============================================================ UTILITIES
+}
+
+/*
+============================================================
+UTILITIES
 ============================================================ */
 .text-primary {
   color: var(--text-primary) !important;

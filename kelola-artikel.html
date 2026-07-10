@@ -5,6 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kelola Artikel — NB-Learning Admin</title>
     <link rel="stylesheet" href="admin-style.css" />
+
+    <style>
+      /* ===== Tambahan untuk kelola-artikel.html ===== */
+
+      /* Stat cards (mengganti inline style) */
+      .stat-card-mini {
+        flex: 1;
+        min-width: 130px;
+      }
+      .stat-card-mini .card__body {
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .stat-card-mini .stat-icon {
+        font-size: 22px;
+      }
+      .stat-card-mini .stat-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .stat-card-mini .stat-value {
+        font-size: 22px;
+        font-weight: 800;
+      }
+      .stat-value--primary {
+        color: var(--primary);
+      }
+      .stat-value--success {
+        color: var(--success);
+      }
+      .stat-value--warning {
+        color: var(--warning);
+      }
+      .stat-value--info {
+        color: var(--info);
+      }
+
+      /* Stats bar wrapper */
+      .stats-bar {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      /* Tabel cell tanggal */
+      .cell-date {
+        color: var(--text-secondary);
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      /* Responsive tambahan untuk filter select di mobile */
+      @media (max-width: 768px) {
+        .stats-bar {
+          flex-direction: column;
+        }
+        .stat-card-mini {
+          min-width: unset;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="admin-shell">
@@ -120,151 +187,40 @@
           </div>
 
           <!-- Stats Bar -->
-          <div
-            style="
-              display: flex;
-              gap: 12px;
-              margin-bottom: 20px;
-              flex-wrap: wrap;
-            "
-          >
-            <div class="card" style="flex: 1; min-width: 130px">
-              <div
-                class="card__body"
-                style="
-                  padding: 16px 20px;
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                "
-              >
-                <div style="font-size: 22px">📝</div>
+          <div class="stats-bar">
+            <div class="card stat-card-mini">
+              <div class="card__body">
+                <span class="stat-icon">📝</span>
                 <div>
-                  <div
-                    style="
-                      font-size: 11px;
-                      color: var(--text-muted);
-                      font-weight: 600;
-                      text-transform: uppercase;
-                      letter-spacing: 0.5px;
-                    "
-                  >
-                    Total Artikel
-                  </div>
-                  <div
-                    style="
-                      font-size: 22px;
-                      font-weight: 800;
-                      color: var(--primary);
-                    "
-                  >
-                    214
-                  </div>
+                  <div class="stat-label">Total Artikel</div>
+                  <div class="stat-value stat-value--primary">214</div>
                 </div>
               </div>
             </div>
-            <div class="card" style="flex: 1; min-width: 130px">
-              <div
-                class="card__body"
-                style="
-                  padding: 16px 20px;
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                "
-              >
-                <div style="font-size: 22px">✅</div>
+            <div class="card stat-card-mini">
+              <div class="card__body">
+                <span class="stat-icon">✅</span>
                 <div>
-                  <div
-                    style="
-                      font-size: 11px;
-                      color: var(--text-muted);
-                      font-weight: 600;
-                      text-transform: uppercase;
-                      letter-spacing: 0.5px;
-                    "
-                  >
-                    Terbit
-                  </div>
-                  <div
-                    style="
-                      font-size: 22px;
-                      font-weight: 800;
-                      color: var(--success);
-                    "
-                  >
-                    186
-                  </div>
+                  <div class="stat-label">Terbit</div>
+                  <div class="stat-value stat-value--success">186</div>
                 </div>
               </div>
             </div>
-            <div class="card" style="flex: 1; min-width: 130px">
-              <div
-                class="card__body"
-                style="
-                  padding: 16px 20px;
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                "
-              >
-                <div style="font-size: 22px">⏳</div>
+            <div class="card stat-card-mini">
+              <div class="card__body">
+                <span class="stat-icon">⏳</span>
                 <div>
-                  <div
-                    style="
-                      font-size: 11px;
-                      color: var(--text-muted);
-                      font-weight: 600;
-                      text-transform: uppercase;
-                      letter-spacing: 0.5px;
-                    "
-                  >
-                    Draft
-                  </div>
-                  <div
-                    style="
-                      font-size: 22px;
-                      font-weight: 800;
-                      color: var(--warning);
-                    "
-                  >
-                    28
-                  </div>
+                  <div class="stat-label">Draft</div>
+                  <div class="stat-value stat-value--warning">28</div>
                 </div>
               </div>
             </div>
-            <div class="card" style="flex: 1; min-width: 130px">
-              <div
-                class="card__body"
-                style="
-                  padding: 16px 20px;
-                  display: flex;
-                  align-items: center;
-                  gap: 12px;
-                "
-              >
-                <div style="font-size: 22px">🗂️</div>
+            <div class="card stat-card-mini">
+              <div class="card__body">
+                <span class="stat-icon">🗂️</span>
                 <div>
-                  <div
-                    style="
-                      font-size: 11px;
-                      color: var(--text-muted);
-                      font-weight: 600;
-                      text-transform: uppercase;
-                      letter-spacing: 0.5px;
-                    "
-                  >
-                    Kategori
-                  </div>
-                  <div
-                    style="
-                      font-size: 22px;
-                      font-weight: 800;
-                      color: var(--info);
-                    "
-                  >
-                    6
-                  </div>
+                  <div class="stat-label">Kategori</div>
+                  <div class="stat-value stat-value--info">6</div>
                 </div>
               </div>
             </div>
@@ -284,7 +240,10 @@
                     placeholder="Cari judul artikel..."
                   />
                 </div>
-                <select class="filter-select">
+                <select
+                  class="filter-select"
+                  aria-label="Filter berdasarkan kategori"
+                >
                   <option value="">Semua Kategori</option>
                   <option>TPS</option>
                   <option>TKA Saintek</option>
@@ -292,7 +251,10 @@
                   <option>Try Out</option>
                   <option>Materi</option>
                 </select>
-                <select class="filter-select">
+                <select
+                  class="filter-select"
+                  aria-label="Filter berdasarkan status"
+                >
                   <option value="">Semua Status</option>
                   <option>Terbit</option>
                   <option>Draft</option>
@@ -324,15 +286,7 @@
                     </div>
                   </td>
                   <td><span class="tag tag--tps">TPS</span></td>
-                  <td
-                    style="
-                      color: var(--text-secondary);
-                      font-size: 12px;
-                      white-space: nowrap;
-                    "
-                  >
-                    12 Mei 2025
-                  </td>
+                  <td class="cell-date">12 Mei 2025</td>
                   <td><span class="badge badge--success">Terbit</span></td>
                   <td>
                     <div class="cell-actions">
@@ -356,15 +310,7 @@
                     </div>
                   </td>
                   <td><span class="tag tag--tka">TKA Saintek</span></td>
-                  <td
-                    style="
-                      color: var(--text-secondary);
-                      font-size: 12px;
-                      white-space: nowrap;
-                    "
-                  >
-                    10 Mei 2025
-                  </td>
+                  <td class="cell-date">10 Mei 2025</td>
                   <td><span class="badge badge--success">Terbit</span></td>
                   <td>
                     <div class="cell-actions">
@@ -384,15 +330,7 @@
                     </div>
                   </td>
                   <td><span class="tag tag--tryout">Try Out</span></td>
-                  <td
-                    style="
-                      color: var(--text-secondary);
-                      font-size: 12px;
-                      white-space: nowrap;
-                    "
-                  >
-                    08 Mei 2025
-                  </td>
+                  <td class="cell-date">08 Mei 2025</td>
                   <td><span class="badge badge--success">Terbit</span></td>
                   <td>
                     <div class="cell-actions">
@@ -412,15 +350,7 @@
                     </div>
                   </td>
                   <td><span class="tag tag--tki">TKA Soshum</span></td>
-                  <td
-                    style="
-                      color: var(--text-secondary);
-                      font-size: 12px;
-                      white-space: nowrap;
-                    "
-                  >
-                    05 Mei 2025
-                  </td>
+                  <td class="cell-date">05 Mei 2025</td>
                   <td><span class="badge badge--warning">Draft</span></td>
                   <td>
                     <div class="cell-actions">
@@ -440,15 +370,7 @@
                     </div>
                   </td>
                   <td><span class="tag tag--materi">Materi</span></td>
-                  <td
-                    style="
-                      color: var(--text-secondary);
-                      font-size: 12px;
-                      white-space: nowrap;
-                    "
-                  >
-                    01 Mei 2025
-                  </td>
+                  <td class="cell-date">01 Mei 2025</td>
                   <td><span class="badge badge--success">Terbit</span></td>
                   <td>
                     <div class="cell-actions">
@@ -468,15 +390,7 @@
                     </div>
                   </td>
                   <td><span class="tag tag--tka">TKA Saintek</span></td>
-                  <td
-                    style="
-                      color: var(--text-secondary);
-                      font-size: 12px;
-                      white-space: nowrap;
-                    "
-                  >
-                    28 Apr 2025
-                  </td>
+                  <td class="cell-date">28 Apr 2025</td>
                   <td><span class="badge badge--neutral">Diarsipkan</span></td>
                   <td>
                     <div class="cell-actions">
@@ -496,15 +410,7 @@
                     </div>
                   </td>
                   <td><span class="tag tag--tps">TPS</span></td>
-                  <td
-                    style="
-                      color: var(--text-secondary);
-                      font-size: 12px;
-                      white-space: nowrap;
-                    "
-                  >
-                    25 Apr 2025
-                  </td>
+                  <td class="cell-date">25 Apr 2025</td>
                   <td><span class="badge badge--warning">Draft</span></td>
                   <td>
                     <div class="cell-actions">
