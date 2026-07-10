@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toko Premium — NB-Learning</title>
+    <link rel="stylesheet" href="siswa-style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="navbar__inner">
+        <a href="landing.html" class="navbar__logo">
+          <span class="navbar__logo-mark">NB</span>
+          NB-Learning
+        </a>
+
+        <nav class="navbar__menu">
+          <a href="landing.html" class="navbar__link">Beranda</a>
+          <a href="try-out.html" class="navbar__link">Try Out</a>
+          <a href="forum.html" class="navbar__link">Forum</a>
+          <a href="artikel.html" class="navbar__link">Artikel</a>
+          <a href="katalog.html" class="navbar__link active">Toko Premium</a>
+        </nav>
+
+        <div class="navbar__actions">
+          <button
+            class="navbar__icon-btn"
+            aria-label="Keranjang belanja"
+            onclick="window.location.href = 'keranjang.html'"
+          >
+            🛒
+            <span class="navbar__badge">2</span>
+          </button>
+          <button class="navbar__icon-btn" aria-label="Notifikasi">🔔</button>
+          <div class="navbar__avatar" title="Naufal Bagaskara">NB</div>
+          <button class="navbar__toggle" aria-label="Buka menu">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- PAGE HEADER -->
+      <section class="page-header">
+        <p class="page-header__breadcrumb">
+          <a href="landing.html">Beranda</a> / Toko Premium
+        </p>
+        <h1 class="page-header__title">Toko Premium</h1>
+        <p class="page-header__subtitle">
+          Tingkatkan persiapan UTBK/SNBT kamu dengan paket kelas intensif,
+          e-book rangkuman, dan sesi konsultasi bersama mentor.
+        </p>
+      </section>
+
+      <!-- FILTER BAR -->
+      <section class="filter-bar">
+        <div class="search-input-wrap">
+          <span class="search-input-wrap__icon">🔍</span>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Cari nama produk..."
+          />
+        </div>
+
+        <div class="filter-bar__tags">
+          <button class="filter-chip active">Semua</button>
+          <button class="filter-chip">Paket Kelas</button>
+          <button class="filter-chip">E-book</button>
+          <button class="filter-chip">Konsultasi</button>
+          <button class="filter-chip">Bundling Hemat</button>
+        </div>
+      </section>
+
+      <!-- PRODUCT GRID -->
+      <section class="product-grid">
+        <a href="detail-produk.html" class="product-card">
+          <div class="product-card__thumb product-card__thumb--kelas">📚</div>
+          <div class="product-card__body">
+            <span class="tag tag--kelas product-card__category"
+              >Paket Kelas</span
+            >
+            <h3 class="product-card__title">
+              Paket Kelas Intensif TPS 4 Minggu
+            </h3>
+            <p class="product-card__desc">
+              20 sesi video + latihan soal terarah
+            </p>
+            <div class="product-card__footer">
+              <div class="product-card__price-wrap">
+                <span class="product-card__price-old">Rp199.000</span>
+                <span class="product-card__price">Rp149.000</span>
+              </div>
+              <button class="btn btn--primary btn--sm">+ Keranjang</button>
+            </div>
+          </div>
+        </a>
+
+        <a href="detail-produk.html" class="product-card">
+          <div class="product-card__thumb product-card__thumb--ebook">📘</div>
+          <div class="product-card__body">
+            <span class="tag tag--ebook product-card__category">E-book</span>
+            <h3 class="product-card__title">E-book Rangkuman Rumus Saintek</h3>
+            <p class="product-card__desc">
+              120 halaman, format PDF, siap cetak
+            </p>
+            <div class="product-card__footer">
+              <div class="product-card__price-wrap">
+                <span class="product-card__price">Rp39.000</span>
+              </div>
+              <button class="btn btn--primary btn--sm">+ Keranjang</button>
+            </div>
+          </div>
+        </a>
+
+        <a href="detail-produk.html" class="product-card">
+          <div class="product-card__thumb product-card__thumb--konsultasi">
+            🎧
+          </div>
+          <div class="product-card__body">
+            <span class="tag tag--konsultasi product-card__category"
+              >Konsultasi</span
+            >
+            <h3 class="product-card__title">
+              Sesi Konsultasi 1-on-1 Bersama Mentor
+            </h3>
+            <p class="product-card__desc">60 menit via video call terjadwal</p>
+            <div class="product-card__footer">
+              <div class="product-card__price-wrap">
+                <span class="product-card__price">Rp75.000</span>
+              </div>
+              <button class="btn btn--primary btn--sm">+ Keranjang</button>
+            </div>
+          </div>
+        </a>
+
+        <a href="detail-produk.html" class="product-card">
+          <div class="product-card__thumb product-card__thumb--bundling">
+            🎁
+            <span class="badge badge--danger product-card__stock-flag"
+              >Hemat</span
+            >
+          </div>
+          <div class="product-card__body">
+            <span class="tag tag--bundling product-card__category"
+              >Bundling Hemat</span
+            >
+            <h3 class="product-card__title">
+              Bundling Paket Kelas TPS + E-book Rumus
+            </h3>
+            <p class="product-card__desc">Gabungan 2 produk, lebih hemat 30%</p>
+            <div class="product-card__footer">
+              <div class="product-card__price-wrap">
+                <span class="product-card__price-old">Rp238.000</span>
+                <span class="product-card__price">Rp169.000</span>
+              </div>
+              <button class="btn btn--primary btn--sm">+ Keranjang</button>
+            </div>
+          </div>
+        </a>
+
+        <a href="detail-produk.html" class="product-card">
+          <div class="product-card__thumb product-card__thumb--kelas">📚</div>
+          <div class="product-card__body">
+            <span class="tag tag--kelas product-card__category"
+              >Paket Kelas</span
+            >
+            <h3 class="product-card__title">
+              Paket Kelas Intensif Soshum 4 Minggu
+            </h3>
+            <p class="product-card__desc">
+              20 sesi video + latihan soal terarah
+            </p>
+            <div class="product-card__footer">
+              <div class="product-card__price-wrap">
+                <span class="product-card__price">Rp149.000</span>
+              </div>
+              <button class="btn btn--primary btn--sm">+ Keranjang</button>
+            </div>
+          </div>
+        </a>
+
+        <div class="product-card">
+          <div class="product-card__thumb product-card__thumb--ebook">
+            📗
+            <span class="badge badge--neutral product-card__stock-flag"
+              >Stok Habis</span
+            >
+          </div>
+          <div class="product-card__body">
+            <span class="tag tag--ebook product-card__category">E-book</span>
+            <h3 class="product-card__title">
+              E-book Bank Soal TKA 5 Tahun Terakhir
+            </h3>
+            <p class="product-card__desc">
+              200+ soal beserta pembahasan lengkap
+            </p>
+            <div class="product-card__footer">
+              <div class="product-card__price-wrap">
+                <span class="product-card__price">Rp49.000</span>
+              </div>
+              <button class="btn btn--disabled btn--sm" disabled>
+                Stok Habis
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGINATION -->
+      <nav class="pagination" aria-label="Navigasi halaman produk">
+        <button class="pagination__btn" disabled>‹</button>
+        <button class="pagination__btn active">1</button>
+        <button class="pagination__btn">2</button>
+        <button class="pagination__btn">›</button>
+      </nav>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand">
+            <span class="navbar__logo-mark">NB</span>
+            NB-Learning
+          </div>
+          <p class="footer__desc">
+            Platform pembelajaran dan simulasi ujian UTBK/SNBT gratis untuk
+            pemberdayaan pendidikan inklusif Kabupaten Nganjuk.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Navigasi</p>
+          <a href="landing.html" class="footer__link">Beranda</a>
+          <a href="try-out.html" class="footer__link">Try Out</a>
+          <a href="artikel.html" class="footer__link">Artikel</a>
+          <a href="katalog.html" class="footer__link">Toko Premium</a>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Bantuan</p>
+          <a href="#" class="footer__link">Pusat Bantuan</a>
+          <a href="#" class="footer__link">Hubungi Kami</a>
+          <a href="#" class="footer__link">Syarat & Ketentuan</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        © 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO). Seluruh hak
+        cipta dilindungi.
+      </div>
+    </footer>
+  </body>
+</html>

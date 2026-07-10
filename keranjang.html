@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keranjang Belanja — NB-Learning</title>
+    <link rel="stylesheet" href="siswa-style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="navbar__inner">
+        <a href="landing.html" class="navbar__logo">
+          <span class="navbar__logo-mark">NB</span>
+          NB-Learning
+        </a>
+
+        <nav class="navbar__menu">
+          <a href="landing.html" class="navbar__link">Beranda</a>
+          <a href="try-out.html" class="navbar__link">Try Out</a>
+          <a href="forum.html" class="navbar__link">Forum</a>
+          <a href="artikel.html" class="navbar__link">Artikel</a>
+          <a href="katalog.html" class="navbar__link">Toko Premium</a>
+        </nav>
+
+        <div class="navbar__actions">
+          <button
+            class="navbar__icon-btn"
+            aria-label="Keranjang belanja"
+            onclick="window.location.href = 'keranjang.html'"
+          >
+            🛒
+            <span class="navbar__badge">2</span>
+          </button>
+          <button class="navbar__icon-btn" aria-label="Notifikasi">🔔</button>
+          <div class="navbar__avatar" title="Naufal Bagaskara">NB</div>
+          <button class="navbar__toggle" aria-label="Buka menu">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- PAGE HEADER -->
+      <section class="page-header">
+        <p class="page-header__breadcrumb">
+          <a href="landing.html">Beranda</a> / Keranjang Belanja
+        </p>
+        <h1 class="page-header__title">Keranjang Belanja</h1>
+        <p class="page-header__subtitle">
+          Periksa kembali produk yang ingin kamu beli sebelum lanjut ke
+          pembayaran.
+        </p>
+      </section>
+
+      <!-- CART LAYOUT -->
+      <section class="cart-layout">
+        <!-- DAFTAR ITEM -->
+        <div class="card" style="padding: 22px">
+          <div class="cart-item">
+            <div class="cart-item__thumb cart-item__thumb--kelas">📚</div>
+            <div class="cart-item__info">
+              <a href="detail-produk.html" class="cart-item__title"
+                >Paket Kelas Intensif TPS 4 Minggu</a
+              >
+              <span class="cart-item__unit-price">Rp149.000 / item</span>
+              <button class="cart-item__remove">Hapus</button>
+            </div>
+            <div class="cart-item__actions">
+              <div class="qty-selector">
+                <button class="qty-selector__btn" aria-label="Kurangi jumlah">
+                  −
+                </button>
+                <span class="qty-selector__value">1</span>
+                <button class="qty-selector__btn" aria-label="Tambah jumlah">
+                  +
+                </button>
+              </div>
+              <span class="cart-item__subtotal">Rp149.000</span>
+            </div>
+          </div>
+
+          <div class="cart-item">
+            <div class="cart-item__thumb cart-item__thumb--ebook">📘</div>
+            <div class="cart-item__info">
+              <a href="detail-produk.html" class="cart-item__title"
+                >E-book Rangkuman Rumus Saintek</a
+              >
+              <span class="cart-item__unit-price">Rp39.000 / item</span>
+              <button class="cart-item__remove">Hapus</button>
+            </div>
+            <div class="cart-item__actions">
+              <div class="qty-selector">
+                <button class="qty-selector__btn" aria-label="Kurangi jumlah">
+                  −
+                </button>
+                <span class="qty-selector__value">1</span>
+                <button class="qty-selector__btn" aria-label="Tambah jumlah">
+                  +
+                </button>
+              </div>
+              <span class="cart-item__subtotal">Rp39.000</span>
+            </div>
+          </div>
+
+          <div style="padding-top: 18px">
+            <a href="katalog.html" class="btn btn--ghost btn--sm"
+              >← Lanjut Belanja</a
+            >
+          </div>
+        </div>
+
+        <!-- RINGKASAN PESANAN -->
+        <aside class="card summary-card">
+          <p class="summary-card__title">Ringkasan Pesanan</p>
+
+          <div class="summary-row">
+            <span>Subtotal (2 produk)</span>
+            <span>Rp188.000</span>
+          </div>
+          <div class="summary-row">
+            <span>Diskon</span>
+            <span>−Rp0</span>
+          </div>
+
+          <div class="voucher-row">
+            <input
+              type="text"
+              class="voucher-input"
+              placeholder="Masukkan kode voucher"
+            />
+            <button class="btn btn--outline btn--sm">Pakai</button>
+          </div>
+
+          <div class="summary-row summary-row--total">
+            <span>Total Bayar</span>
+            <span>Rp188.000</span>
+          </div>
+
+          <button
+            class="btn btn--primary btn--block"
+            style="margin-top: 18px"
+            onclick="window.location.href = 'checkout.html'"
+          >
+            Checkout
+          </button>
+          <p
+            class="stock-note"
+            style="justify-content: center; margin-top: 12px"
+          >
+            🔒 Produk digital — tidak memerlukan alamat pengiriman
+          </p>
+        </aside>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand">
+            <span class="navbar__logo-mark">NB</span>
+            NB-Learning
+          </div>
+          <p class="footer__desc">
+            Platform pembelajaran dan simulasi ujian UTBK/SNBT gratis untuk
+            pemberdayaan pendidikan inklusif Kabupaten Nganjuk.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Navigasi</p>
+          <a href="landing.html" class="footer__link">Beranda</a>
+          <a href="try-out.html" class="footer__link">Try Out</a>
+          <a href="artikel.html" class="footer__link">Artikel</a>
+          <a href="katalog.html" class="footer__link">Toko Premium</a>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Bantuan</p>
+          <a href="#" class="footer__link">Pusat Bantuan</a>
+          <a href="#" class="footer__link">Hubungi Kami</a>
+          <a href="#" class="footer__link">Syarat & Ketentuan</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        © 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO). Seluruh hak
+        cipta dilindungi.
+      </div>
+    </footer>
+  </body>
+</html>

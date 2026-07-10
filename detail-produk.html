@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paket Kelas Intensif TPS 4 Minggu — NB-Learning</title>
+    <link rel="stylesheet" href="siswa-style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="navbar__inner">
+        <a href="landing.html" class="navbar__logo">
+          <span class="navbar__logo-mark">NB</span>
+          NB-Learning
+        </a>
+
+        <nav class="navbar__menu">
+          <a href="landing.html" class="navbar__link">Beranda</a>
+          <a href="try-out.html" class="navbar__link">Try Out</a>
+          <a href="forum.html" class="navbar__link">Forum</a>
+          <a href="artikel.html" class="navbar__link">Artikel</a>
+          <a href="katalog.html" class="navbar__link active">Toko Premium</a>
+        </nav>
+
+        <div class="navbar__actions">
+          <button
+            class="navbar__icon-btn"
+            aria-label="Keranjang belanja"
+            onclick="window.location.href = 'keranjang.html'"
+          >
+            🛒
+            <span class="navbar__badge">2</span>
+          </button>
+          <button class="navbar__icon-btn" aria-label="Notifikasi">🔔</button>
+          <div class="navbar__avatar" title="Naufal Bagaskara">NB</div>
+          <button class="navbar__toggle" aria-label="Buka menu">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- BREADCRUMB -->
+      <section class="page-header" style="padding-bottom: 0">
+        <p class="page-header__breadcrumb">
+          <a href="landing.html">Beranda</a> /
+          <a href="katalog.html">Toko Premium</a> / Paket Kelas Intensif TPS
+        </p>
+      </section>
+
+      <!-- PRODUCT DETAIL -->
+      <section class="product-detail" style="margin-top: 20px">
+        <!-- GALLERY -->
+        <div class="product-detail__gallery product-detail__gallery--kelas">
+          📚
+          <span class="badge badge--danger product-detail__gallery-badge"
+            >Diskon 25%</span
+          >
+        </div>
+
+        <!-- INFO & BUY BOX -->
+        <div class="product-detail__info">
+          <span class="tag tag--kelas product-detail__category"
+            >Paket Kelas</span
+          >
+          <h1 class="product-detail__title">
+            Paket Kelas Intensif TPS 4 Minggu
+          </h1>
+          <p class="product-detail__sold">
+            🎓 Sudah dibeli 340 siswa · ⭐ 4.8 dari 96 ulasan
+          </p>
+
+          <div class="price-block">
+            <span class="price-block__current">Rp149.000</span>
+            <span class="price-block__old">Rp199.000</span>
+          </div>
+
+          <p class="product-detail__desc">
+            Paket belajar intensif untuk memperkuat Tes Potensi Skolastik (TPS)
+            dalam 4 minggu, dirancang khusus mengikuti pola soal SNBT terbaru.
+            Cocok untuk siswa yang ingin belajar terstruktur tanpa perlu
+            bimbingan belajar tatap muka berbayar mahal.
+          </p>
+
+          <div class="feature-list">
+            <div class="feature-list__item">
+              <span class="feature-list__icon">✅</span> 20 sesi video
+              pembelajaran (durasi total 12 jam)
+            </div>
+            <div class="feature-list__item">
+              <span class="feature-list__icon">✅</span> 300+ latihan soal
+              dengan pembahasan
+            </div>
+            <div class="feature-list__item">
+              <span class="feature-list__icon">✅</span> 2x simulasi Try Out CBT
+              eksklusif
+            </div>
+            <div class="feature-list__item">
+              <span class="feature-list__icon">✅</span> Akses selamanya, bisa
+              diulang kapan saja
+            </div>
+          </div>
+
+          <div class="buy-actions">
+            <div class="qty-selector">
+              <button class="qty-selector__btn" aria-label="Kurangi jumlah">
+                −
+              </button>
+              <span class="qty-selector__value">1</span>
+              <button class="qty-selector__btn" aria-label="Tambah jumlah">
+                +
+              </button>
+            </div>
+            <button
+              class="btn btn--outline"
+              onclick="window.location.href = 'keranjang.html'"
+            >
+              + Tambah ke Keranjang
+            </button>
+            <button
+              class="btn btn--primary"
+              onclick="window.location.href = 'checkout.html'"
+            >
+              Beli Sekarang
+            </button>
+          </div>
+
+          <p class="stock-note">
+            🟢 Stok tersedia — produk digital, langsung aktif setelah pembayaran
+            divalidasi
+          </p>
+        </div>
+      </section>
+
+      <!-- DESKRIPSI LENGKAP -->
+      <section class="section-block">
+        <h2 class="section-title">Deskripsi Produk</h2>
+        <div class="card" style="padding: 24px">
+          <div class="prose">
+            <p>
+              Paket Kelas Intensif TPS 4 Minggu disusun oleh tim mentor
+              NB-Learning berdasarkan analisis pola soal SNBT tiga tahun
+              terakhir. Setiap minggu berfokus pada satu kelompok kemampuan:
+              Penalaran Umum, Pemahaman Bacaan, Pengetahuan Kuantitatif, dan
+              Pengetahuan Umum.
+            </p>
+            <p>
+              Setelah menyelesaikan paket ini, kamu akan mendapatkan sertifikat
+              penyelesaian digital dan hasil pemetaan kekuatan/kelemahan
+              otomatis lewat Dashboard Analisis, sehingga tahu materi mana yang
+              masih perlu diperdalam sebelum ujian sesungguhnya.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUK TERKAIT -->
+      <section class="section-block">
+        <h2 class="section-title">Produk Terkait</h2>
+        <div class="product-grid">
+          <a href="detail-produk.html" class="product-card">
+            <div class="product-card__thumb product-card__thumb--ebook">📘</div>
+            <div class="product-card__body">
+              <span class="tag tag--ebook product-card__category">E-book</span>
+              <h3 class="product-card__title">
+                E-book Rangkuman Rumus Saintek
+              </h3>
+              <p class="product-card__desc">
+                120 halaman, format PDF, siap cetak
+              </p>
+              <div class="product-card__footer">
+                <div class="product-card__price-wrap">
+                  <span class="product-card__price">Rp39.000</span>
+                </div>
+                <button class="btn btn--primary btn--sm">+ Keranjang</button>
+              </div>
+            </div>
+          </a>
+
+          <a href="detail-produk.html" class="product-card">
+            <div class="product-card__thumb product-card__thumb--bundling">
+              🎁
+              <span class="badge badge--danger product-card__stock-flag"
+                >Hemat</span
+              >
+            </div>
+            <div class="product-card__body">
+              <span class="tag tag--bundling product-card__category"
+                >Bundling Hemat</span
+              >
+              <h3 class="product-card__title">
+                Bundling Paket Kelas TPS + E-book Rumus
+              </h3>
+              <p class="product-card__desc">
+                Gabungan 2 produk, lebih hemat 30%
+              </p>
+              <div class="product-card__footer">
+                <div class="product-card__price-wrap">
+                  <span class="product-card__price-old">Rp238.000</span>
+                  <span class="product-card__price">Rp169.000</span>
+                </div>
+                <button class="btn btn--primary btn--sm">+ Keranjang</button>
+              </div>
+            </div>
+          </a>
+
+          <a href="detail-produk.html" class="product-card">
+            <div class="product-card__thumb product-card__thumb--konsultasi">
+              🎧
+            </div>
+            <div class="product-card__body">
+              <span class="tag tag--konsultasi product-card__category"
+                >Konsultasi</span
+              >
+              <h3 class="product-card__title">
+                Sesi Konsultasi 1-on-1 Bersama Mentor
+              </h3>
+              <p class="product-card__desc">
+                60 menit via video call terjadwal
+              </p>
+              <div class="product-card__footer">
+                <div class="product-card__price-wrap">
+                  <span class="product-card__price">Rp75.000</span>
+                </div>
+                <button class="btn btn--primary btn--sm">+ Keranjang</button>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand">
+            <span class="navbar__logo-mark">NB</span>
+            NB-Learning
+          </div>
+          <p class="footer__desc">
+            Platform pembelajaran dan simulasi ujian UTBK/SNBT gratis untuk
+            pemberdayaan pendidikan inklusif Kabupaten Nganjuk.
+          </p>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Navigasi</p>
+          <a href="landing.html" class="footer__link">Beranda</a>
+          <a href="try-out.html" class="footer__link">Try Out</a>
+          <a href="artikel.html" class="footer__link">Artikel</a>
+          <a href="katalog.html" class="footer__link">Toko Premium</a>
+        </div>
+
+        <div>
+          <p class="footer__col-title">Bantuan</p>
+          <a href="#" class="footer__link">Pusat Bantuan</a>
+          <a href="#" class="footer__link">Hubungi Kami</a>
+          <a href="#" class="footer__link">Syarat & Ketentuan</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        © 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO). Seluruh hak
+        cipta dilindungi.
+      </div>
+    </footer>
+  </body>
+</html>
