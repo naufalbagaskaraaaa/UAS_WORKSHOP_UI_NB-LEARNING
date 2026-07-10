@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Papan Peringkat — NB-Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="admin-style.css" />
+
+    <style>
+      /* ===== Tambahan untuk leaderboard.html ===== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg-page);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* ===== Navbar ===== */
+      .navbar {
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 0 24px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .navbar__logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 20px;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .navbar__logo-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: var(--primary);
+        color: #fff;
+        border-radius: var(--radius-sm);
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .navbar__menu {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        list-style: none;
+      }
+
+      .navbar__menu a {
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-weight: 500;
+        font-size: 14px;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .navbar__menu a:hover {
+        color: var(--primary);
+      }
+
+      .navbar__menu a.active {
+        color: var(--primary);
+      }
+
+      .navbar__menu a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 999px;
+      }
+
+      .navbar__actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .navbar__avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--primary-light);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        transition: var(--transition);
+        border: 2px solid transparent;
+      }
+
+      .navbar__avatar:hover {
+        border-color: var(--primary);
+      }
+
+      /* ===== Page Header ===== */
+      .page-header {
+        padding: 32px 0 16px;
+      }
+      .page-header__title {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.4px;
+        color: var(--text-primary);
+      }
+      .page-header__sub {
+        color: var(--text-secondary);
+        font-size: 15px;
+        margin-top: 4px;
+      }
+
+      /* ===== Podium ===== */
+      .podium {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 24px;
+        padding: 32px 0 48px;
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 32px;
+      }
+
+      .podium-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        flex: 0 1 180px;
+      }
+
+      .podium-item__avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+        box-shadow: var(--shadow-md);
+        border: 3px solid var(--bg-card);
+      }
+
+      .podium-item__name {
+        font-weight: 700;
+        font-size: 15px;
+        color: var(--text-primary);
+      }
+
+      .podium-item__school {
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+
+      .podium-item__score {
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--primary);
+        margin-top: 4px;
+      }
+
+      .podium-item__rank {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      /* Podium heights */
+      .podium-item--2 {
+        order: 1;
+        transform: translateY(20px);
+      }
+      .podium-item--1 {
+        order: 2;
+        transform: translateY(0);
+      }
+      .podium-item--3 {
+        order: 3;
+        transform: translateY(40px);
+      }
+
+      .podium-item--1 .podium-item__avatar {
+        width: 88px;
+        height: 88px;
+        font-size: 34px;
+        border-width: 4px;
+        box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+        background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      }
+
+      .podium-item--2 .podium-item__avatar {
+        background: linear-gradient(135deg, #94a3b8, #cbd5e1);
+      }
+
+      .podium-item--3 .podium-item__avatar {
+        background: linear-gradient(135deg, #d97706, #f59e0b);
+      }
+
+      .podium-item__crown {
+        font-size: 28px;
+        margin-bottom: -8px;
+        display: block;
+      }
+
+      /* ===== Tabel ===== */
+      .table-container {
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+        margin-bottom: 40px;
+      }
+
+      .table-toolbar {
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        border-bottom: 1px solid var(--border-light);
+        flex-wrap: wrap;
+      }
+
+      .table-toolbar__left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .table-toolbar__title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .table-toolbar__count {
+        font-size: 11px;
+        background: var(--primary-light);
+        color: var(--primary);
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 20px;
+      }
+
+      .search-input {
+        padding: 8px 14px 8px 34px;
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-md);
+        font-family: inherit;
+        font-size: 13px;
+        color: var(--text-primary);
+        background: var(--bg-page)
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>')
+          no-repeat 10px center;
+        background-size: 16px;
+        outline: none;
+        width: 200px;
+        transition: var(--transition);
+      }
+
+      .search-input:focus {
+        border-color: var(--primary);
+        background-color: var(--bg-card);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        width: 240px;
+      }
+
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+
+      .data-table th {
+        padding: 11px 16px;
+        text-align: left;
+        font-size: 10.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--text-muted);
+        background: var(--bg-page);
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+      }
+
+      .data-table th:first-child {
+        padding-left: 24px;
+      }
+
+      .data-table th:last-child {
+        padding-right: 24px;
+        text-align: right;
+      }
+
+      .data-table td {
+        padding: 13px 16px;
+        border-bottom: 1px solid var(--border-light);
+        color: var(--text-primary);
+        vertical-align: middle;
+      }
+
+      .data-table td:first-child {
+        padding-left: 24px;
+      }
+
+      .data-table td:last-child {
+        padding-right: 24px;
+        text-align: right;
+      }
+
+      .data-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .data-table tbody tr {
+        transition: var(--transition);
+      }
+
+      .data-table tbody tr:hover {
+        background: var(--bg-page);
+      }
+
+      /* Highlight untuk user yang login */
+      .data-table tbody tr.is-current-user {
+        background: var(--primary-light);
+        border-left: 3px solid var(--primary);
+      }
+
+      .data-table tbody tr.is-current-user td:first-child {
+        padding-left: 21px;
+      }
+
+      .data-table tbody tr.is-current-user:hover {
+        background: #dbeafe;
+      }
+
+      /* Kolom peringkat dengan nomor */
+      .rank-number {
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+
+      .rank-number--top {
+        color: var(--primary);
+        font-size: 16px;
+      }
+
+      .cell-user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .cell-user__avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: #fff;
+        flex-shrink: 0;
+      }
+
+      .cell-user__name {
+        font-weight: 600;
+        font-size: 13px;
+      }
+
+      .cell-user__school {
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+
+      .cell-score {
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--text-primary);
+      }
+
+      /* ===== Footer ===== */
+      .footer {
+        margin-top: auto;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border);
+        padding: 32px 0 20px;
+      }
+
+      .footer__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .footer__links {
+        display: flex;
+        gap: 24px;
+        list-style: none;
+      }
+
+      .footer__links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 13px;
+        transition: var(--transition);
+      }
+
+      .footer__links a:hover {
+        color: var(--primary);
+      }
+
+      .footer__copy {
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+
+      /* ===== Responsive ===== */
+      @media (max-width: 860px) {
+        .navbar__menu {
+          display: none;
+        }
+        .podium {
+          flex-direction: column;
+          align-items: center;
+          padding: 24px 16px;
+          gap: 16px;
+        }
+        .podium-item {
+          flex: 0 1 auto;
+          width: 100%;
+          max-width: 200px;
+        }
+        .podium-item--2 {
+          transform: translateY(0);
+          order: 1;
+        }
+        .podium-item--1 {
+          order: 2;
+        }
+        .podium-item--3 {
+          transform: translateY(0);
+          order: 3;
+        }
+        .podium-item--1 .podium-item__avatar {
+          width: 72px;
+          height: 72px;
+          font-size: 28px;
+        }
+        .table-toolbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .search-input {
+          width: 100%;
+        }
+        .search-input:focus {
+          width: 100%;
+        }
+        .data-table {
+          font-size: 12px;
+        }
+        .data-table th,
+        .data-table td {
+          padding: 10px 12px;
+        }
+        .cell-user__school {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 16px;
+        }
+        .page-header__title {
+          font-size: 20px;
+        }
+        .data-table th:nth-child(3),
+        .data-table td:nth-child(3) {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+      <div class="navbar__inner">
+        <a href="index.html" class="navbar__logo">
+          <span class="navbar__logo-icon">NB</span>
+          NB-Learning
+        </a>
+        <ul class="navbar__menu">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="cbt.html">Try Out</a></li>
+          <li><a href="forum.html">Forum</a></li>
+          <li><a href="artikel.html">Artikel</a></li>
+          <li><a href="katalog.html">Toko Premium</a></li>
+          <li><a href="leaderboard.html" class="active">Peringkat</a></li>
+        </ul>
+        <div class="navbar__actions">
+          <a
+            href="keranjang.html"
+            class="navbar__cart"
+            style="
+              position: relative;
+              color: var(--text-secondary);
+              text-decoration: none;
+              font-size: 20px;
+              transition: var(--transition);
+            "
+          >
+            🛒
+            <span
+              style="
+                position: absolute;
+                top: -8px;
+                right: -10px;
+                background: var(--danger);
+                color: #fff;
+                font-size: 10px;
+                font-weight: 700;
+                width: 18px;
+                height: 18px;
+                border-radius: 999px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+              >3</span
+            >
+          </a>
+          <div class="navbar__avatar">NB</div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <header class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">🏆 Papan Peringkat</h1>
+        <p class="page-header__sub">
+          Lihat siapa yang berprestasi di NB-Learning
+        </p>
+      </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="container">
+      <!-- Podium -->
+      <section class="podium">
+        <!-- Juara 2 -->
+        <div class="podium-item podium-item--2">
+          <span class="podium-item__crown">🥈</span>
+          <div class="podium-item__avatar avatar-color-5">SR</div>
+          <div class="podium-item__name">Sinta Rahayu</div>
+          <div class="podium-item__school">SMAN 3 Bandung</div>
+          <div class="podium-item__score">Skor IRT: 785</div>
+          <div class="podium-item__rank">Peringkat 2</div>
+        </div>
+
+        <!-- Juara 1 -->
+        <div class="podium-item podium-item--1">
+          <span class="podium-item__crown">🥇</span>
+          <div
+            class="podium-item__avatar"
+            style="background: linear-gradient(135deg, #f59e0b, #fbbf24)"
+          >
+            AN
+          </div>
+          <div class="podium-item__name">Andika Nugraha</div>
+          <div class="podium-item__school">SMAN 1 Surabaya</div>
+          <div class="podium-item__score">Skor IRT: 812</div>
+          <div class="podium-item__rank">Peringkat 1</div>
+        </div>
+
+        <!-- Juara 3 -->
+        <div class="podium-item podium-item--3">
+          <span class="podium-item__crown">🥉</span>
+          <div class="podium-item__avatar avatar-color-4">DP</div>
+          <div class="podium-item__name">Dewi Puspita</div>
+          <div class="podium-item__school">SMAN 5 Jakarta</div>
+          <div class="podium-item__score">Skor IRT: 756</div>
+          <div class="podium-item__rank">Peringkat 3</div>
+        </div>
+      </section>
+
+      <!-- Tabel Peringkat -->
+      <div class="table-container">
+        <div class="table-toolbar">
+          <div class="table-toolbar__left">
+            <span class="table-toolbar__title">Semua Peserta</span>
+            <span class="table-toolbar__count">100 siswa</span>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Cari nama..."
+            />
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Peringkat</th>
+              <th>Nama Siswa</th>
+              <th>Asal Sekolah</th>
+              <th>Skor IRT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Baris 4–10 (contoh) -->
+            <tr>
+              <td><span class="rank-number">4</span></td>
+              <td>
+                <div class="cell-user">
+                  <div class="cell-user__avatar avatar-color-1">BW</div>
+                  <div>
+                    <div class="cell-user__name">Bayu Wicaksono</div>
+                    <div class="cell-user__school">SMKN 2 Surabaya</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMKN 2 Surabaya</td>
+              <td class="cell-score">742</td>
+            </tr>
+            <tr>
+              <td><span class="rank-number">5</span></td>
+              <td>
+                <div class="cell-user">
+                  <div class="cell-user__avatar avatar-color-6">NF</div>
+                  <div>
+                    <div class="cell-user__name">Nur Fitriani</div>
+                    <div class="cell-user__school">SMAN 2 Yogyakarta</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMAN 2 Yogyakarta</td>
+              <td class="cell-score">735</td>
+            </tr>
+            <tr>
+              <td><span class="rank-number">6</span></td>
+              <td>
+                <div class="cell-user">
+                  <div class="cell-user__avatar avatar-color-2">RA</div>
+                  <div>
+                    <div class="cell-user__name">Rizky Adriansyah</div>
+                    <div class="cell-user__school">SMAN 1 Malang</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMAN 1 Malang</td>
+              <td class="cell-score">728</td>
+            </tr>
+            <tr>
+              <td><span class="rank-number">7</span></td>
+              <td>
+                <div class="cell-user">
+                  <div class="cell-user__avatar avatar-color-3">HP</div>
+                  <div>
+                    <div class="cell-user__name">Hendra Pratama</div>
+                    <div class="cell-user__school">SMAN 7 Surabaya</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMAN 7 Surabaya</td>
+              <td class="cell-score">715</td>
+            </tr>
+            <tr>
+              <td><span class="rank-number">8</span></td>
+              <td>
+                <div class="cell-user">
+                  <div class="cell-user__avatar avatar-color-4">AL</div>
+                  <div>
+                    <div class="cell-user__name">Aurelia Lestari</div>
+                    <div class="cell-user__school">SMAN 3 Semarang</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMAN 3 Semarang</td>
+              <td class="cell-score">708</td>
+            </tr>
+            <tr>
+              <td><span class="rank-number">9</span></td>
+              <td>
+                <div class="cell-user">
+                  <div class="cell-user__avatar avatar-color-5">MA</div>
+                  <div>
+                    <div class="cell-user__name">Maya Anggraini</div>
+                    <div class="cell-user__school">SMAN 8 Jakarta</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMAN 8 Jakarta</td>
+              <td class="cell-score">695</td>
+            </tr>
+            <tr>
+              <td><span class="rank-number">10</span></td>
+              <td>
+                <div class="cell-user">
+                  <div class="cell-user__avatar avatar-color-1">DN</div>
+                  <div>
+                    <div class="cell-user__name">Dian Nuraeni</div>
+                    <div class="cell-user__school">SMAN 4 Bandung</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMAN 4 Bandung</td>
+              <td class="cell-score">688</td>
+            </tr>
+
+            <!-- Contoh baris highlight untuk user yang login (misal peringkat 42) -->
+            <tr class="is-current-user">
+              <td><span class="rank-number">42</span></td>
+              <td>
+                <div class="cell-user">
+                  <div
+                    class="cell-user__avatar"
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        var(--primary),
+                        var(--primary-mid)
+                      );
+                    "
+                  >
+                    NB
+                  </div>
+                  <div>
+                    <div class="cell-user__name">
+                      Naufal Bagaskara
+                      <span
+                        style="
+                          font-size: 10px;
+                          font-weight: 700;
+                          color: var(--primary);
+                        "
+                        >(Anda)</span
+                      >
+                    </div>
+                    <div class="cell-user__school">SMAN 5 Surabaya</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMAN 5 Surabaya</td>
+              <td class="cell-score">612</td>
+            </tr>
+
+            <!-- Beberapa baris tambahan untuk demo -->
+            <tr>
+              <td><span class="rank-number">43</span></td>
+              <td>
+                <div class="cell-user">
+                  <div class="cell-user__avatar avatar-color-6">FN</div>
+                  <div>
+                    <div class="cell-user__name">Fajar Nugroho</div>
+                    <div class="cell-user__school">SMAN 2 Semarang</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMAN 2 Semarang</td>
+              <td class="cell-score">608</td>
+            </tr>
+            <tr>
+              <td><span class="rank-number">44</span></td>
+              <td>
+                <div class="cell-user">
+                  <div class="cell-user__avatar avatar-color-2">RD</div>
+                  <div>
+                    <div class="cell-user__name">Rina Dewi</div>
+                    <div class="cell-user__school">SMAN 6 Jakarta</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMAN 6 Jakarta</td>
+              <td class="cell-score">605</td>
+            </tr>
+            <tr>
+              <td><span class="rank-number">45</span></td>
+              <td>
+                <div class="cell-user">
+                  <div class="cell-user__avatar avatar-color-3">AP</div>
+                  <div>
+                    <div class="cell-user__name">Agung Prabowo</div>
+                    <div class="cell-user__school">SMAN 1 Yogyakarta</div>
+                  </div>
+                </div>
+              </td>
+              <td>SMAN 1 Yogyakarta</td>
+              <td class="cell-score">598</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <ul class="footer__links">
+          <li><a href="#">Pusat Bantuan</a></li>
+          <li><a href="#">Hubungi Kami</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+        </ul>
+        <span class="footer__copy"
+          >&copy; 2026 NB-Learning — Organisasi Nganjuk Berkuliah (NGO).</span
+        >
+      </div>
+    </footer>
+  </body>
+</html>
